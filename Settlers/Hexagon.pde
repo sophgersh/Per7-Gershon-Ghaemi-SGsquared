@@ -1,17 +1,18 @@
 class Hexagon {
    
-   int dieValue;
+   
    String resource;
    float centerx;
    float centery;  
    //vertices 
+   //neighbor
    Hexagon[] adjHexs;
    float radius; //60
    boolean isCenter;
    //---game mechanics--- 
    int type; /* 1 = forest, 2 = brick, 3 = sheep 
-                4 = rock, 5 = wheat, 6 = desert */    
-   int diceNum; //dice roll number, 2-12 
+                4 = rock, 5 = wheat, 6 = desert */ 
+   int dieValue; //dice roll number 2-12   
    boolean hasRobber;
   // ---pieces on board--- (settlements/cities/roads)
   
@@ -82,8 +83,13 @@ class Hexagon {
      return adjHexs[pos]; 
   }
   
-  void setValue(int val){
+  boolean setValue(int val){
     dieValue = val;
+    return true;
   }
 
+  boolean setResource(String r){
+    resource = r;
+    return true;
+  } 
 }

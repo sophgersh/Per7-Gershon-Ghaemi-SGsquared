@@ -9,6 +9,8 @@ class HexGrid{
    HexGrid(){
      hexs = new Hexagon[19]; 
      makethemhexs();
+     setValues();
+     setResources();
    }
 
   //creates the HexGrid with 19 hexagons   
@@ -70,19 +72,22 @@ class HexGrid{
   //creates 4 forest tiles, 4 wheat, 4 sheep...etc. randomize
   void setResources(){
    int[] tiles = {0,1,2,3,4,5,6,7,8,9,10,11,12,
-                   13,14,15,16,17,18,19};
+                   13,14,15,16,17,18};
    tiles = scramble(tiles);
    int[] resourceAmts = {4,4,4,3,3,1};
    //4 forest tiles, 4 wheat, 4 sheep, 
    //3 stone tiles, 3 brick, 1 desert
    int total = 0; 
-   int j = 0;
    for(int a = 0; a<resourceAmts.length; a++){
     for(int b = 0; b<resourceAmts[a]; b++){
-     hexs[ tiles[total] ].setResource( RESOURCES[j] );
+     //***DIAG***
+     //println("a: "+a+"\tb: "+b+"\ttotal: "+total);
+     //int randomTile = tiles[total];
+     //Hexagon randomHex = hexs[randomTile];
+     //randomHex.setResource( RESOURCES[a] );
+     hexs[ tiles[total] ].setResource( RESOURCES[a] );
      total++;
     }
-    if(j<RESOURCES.length){j++;} 
    }
    
   } 

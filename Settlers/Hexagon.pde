@@ -1,4 +1,6 @@
 class Hexagon {
+   int dieValue;
+   String resource;
    float centerx;
    float centery;  
    //vertices 
@@ -74,6 +76,10 @@ class Hexagon {
   
   Hexagon get(int pos){
      return adjHexs[pos]; 
+  }
+  
+  void setValue(int val){
+    dieValue = val;
   }
 
 }

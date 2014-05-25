@@ -26,13 +26,6 @@ class HexGrid{
      }
    }
    
-   void roads(){
-        
-   }
-   
-   void settlements(){
-     
-   }
  
   Hexagon get(int i){
     return hexs[i];

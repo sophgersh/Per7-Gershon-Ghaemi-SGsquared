@@ -6,11 +6,9 @@ class Hexagon {
    float radius; //60
    boolean isCenter;
    //---game mechanics--- 
-   int type; 
-   /* 1 = forest, 2 = brick, 3 = sheep 
-      4 = rock, 5 = wheat, 6 = desert */  
-   int diceNum; //dice roll number, 2-12
-   //int distanceToCenter; //1, 2, 3 
+   int type; /* 1 = forest, 2 = brick, 3 = sheep 
+                4 = rock, 5 = wheat, 6 = desert */    
+   int diceNum; //dice roll number, 2-12 
    boolean hasRobber;
   // ---pieces on board--- (settlements/cities/roads)
   
@@ -23,9 +21,7 @@ class Hexagon {
     beginShape();
     for (int i = 0; i < 6; i++) {
       vertex(cx + r * cos(angle * i),
-        cy + r * sin(angle * i) );
-        //println(""+i+": "+(angle*i));
-        
+             cy + r * sin(angle * i) );      
     }
     endShape(CLOSE);  
     noFill();
@@ -53,6 +49,23 @@ class Hexagon {
   void setColor(float c){
     fill(c);
     ellipse(centerx,centery,radius,radius);
+  }
+  
+  void mouseOver(boolean b){  
+    //the 0 opacity does not undo the others, so they accumulate
+      int col;
+      if (b) 
+         col = 10;
+      else 
+          col = 0;
+      float angle = TWO_PI/6;
+      beginShape();
+      fill(255,col);
+      for (int i = 0; i < 6; i++) {
+        vertex(centerx + radius * cos(angle * i),
+          centery + radius * sin(angle * i) );        
+      }    
+      endShape(CLOSE); 
   }
   
   void add(int pos, Hexagon h){

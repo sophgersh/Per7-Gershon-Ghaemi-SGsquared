@@ -18,6 +18,12 @@ void setup(){
 
 
 void draw(){
+  /* some way of highlighting the thing the mouse is over
+  for (Hexagon h : grid.getGrid()){
+    if (h != null){
+      h.mouseOver(h.inRadius(mouseX,mouseY));
+    }
+  }*/
 }
 
 void mousePressed(){

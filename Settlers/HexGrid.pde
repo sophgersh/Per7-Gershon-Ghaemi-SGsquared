@@ -2,12 +2,12 @@ class HexGrid{
    Hexagon[] hexs;   
    
    HexGrid(){
-     hexs = new Hexagon[19] ; 
+     hexs = new Hexagon[19]; 
      makethemhexs();
    }
    
    void makethemhexs(){     
-     hexs[0] = new Hexagon(350,350,60);
+     hexs[0] = new Hexagon(350,350,65);
      hexs[0].center();
      for (int i = 0; i < 6; i++){  
         hexs[i+1] = hexs[0].get(i);              
@@ -24,6 +24,14 @@ class HexGrid{
           hexs[i].add(j%6, hexs[i+j+6]);
         }
      }
+   }
+   
+   void roads(){
+        
+   }
+   
+   void settlements(){
+     
    }
  
   Hexagon get(int i){

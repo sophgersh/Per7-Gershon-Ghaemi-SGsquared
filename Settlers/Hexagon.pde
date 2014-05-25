@@ -1,10 +1,10 @@
 class Hexagon {
-   
-   int dieValue;
+
    String resource;
    float centerx;
    float centery;  
    //vertices 
+   //neighbor
    Road[] roads;
    Settlement[] settlements;
    Hexagon[] adjHexs;
@@ -13,7 +13,7 @@ class Hexagon {
    //---game mechanics--- 
    int type; /* 1 = forest, 2 = brick, 3 = sheep 
                 4 = rock, 5 = wheat, 6 = desert */    
-   int diceNum; //dice roll number, 2-12 
+   int dieValue; //dice roll number, 2-12 
    boolean hasRobber;
   // ---pieces on board--- (settlements/cities/roads)
   
@@ -44,8 +44,7 @@ class Hexagon {
     for (int i = 0; i < 6; i++) {
       settlements[i] = new Settlement(centerx+rad*cos(angle * i), centery+rad*sin(angle * i), r);                                      
       noFill();
-      stroke(i*10);      
-      ellipse(centerx + rad * cos(angle * i), centery + rad * sin(angle * i), r, r );      
+      stroke(i*10);              
     }
   }
 
@@ -108,8 +107,13 @@ class Hexagon {
      return adjHexs[pos]; 
   }
   
-  void setValue(int val){
+  boolean setValue(int val){
     dieValue = val;
+    return true;
   }
+  boolean setResource(String r){
+     resource = r;
+     return true;
+   } 
 
 }

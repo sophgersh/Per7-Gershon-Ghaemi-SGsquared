@@ -22,7 +22,7 @@ void draw(){
 
 void mousePressed(){
   for (Hexagon h : grid.getGrid()){
-    if(h.inRadius(mouseX,mouseY)){
+    if(h != null && h.inRadius(mouseX,mouseY)){
       h.setColor(random(255));
     }
   }

@@ -1,21 +1,25 @@
 class Hexagon {
    float centerx;
    float centery;  
+   //vertices 
+   Hexagon[] adjHexs;
+   float radius; //60
+   boolean isCenter;
+   //---game mechanics--- 
    int type; 
    /* 1 = forest, 2 = brick, 3 = sheep 
       4 = rock, 5 = wheat, 6 = desert */  
    int diceNum; //dice roll number, 2-12
-   //int distanceToCenter; //1, 2, 3  
-   Hexagon[] hexs;
-   float radius; //60
-   boolean isCenter;
+   //int distanceToCenter; //1, 2, 3 
+   boolean hasRobber;
+  // ---pieces on board--- (settlements/cities/roads)
   
   Hexagon(float cx, float cy, float r) {
     centerx = cx;
     centery = cy;
     radius = r; //50
     float angle = TWO_PI / 6;
-    hexs = new Hexagon[6];
+    adjHexs = new Hexagon[6];
     beginShape();
     for (int i = 0; i < 6; i++) {
       vertex(cx + r * cos(angle * i),
@@ -35,7 +39,7 @@ class Hexagon {
         float x = centerx+2*radius*cos(angle*i+PI/6);
         float y = centery+2*radius*sin(angle*i+PI/6);
         //ellipse(x,y,10,10);
-        hexs[i] = new Hexagon(x,y,radius);
+        adjHexs[i] = new Hexagon(x,y,radius);
      }
     isCenter = true;
   }
@@ -52,11 +56,11 @@ class Hexagon {
   }
   
   void add(int pos, Hexagon h){
-     hexs[pos] = h; 
+     adjHexs[pos] = h; 
   }
   
   Hexagon get(int pos){
-     return hexs[pos]; 
+     return adjHexs[pos]; 
   }
 
 }

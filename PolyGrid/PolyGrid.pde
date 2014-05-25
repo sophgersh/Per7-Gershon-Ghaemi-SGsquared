@@ -5,11 +5,11 @@ void setup(){
   
   for(int x = 100; x<700; x+=100){
     for(int y = 100; y<800; y+=100){
-      for(int j = x/100; j<7; j+=1){
+      //for(int j = x/100; j<7; j+=1){
        polygon(6, x, y, 50); }
     }
   }
-}
+//}
 
 void draw(){
     PShape[] hexes = new PShape[10];

@@ -1,11 +1,14 @@
 class HexGrid{
    Hexagon[] hexs;   
+   final int[] VALUES = {2,3,3,4,4,5,5,6,6,8,8,9,9,10,10,11,11,12};
+   final String[] RESOURCES = {"wood", "wheat", "sheep", "stone", "brick"};
    
    HexGrid(){
      hexs = new Hexagon[19] ; 
      makethemhexs();
    }
-   
+
+  //creates the HexGrid with 19 hexagons   
    void makethemhexs(){     
      hexs[0] = new Hexagon(350,350,60);
      hexs[0].center();
@@ -25,7 +28,29 @@ class HexGrid{
         }
      }
    }
- 
+
+  //sets the dieValues of the Hexagons
+  void setValues(){
+    int[] chosenValues = scramble(VALUES);
+    for(int i = 0; i<18; i++){
+      hexs[i].setValue(chosenValues[i]);
+    }
+  }
+  
+  //randomly scrambles the values in an array
+  //returns a new array, does not alter parameter
+  int[] scramble(int[] arr){
+   int[] newArr = new int[arr.length];
+   for(int a =0; a<arr.length; a++){ newArr[a] = arr[a];}
+   for(int i = 0; i<newArr.length; i++){
+    int random = (int)random(newArr.length);
+    int temp = newArr[i];
+    newArr[i] = newArr[random];
+    newArr[random] = temp;
+   } 
+   return newArr;
+  }
+  
   Hexagon get(int i){
     return hexs[i];
   }

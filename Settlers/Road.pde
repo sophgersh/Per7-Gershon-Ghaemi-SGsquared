@@ -1,5 +1,5 @@
 class Road{
-  
+  boolean isBuilt;
   Hexagon[] adjHexs;
   //Player owner;
   

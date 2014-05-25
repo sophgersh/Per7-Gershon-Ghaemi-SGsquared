@@ -5,6 +5,8 @@ class Hexagon {
    float centerx;
    float centery;  
    //vertices 
+   Road[] roads;
+   Settlement[] settlements;
    Hexagon[] adjHexs;
    float radius; //60
    boolean isCenter;
@@ -18,7 +20,7 @@ class Hexagon {
   Hexagon(float cx, float cy, float r) {
     centerx = cx;
     centery = cy;
-    radius = r; //50
+    radius = r;
     float angle = TWO_PI / 6;
     adjHexs = new Hexagon[6];
     beginShape();
@@ -29,7 +31,22 @@ class Hexagon {
     endShape(CLOSE);  
     noFill();
     ellipse(centerx,centery,sqrt(3)*radius,sqrt(3)*radius);
+    roads = new Road[6];
+    settlements = new Settlement[6];
     isCenter = false;
+    surroundingS();
+  }
+
+  void surroundingS(){    
+    float angle = TWO_PI / 6;
+    float r = (2/sqrt(3)*radius - sqrt(3)/2*radius)*2;
+    float rad = 2/sqrt(3)*radius;
+    for (int i = 0; i < 6; i++) {
+      settlements[i] = new Settlement(centerx+rad*cos(angle * i), centery+rad*sin(angle * i), r);                                      
+      noFill();
+      stroke(i*10);      
+      ellipse(centerx + rad * cos(angle * i), centery + rad * sin(angle * i), r, r );      
+    }
   }
 
   void center(){
@@ -37,19 +54,28 @@ class Hexagon {
      for (int i = 0; i < 6; i++){
         float x = centerx+2*radius*cos(angle*i+PI/6);
         float y = centery+2*radius*sin(angle*i+PI/6);
-        //ellipse(x,y,10,10);
         adjHexs[i] = new Hexagon(x,y,radius);
      }
     isCenter = true;
   }
   
   void background(){
-   PImage photo = loadImage("Images/Catan5");
+   PImage photo = loadImage("catan5.jpg");
    image(photo,0,0);
   } 
 
-  boolean inRadius(int x, int y){
+  boolean inHex(int x, int y){
       return sqrt(sq(x-centerx)+sq(y-centery)) < sqrt(3)/2*radius;  
+  }  
+  /*boolean onRoad(int x, int y){
+  
+  }*/
+  void onSet(int x, int y){
+    for (Settlement s : settlements){
+      if (s.inRadius(x,y)){
+        s.setColor(random(255));
+      }
+    }
   }
 
   void setColor(float c){

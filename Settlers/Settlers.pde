@@ -26,10 +26,16 @@ void draw(){
   }*/
 }
 
+Hexagon pressed;
 void mousePressed(){
+  if (pressed != null){
+    pressed.onSet(mouseX,mouseY);
+    pressed = null;
+  }
   for (Hexagon h : grid.getGrid()){
-    if(h != null && h.inRadius(mouseX,mouseY)){
-      h.setColor(random(255));
+    if(h != null && h.inHex(mouseX,mouseY)){
+      pressed = h;
+      h.setColor(random(255));      
     }
   }
   

@@ -1,6 +1,7 @@
 class Road{
+  
   Hexagon[] adjHexs;
-  Player owner;
+  //Player owner;
   
   Road(){
    adjHexs = new Hexagon[2]; 

@@ -1,4 +1,5 @@
 class Hexagon {
+   
    int dieValue;
    String resource;
    float centerx;
@@ -42,7 +43,10 @@ class Hexagon {
     isCenter = true;
   }
   
-  
+  void background(){
+   PImage photo = loadImage("Images/Catan5");
+   image(photo,0,0);
+  } 
 
   boolean inRadius(int x, int y){
       return sqrt(sq(x-centerx)+sq(y-centery)) < sqrt(3)/2*radius;  

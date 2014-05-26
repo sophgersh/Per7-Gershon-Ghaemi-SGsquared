@@ -38,11 +38,9 @@ class Hexagon {
     surroundingS();
   }
 
-
   String toString(){
     return "Hex#"+this.num; 
-   }
-
+  }
 
   void surroundingS(){    
     float angle = TWO_PI / 6;

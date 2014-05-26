@@ -13,14 +13,15 @@ class Settlement{
      isBuilt = false;
      adjHexs = new Hexagon[3]; 
      ellipse(x, y, r, r ); 
-  }
+  };
 
   boolean addAdjHex(Hexagon h){
     for(int i=0; i<3; i++){
      if(adjHexs[i] == null){adjHexs[i] = h; return true;}
     }
     return false; 
-
+  }
+  
   boolean inRadius(int x, int y){
      return sqrt(sq(x-centerx)+sq(y-centery)) < radius/2; 
   }

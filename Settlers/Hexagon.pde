@@ -37,6 +37,10 @@ class Hexagon {
     isCenter = false;
     surroundingS();
   }
+  
+  String toString(){
+   return "Hex#"+this.num; 
+  }
 
   void surroundingS(){    
     float angle = TWO_PI / 6;
@@ -44,6 +48,7 @@ class Hexagon {
     float rad = 2/sqrt(3)*radius;
     for (int i = 0; i < 6; i++) {
       settlements[i] = new Settlement(centerx+rad*cos(angle * i), centery+rad*sin(angle * i), r);                                      
+      settlements[i].addAdjHex(this);
       noFill();
       stroke(i*10);              
     }
@@ -79,7 +84,7 @@ class Hexagon {
   }*/
   void onSet(int x, int y){
     for (Settlement s : settlements){
-      if (s.inRadius(x,y)){
+      if (s.inRadius(x,y) && s.isValidPlacement() ){
         s.setColor(random(255));
       }
     }

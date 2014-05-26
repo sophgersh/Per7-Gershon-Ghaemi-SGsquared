@@ -12,29 +12,43 @@ class HexGrid{
    }
 
   //creates the HexGrid with 19 hexagons, and the web of connection between them   
-   void makethemhexs(){     
-     hexs[0] = new Hexagon(350,350,60,0);
-     hexs[0].center();
-     for (int i = 0; i < 6; i++){  
-        hexs[i+1] = hexs[0].get(i);          
-     }
+   void makethemhexs(){   
+     for (int i = 0; i < hexs.length; i++){
+        hexs[i] = new Hexagon(i); 
+     }   
+     hexs[0].drawHex(350,350);
+     center();
      float angle = TWO_PI/6;
      for (int i = 1; i <= 6; i++){
         hexs[i].add((i+1)%6,hexs[i%6+1]); //i and i+1
         hexs[i].add((i+2)%6,hexs[0]); //i and i-1
         hexs[i].add((i+3)%6,hexs[(i+4)%6+1]);
         for (int j = i-1; j <= i; j++){          
-          float x = hexs[i].centerx+2*hexs[i].radius * cos(angle*(j%6)+PI/6);
+          float x = hexs[i].centerx + 2*hexs[i].radius * cos(angle*(j%6)+PI/6);
           float y = hexs[i].centery + 2*hexs[i].radius * sin(angle*(j%6)+PI/6);
-          hexs[i+j+6] = new Hexagon(x,y,hexs[i].radius,i+j+6); 
-          mutualAdd((j+3)%6, i,  j%6, i+j+6); //i and generated
+          hexs[i+j+6].drawHex(x,y); 
+          mutualAdd((j+3)%6, i,  j%6, i+j+6); //i and generated (both)
           if (j == i){
             mutualAdd((i+1)%6, i+j+6,  (i+4)%6, i+j+5); //two generated with each other
             mutualAdd((i+2)%6, i%6+1,  (i+5)%6, i+j+6);//second generated with i+1
+            int pos2 = ( i+j+7 < 18 ? i+j+7 : 7 );
+            mutualAdd((i+4)%6, i+j+6,  (i+1)%6, pos2);
+            
           }          
         }
      }
    }
+   
+   void center(){
+     Hexagon h = hexs[0];
+     float angle = TWO_PI / 6;
+     for (int i = 1; i <= 6; i++){
+        float x = h.centerx + 2*h.radius*cos(angle*i+PI/6);
+        float y = h.centery + 2*h.radius*sin(angle*i+PI/6);
+        hexs[i].drawHex(x,y);
+        hexs[0].add(i-1, hexs[i]);        
+     }  
+  }
    
    void mutualAdd(int pos1, int h1, int pos2, int h2){
      hexs[h1].add(pos2, hexs[h2]);

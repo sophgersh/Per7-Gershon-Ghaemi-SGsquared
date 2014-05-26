@@ -38,6 +38,7 @@ class Hexagon {
     surroundingS();
   }
 
+
   String toString(){
     return "Hex#"+this.num; 
    }

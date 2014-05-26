@@ -20,20 +20,25 @@ class HexGrid{
      }
      float angle = TWO_PI/6;
      for (int i = 1; i <= 6; i++){
-        hexs[i].add((i+1)%6,hexs[i%6+1]);
-        hexs[i].add((i+2)%6,hexs[0]);
+        hexs[i].add((i+1)%6,hexs[i%6+1]); //i and i+1
+        hexs[i].add((i+2)%6,hexs[0]); //i and i-1
         hexs[i].add((i+3)%6,hexs[(i+4)%6+1]);
         for (int j = i-1; j <= i; j++){          
-          float x = hexs[i].centerx+2*hexs[i].radius*
-                    cos(angle*(j%6)+PI/6);
-          float y = hexs[i].centery + 2*hexs[i].radius*
-                    sin(angle*(j%6)+PI/6);
+          float x = hexs[i].centerx+2*hexs[i].radius * cos(angle*(j%6)+PI/6);
+          float y = hexs[i].centery + 2*hexs[i].radius * sin(angle*(j%6)+PI/6);
           hexs[i+j+6] = new Hexagon(x,y,hexs[i].radius,i+j+6); 
-          hexs[i+j+6].add((i+2)%6,hexs[i]);
-          hexs[i].add(j%6, hexs[i+j+6]);
-          
+          mutualAdd((j+3)%6, i,  j%6, i+j+6); //i and generated
+          if (j == i){
+            mutualAdd((i+1)%6, i+j+6,  (i+4)%6, i+j+5); //two generated with each other
+            mutualAdd((i+2)%6, i%6+1,  (i+5)%6, i+j+6);//second generated with i+1
+          }          
         }
      }
+   }
+   
+   void mutualAdd(int pos1, int h1, int pos2, int h2){
+     hexs[h1].add(pos2, hexs[h2]);
+     hexs[h2].add(pos1, hexs[h1]);
    }
 
   void background(){

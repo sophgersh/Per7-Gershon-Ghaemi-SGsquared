@@ -37,10 +37,6 @@ class Hexagon {
     isCenter = false;
     surroundingS();
   }
-  
-  String toString(){
-   return "Hex#"+this.num; 
-  }
 
   String toString(){
     return "Hex#"+this.num; 
@@ -88,11 +84,7 @@ class Hexagon {
   }*/
   void onSet(int x, int y){
     for (Settlement s : settlements){
-<<<<<<< HEAD
-      if (s.inRadius(x,y) && s.isValidPlacement()){
-=======
       if (s.inRadius(x,y) && s.isValidPlacement() ){
->>>>>>> f9c3ab64b532e5e040aca668e8b2df209bdc3276
         s.setColor(random(255));
       }
     }

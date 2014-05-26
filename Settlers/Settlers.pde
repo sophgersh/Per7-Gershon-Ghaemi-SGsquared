@@ -13,6 +13,17 @@ void setup(){
          ellipse(x, y, 50, 50);
       }
     } */
+    
+    for (int i = 0; i < grid.getGrid().length; i++){
+     print(i+": ");
+     for (Hexagon hex : grid.getGrid()[i].adjHexs){
+        if (hex != null)
+          print(hex.num+" ");
+        else 
+          print("null "); 
+     }    
+     println();
+  }
 }
 
 
@@ -38,6 +49,7 @@ void mousePressed(){
       h.setColor(random(255));      
     }
   }
+  
   
   
 }

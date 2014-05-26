@@ -11,23 +11,27 @@ class HexGrid{
      makethemhexs();
    }
 
-  //creates the HexGrid with 19 hexagons   
+  //creates the HexGrid with 19 hexagons, and the web of connection between them   
    void makethemhexs(){     
-     hexs[0] = new Hexagon(350,350,60);
+     hexs[0] = new Hexagon(350,350,60,0);
      hexs[0].center();
      for (int i = 0; i < 6; i++){  
-        hexs[i+1] = hexs[0].get(i);              
+        hexs[i+1] = hexs[0].get(i);          
      }
      float angle = TWO_PI/6;
      for (int i = 1; i <= 6; i++){
-        for (int j = i-1; j <= i; j++){
-          
+        hexs[i].add((i+1)%6,hexs[i%6+1]);
+        hexs[i].add((i+2)%6,hexs[0]);
+        hexs[i].add((i+3)%6,hexs[(i+4)%6+1]);
+        for (int j = i-1; j <= i; j++){          
           float x = hexs[i].centerx+2*hexs[i].radius*
                     cos(angle*(j%6)+PI/6);
           float y = hexs[i].centery + 2*hexs[i].radius*
                     sin(angle*(j%6)+PI/6);
-          hexs[i+j+6] = new Hexagon(x,y,hexs[i].radius); 
+          hexs[i+j+6] = new Hexagon(x,y,hexs[i].radius,i+j+6); 
+          hexs[i+j+6].add((i+2)%6,hexs[i]);
           hexs[i].add(j%6, hexs[i+j+6]);
+          
         }
      }
    }

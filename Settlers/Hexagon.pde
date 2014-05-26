@@ -1,5 +1,5 @@
 class Hexagon {
-
+   int num;
    String resource;
    float centerx;
    float centery;  
@@ -17,7 +17,8 @@ class Hexagon {
    boolean hasRobber;
   // ---pieces on board--- (settlements/cities/roads)
   
-  Hexagon(float cx, float cy, float r) {
+  Hexagon(float cx, float cy, float r, int n) {
+    num = n;
     centerx = cx;
     centery = cy;
     radius = r;
@@ -50,12 +51,19 @@ class Hexagon {
 
   void center(){
      float angle = TWO_PI / 6;
-     for (int i = 0; i < 6; i++){
+     for (int i = 1; i <= 6; i++){
         float x = centerx+2*radius*cos(angle*i+PI/6);
         float y = centery+2*radius*sin(angle*i+PI/6);
-        adjHexs[i] = new Hexagon(x,y,radius);
+        adjHexs[i-1] = new Hexagon(x,y,radius,i);
+       
      }
-    isCenter = true;
+     isCenter = true;   
+  }
+  
+  
+  
+  void setNum(int n){
+     num = n; 
   }
   
   void background(){

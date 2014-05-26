@@ -1,7 +1,7 @@
 HexGrid grid;
 
 void setup(){
- size(1200,700);
+ size(700,700);
  background(#05E7FA);
  smooth();    
  grid = new HexGrid();

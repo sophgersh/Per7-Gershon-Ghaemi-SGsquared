@@ -9,7 +9,6 @@ class Hexagon {
    Settlement[] settlements;
    Hexagon[] adjHexs;
    float radius; //60
-   boolean isCenter;
    //---game mechanics--- 
    int type; /* 1 = forest, 2 = brick, 3 = sheep 
                 4 = rock, 5 = wheat, 6 = desert */    
@@ -17,25 +16,38 @@ class Hexagon {
    boolean hasRobber;
   // ---pieces on board--- (settlements/cities/roads)
   
+  Hexagon(int n){
+     num = n;
+     radius = 60; 
+     adjHexs = new Hexagon[6];  
+     roads = new Road[6];
+     settlements = new Settlement[6];        
+  }
+    
   Hexagon(float cx, float cy, float r, int n) {
-    num = n;
+    num = n;   
+    //if (n == 0) { center(); }
+    radius = r; 
+    drawHex(cx, cy);   
+    adjHexs = new Hexagon[6];  
+    roads = new Road[6];
+    settlements = new Settlement[6];   
+  }
+
+  void drawHex(float cx, float cy){
     centerx = cx;
     centery = cy;
-    radius = r;
     float angle = TWO_PI / 6;
-    adjHexs = new Hexagon[6];
     beginShape();
     for (int i = 0; i < 6; i++) {
-      vertex(cx + r * cos(angle * i),
-             cy + r * sin(angle * i) );      
+      vertex(centerx + radius * cos(angle * i),
+             centery + radius * sin(angle * i) );      
     }
     endShape(CLOSE);  
     noFill();
-    ellipse(centerx,centery,sqrt(3)*radius,sqrt(3)*radius);
-    roads = new Road[6];
-    settlements = new Settlement[6];
-    isCenter = false;
+    ellipse(centerx,centery,sqrt(3)*radius,sqrt(3)*radius); 
     surroundingS();
+    //if (num == 0) { center(); }
   }
 
   String toString(){
@@ -44,28 +56,27 @@ class Hexagon {
 
   void surroundingS(){    
     float angle = TWO_PI / 6;
-    float r = (2/sqrt(3)*radius - sqrt(3)/2*radius)*2;
-    float rad = 2/sqrt(3)*radius;
+    float r = (2/sqrt(3)*radius - sqrt(3)/2*radius)*2; //diameter
+    float rad = 2/sqrt(3)*radius; //displacement
     for (int i = 0; i < 6; i++) {
-      settlements[i] = new Settlement(centerx+rad*cos(angle * i), centery+rad*sin(angle * i), r);                                      
+      settlements[i] = new Settlement(centerx+rad*cos(angle * i), 
+                                      centery+rad*sin(angle * i), r);                                      
       settlements[i].addAdjHex(this);
       noFill();
       stroke(i*10);              
     }
   }
 
-  void center(){
+  /*void center(){
      float angle = TWO_PI / 6;
      for (int i = 1; i <= 6; i++){
         float x = centerx+2*radius*cos(angle*i+PI/6);
         float y = centery+2*radius*sin(angle*i+PI/6);
         adjHexs[i-1] = new Hexagon(x,y,radius,i);
-       
-     }
-     isCenter = true;   
-  }
-  
-  
+        
+     }  
+  }*/
+    
   
   void setNum(int n){
      num = n; 
@@ -84,7 +95,7 @@ class Hexagon {
   }*/
   void onSet(int x, int y){
     for (Settlement s : settlements){
-      if (s.inRadius(x,y) && s.isValidPlacement() ){
+      if (s.inRadius(x,y) /*&& s.isValidPlacement()*/ ){
         s.setColor(random(255));
       }
     }
@@ -95,7 +106,7 @@ class Hexagon {
     ellipse(centerx,centery,radius,radius);
   }
   
-  void mouseOver(boolean b){  
+  /*void mouseOver(boolean b){  
     //the 0 opacity does not undo the others, so they accumulate
       int col;
       if (b) 
@@ -110,7 +121,7 @@ class Hexagon {
           centery + radius * sin(angle * i) );        
       }    
       endShape(CLOSE); 
-  }
+  }*/
   
   void add(int pos, Hexagon h){
      adjHexs[pos] = h; 

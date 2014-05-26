@@ -13,7 +13,7 @@ class Settlement{
      isBuilt = false;
      adjHexs = new Hexagon[3]; 
      ellipse(x, y, r, r ); 
-  }
+  };
 
   boolean addAdjHex(Hexagon h){
     for(int i=0; i<3; i++){

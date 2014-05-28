@@ -61,7 +61,6 @@ class Hexagon {
     for (int i = 0; i < 6; i++) {
       settlements[i] = new Settlement(centerx+rad*cos(angle * i), 
                                       centery+rad*sin(angle * i), r);                                      
-      settlements[i].addAdjHex(this);
       noFill();
       stroke(i*10);              
     }
@@ -93,12 +92,47 @@ class Hexagon {
   /*boolean onRoad(int x, int y){
   
   }*/
-  void onSet(int x, int y){
-    for (Settlement s : settlements){
-      if (s.inRadius(x,y) /*&& s.isValidPlacement()*/ ){
-        s.setColor(random(255));
+  void checkSettlement(int x, int y){
+    for (int i = 0; i < settlements.length; i++){
+      if (settlements[i].inRadius(x,y)){
+        if (!settlements[i].isBuilt){
+          if (checkAdjSets(i)){
+             buildSettlement(i); 
+             settlements[i].setColor(#FA0A0A); 
+          }
+        } else {
+          settlements[i].setColor(#9A07DB);
+        }    
       }
     }
+  }
+
+  boolean checkAdjSets(int i){
+     if (settlements[(i+1)%6].isBuilt || settlements[(i+5)%6].isBuilt)
+        return false; 
+     if (adjHexs[(i+5)%6] != null){
+       if (adjHexs[(i+5)%6].settlements[(i+1)%6].isBuilt ||
+           adjHexs[(i+5)%6].settlements[(i+3)%6].isBuilt)
+           return false;
+     } if (adjHexs[i] != null){
+       if (adjHexs[i].settlements[(i+5)%6].isBuilt ||
+           adjHexs[i].settlements[(i+3)%6].isBuilt)
+           return false;
+     }
+     return true;     
+  }
+  
+  void buildSettlement(int i){
+    settlements[i].build();
+    settlements[i].add(this);
+    if (adjHexs[(i+5)%6] != null){
+       adjHexs[(i+5)%6].addSet((i+2)%6, settlements[i]);
+       settlements[i].add(adjHexs[(i+5)%6]);
+    } if (adjHexs[i%6] != null){
+       adjHexs[i].addSet((i+4)%6, settlements[i]);
+       settlements[i].add(adjHexs[(i+4)%6]);
+    }
+    
   }
 
   void setColor(float c){
@@ -125,6 +159,9 @@ class Hexagon {
   
   void add(int pos, Hexagon h){
      adjHexs[pos] = h; 
+  }
+  void addSet(int pos, Settlement s){
+     settlements[pos] = s; 
   }
   
   Hexagon get(int pos){

@@ -32,8 +32,7 @@ class HexGrid{
             mutualAdd((i+1)%6, i+j+6,  (i+4)%6, i+j+5); //two generated with each other
             mutualAdd((i+2)%6, i%6+1,  (i+5)%6, i+j+6);//second generated with i+1
             int pos2 = ( i+j+7 < 18 ? i+j+7 : 7 );
-            mutualAdd((i+4)%6, i+j+6,  (i+1)%6, pos2);
-            
+            mutualAdd((i+4)%6, i+j+6,  (i+1)%6, pos2);           
           }          
         }
      }

@@ -15,11 +15,23 @@ class Settlement{
      ellipse(x, y, r, r ); 
   }
 
-  boolean addAdjHex(Hexagon h){
-    for(int i=0; i<3; i++){
-     if(adjHexs[i] == null){adjHexs[i] = h; return true;}
-    }
-    return false; 
+  void build(){
+    isBuilt = true; 
+  }
+
+  void add(Hexagon h1, Hexagon h2, Hexagon h3){
+    adjHexs[0] = h1;
+    adjHexs[1] = h2;
+    adjHexs[2] = h3;
+  }
+  
+  void add(Hexagon h1){
+     for (int i = 0; i < adjHexs.length; i++){
+        if (adjHexs[i] == null){
+          adjHexs[i] = h1;
+          return;
+        }
+     } 
   }
   
   boolean inRadius(int x, int y){
@@ -29,7 +41,7 @@ class Settlement{
   //checks to see if it settlement is in a legal placing
    //each Hexagon can have no more than 3 Settlments around it
    //each Settlement must be >=two sides away from each other
-   boolean isValidPlacement(){
+   /*boolean isValidPlacement(){
       for(Hexagon h: adjHexs){
        println(h);
        if(h.settlements.length > 2){return false;}
@@ -44,9 +56,9 @@ class Settlement{
        } 
       }
       return true;
-   }
+   }*/
 
-  void setColor(float r){
+  void setColor(int r){
     fill(r);
     ellipse(centerx,centery,radius,radius);
   }

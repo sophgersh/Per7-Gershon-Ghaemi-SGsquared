@@ -15,6 +15,7 @@ class Hexagon {
    int dieValue; //dice roll number, 2-12 
    boolean hasRobber;
   // ---pieces on board--- (settlements/cities/roads)
+  int col;
   
   Hexagon(int n){
      num = n;
@@ -100,23 +101,25 @@ class Hexagon {
              buildSettlement(i); 
              settlements[i].setColor(#FA0A0A); 
           }
-        } else {
+         else 
+            settlements[i].setColor(#F525BA);
+      
+        }else 
           settlements[i].setColor(#9A07DB);
-        }    
+        
       }
     }
   }
+  
 
   boolean checkAdjSets(int i){
      if (settlements[(i+1)%6].isBuilt || settlements[(i+5)%6].isBuilt)
         return false; 
      if (adjHexs[(i+5)%6] != null){
-       if (adjHexs[(i+5)%6].settlements[(i+1)%6].isBuilt ||
-           adjHexs[(i+5)%6].settlements[(i+3)%6].isBuilt)
+       if (adjHexs[(i+5)%6].settlements[(i+1)%6].isBuilt)
            return false;
      } if (adjHexs[i] != null){
-       if (adjHexs[i].settlements[(i+5)%6].isBuilt ||
-           adjHexs[i].settlements[(i+3)%6].isBuilt)
+       if (adjHexs[i].settlements[(i+5)%6].isBuilt)
            return false;
      }
      return true;     
@@ -130,14 +133,18 @@ class Hexagon {
        settlements[i].add(adjHexs[(i+5)%6]);
     } if (adjHexs[i%6] != null){
        adjHexs[i].addSet((i+4)%6, settlements[i]);
-       settlements[i].add(adjHexs[(i+4)%6]);
+       settlements[i].add(adjHexs[i%6]);
     }
     
   }
 
-  void setColor(float c){
+  void setColor(int c){
     fill(c);
     ellipse(centerx,centery,radius,radius);
+    if (col != 255)
+      col = c;
+    else 
+      col = 0;
   }
   
   /*void mouseOver(boolean b){  

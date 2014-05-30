@@ -19,16 +19,12 @@ class Settlement{
     isBuilt = true; 
   }
 
-  void add(Hexagon h1, Hexagon h2, Hexagon h3){
-    adjHexs[0] = h1;
-    adjHexs[1] = h2;
-    adjHexs[2] = h3;
-  }
   
   void add(Hexagon h1){
      for (int i = 0; i < adjHexs.length; i++){
         if (adjHexs[i] == null){
           adjHexs[i] = h1;
+          h1.setColor(#59D84F);
           return;
         }
      } 

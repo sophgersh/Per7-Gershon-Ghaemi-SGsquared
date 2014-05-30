@@ -1,7 +1,7 @@
 HexGrid grid;
 
 void setup(){
- size(1200,700); //x=1200 so that we can have space to put stats and stuff
+ size(700,700); //x=1200 so that we can have space to put stats and stuff
  background(#05E7FA);
  smooth();    
  grid = new HexGrid();  
@@ -39,7 +39,7 @@ void mousePressed(){
   for (Hexagon h : grid.getGrid()){
     if(h != null && h.inHex(mouseX,mouseY)){
       pressed = h;
-      h.setColor(random(255));      
+      h.setColor(h.col+50);      
     }
   }
   

@@ -1,10 +1,12 @@
 HexGrid grid;
+Game g;
 
 void setup(){
  size(700,700); //x=1200 so that we can have space to put stats and stuff
  background(#05E7FA);
  smooth();    
- grid = new HexGrid();  
+ g = new Game();
+ //grid = new HexGrid();  
     
     
  /*for (int i = 0; i < grid.getGrid().length; i++){

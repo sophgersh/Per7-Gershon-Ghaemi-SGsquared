@@ -17,6 +17,8 @@ class HexGrid{
         hexs[i] = new Hexagon(i); 
      }   
      //DO THE THING HERE 
+     setValuesAll();
+     setResourcesAll();
      hexs[0].drawHex(350,350);
      center();
      float angle = TWO_PI/6;
@@ -61,7 +63,7 @@ class HexGrid{
   } 
 
   //sets the dieValues of the Hexagons
-  void setValues(){
+  void setValuesAll(){
     int[] chosenValues = scramble(VALUES);
     for(int i = 0; i<18; i++){
       hexs[i].setValue(chosenValues[i]);
@@ -91,7 +93,7 @@ class HexGrid{
   }
   
   //creates 4 forest tiles, 4 wheat, 4 sheep...etc. randomize
-   void setResources(){
+   void setResourcesAll(){
     int[] tiles = {0,1,2,3,4,5,6,7,8,9,10,11,12,
                     13,14,15,16,17,18,19};
     tiles = scramble(tiles);
@@ -109,4 +111,5 @@ class HexGrid{
     }
     
    } 
+
 }

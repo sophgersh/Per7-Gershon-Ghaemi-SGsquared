@@ -111,5 +111,4 @@ class HexGrid{
     }
     
    } 
-
 }

@@ -57,7 +57,7 @@ class Hexagon {
     //stroke(0); 
     //ellipse(centerx,centery,sqrt(3)*radius,sqrt(3)*radius); 
     surroundingS();
-    
+    surroundingRoads();
   }
 
   String toString(){
@@ -76,7 +76,16 @@ class Hexagon {
     }
   }
 
-
+  void surroundingRoads(){
+   float rad = 2/sqrt(3)*radius;
+   int j = 0;
+   for(float i = 0.5; i<6; i+=1){
+    float x = centerx + rad*cos( (PI/3) * i);
+    float y = centery + rad*sin( (PI/3) * i);
+    roads[j] = new Road(x,y);
+    j++;
+   } 
+  }
     
   
   void setNum(int n){
@@ -112,6 +121,15 @@ class Hexagon {
     }
   }
   
+  Hexagon hexInDir(float angleFromCenter){
+   for(int i = 0; i<6; i++){
+    float j = (float)(i) + 0.5;
+    int nextX =(int)(3/2 * (centerx + radius*cos( (PI/3)*j ) ) );
+    int nextY =(int)(3/2 * (centery + radius*sin( (PI/3)*j ) ) );
+    if( adjHexs[i].inHex(nextX, nextY) ){return adjHexs[i];}
+   } 
+   return null;
+  }
 
   boolean checkAdjSets(int i){
      if (settlements[(i+1)%6].isBuilt || settlements[(i+5)%6].isBuilt)

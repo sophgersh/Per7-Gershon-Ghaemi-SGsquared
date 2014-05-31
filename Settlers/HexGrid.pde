@@ -9,6 +9,7 @@ class HexGrid{
    HexGrid(){
      hexs = new Hexagon[19]; 
      makethemhexs();
+     new Road( 40, 500);
    }
 
   //creates the HexGrid with 19 hexagons, and the web of connection between them   
@@ -104,6 +105,9 @@ class HexGrid{
     int j = 0;
     for(int a = 0; a<resourceAmts.length; a++){
      for(int b = 0; b<resourceAmts[a]; b++){
+      //int l = tiles[total];
+      //Hexagon m = hexs[l];
+      //String resource = RESOURCES[j];
       hexs[ tiles[total] ].setResource( RESOURCES[j] );
       total++;
      }

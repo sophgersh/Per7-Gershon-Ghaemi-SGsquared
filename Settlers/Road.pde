@@ -3,8 +3,9 @@ class Road{
   Hexagon[] adjHexs;
   //Player owner;
   
-  Road(){
-   adjHexs = new Hexagon[2]; 
+  Road(float x, float y){
+   adjHexs = new Hexagon[2];
+   ellipse(x,y,15,15); 
   }
   
   

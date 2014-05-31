@@ -39,13 +39,13 @@ class Hexagon {
     centerx = cx;
     centery = cy;
     float angle = TWO_PI / 6;
+    noFill();
     beginShape();
     for (int i = 0; i < 6; i++) {
       vertex(centerx + radius * cos(angle * i),
              centery + radius * sin(angle * i) );      
     }
-    endShape(CLOSE);  
-    noFill();
+    endShape(CLOSE);    
     ellipse(centerx,centery,sqrt(3)*radius,sqrt(3)*radius); 
     surroundingS();
     //if (num == 0) { center(); }
@@ -67,15 +67,7 @@ class Hexagon {
     }
   }
 
-  /*void center(){
-     float angle = TWO_PI / 6;
-     for (int i = 1; i <= 6; i++){
-        float x = centerx+2*radius*cos(angle*i+PI/6);
-        float y = centery+2*radius*sin(angle*i+PI/6);
-        adjHexs[i-1] = new Hexagon(x,y,radius,i);
-        
-     }  
-  }*/
+
     
   
   void setNum(int n){
@@ -84,7 +76,7 @@ class Hexagon {
   
   void background(){
    PImage photo = loadImage("catan5.jpg");
-   image(photo,0,0);
+   image(photo,700,0);
   } 
 
   boolean inHex(int x, int y){

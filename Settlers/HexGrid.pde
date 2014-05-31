@@ -56,7 +56,7 @@ class HexGrid{
 
   void background(){
    PImage photo = loadImage("catan5.jpg");
-   image(photo,0,0);
+   image(photo,700,0);
   } 
 
   //sets the dieValues of the Hexagons

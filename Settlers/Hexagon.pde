@@ -39,14 +39,23 @@ class Hexagon {
     centerx = cx;
     centery = cy;
     float angle = TWO_PI / 6;
-    noFill();
+    int r;
+    if (resource.equals("forest")) {r = #177E0A; }
+    else if (resource.equals("wheat")) {r = #DBA307; }
+    else if (resource.equals("desert")) {r = #F7F700; }
+    else if (resource.equals("stone")) {r = #7E7E7A; }
+    else if (resource.equals("brick")) {r = #BC4E09; }
+    else /*(resource.equals("sheep"))*/ {r = #4EFF15; }
+    fill(r);
     beginShape();
     for (int i = 0; i < 6; i++) {
       vertex(centerx + radius * cos(angle * i),
              centery + radius * sin(angle * i) );      
     }
-    endShape(CLOSE);    
-    ellipse(centerx,centery,sqrt(3)*radius,sqrt(3)*radius); 
+    endShape(CLOSE);  
+    noFill(); 
+    //stroke(0); 
+    //ellipse(centerx,centery,sqrt(3)*radius,sqrt(3)*radius); 
     surroundingS();
     
   }

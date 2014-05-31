@@ -2,7 +2,7 @@ HexGrid grid;
 Game g;
 
 void setup(){
- size(1200,700); //x=1200 so that we can have space to put stats and stuff
+ size(700,700); //x=1200 so that we can have space to put stats and stuff
  background(255);
  smooth();    
  g = new Game();
@@ -22,9 +22,11 @@ void draw(){
 
 Hexagon pressed;
 void mousePressed(){
-  if (g.stage == 0)
+  //println(mouseX+","+mouseY);
+  if (g.stage == 0){
+    g.selectColor(mouseX, mouseY);
     g.hexs();
-  else{
+  }else{
     if (pressed != null){
       pressed.checkSettlement(mouseX,mouseY);
       pressed = null;

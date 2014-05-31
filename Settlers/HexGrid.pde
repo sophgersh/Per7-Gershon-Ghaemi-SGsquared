@@ -95,7 +95,7 @@ class HexGrid{
   //creates 4 forest tiles, 4 wheat, 4 sheep...etc. randomize
    void setResourcesAll(){
     int[] tiles = {0,1,2,3,4,5,6,7,8,9,10,11,12,
-                    13,14,15,16,17,18,19};
+                    13,14,15,16,17,18};
     tiles = scramble(tiles);
     int[] resourceAmts = {4,4,4,3,3,1};
     //4 forest tiles, 4 wheat, 4 sheep, 

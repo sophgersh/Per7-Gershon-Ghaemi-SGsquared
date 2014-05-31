@@ -42,8 +42,8 @@ class HexGrid{
      Hexagon h = hexs[0];
      float angle = TWO_PI / 6;
      for (int i = 1; i <= 6; i++){
-        float x = h.centerx + 2*h.radius*cos(angle*i+PI/6);
-        float y = h.centery + 2*h.radius*sin(angle*i+PI/6);
+        float x = h.centerx + 2*h.radius*cos(angle*(i-1)+PI/6);
+        float y = h.centery + 2*h.radius*sin(angle*(i-1)+PI/6);
         hexs[i].drawHex(x,y);
         hexs[0].add(i-1, hexs[i]);        
      }  

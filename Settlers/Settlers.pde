@@ -38,6 +38,8 @@ void mousePressed(){
   }
   for (Hexagon h : grid.getGrid()){
     if(h != null && h.inHex(mouseX,mouseY)){
+      print(h+": ");
+      println(h.adjHexs);
       pressed = h;
       h.setColor(h.col+50);      
     }

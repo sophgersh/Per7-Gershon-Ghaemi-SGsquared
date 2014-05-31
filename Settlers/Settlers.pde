@@ -3,7 +3,7 @@ Game g;
 
 void setup(){
  size(1200,700); //x=1200 so that we can have space to put stats and stuff
- background(#05E7FA);
+ background(255);
  smooth();    
  g = new Game();
  //grid = new HexGrid();  

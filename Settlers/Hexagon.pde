@@ -48,7 +48,7 @@ class Hexagon {
     endShape(CLOSE);    
     ellipse(centerx,centery,sqrt(3)*radius,sqrt(3)*radius); 
     surroundingS();
-    //if (num == 0) { center(); }
+    
   }
 
   String toString(){

@@ -16,6 +16,7 @@ class HexGrid{
      for (int i = 0; i < hexs.length; i++){
         hexs[i] = new Hexagon(i); 
      }   
+     //DO THE THING HERE 
      hexs[0].drawHex(350,350);
      center();
      float angle = TWO_PI/6;

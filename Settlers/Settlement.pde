@@ -3,6 +3,7 @@ class Settlement{
   float centerx;
   float centery;
   boolean isBuilt;
+  boolean isCity;
   Hexagon[] adjHexs;
   //Player owner;
   
@@ -11,6 +12,7 @@ class Settlement{
      centery = y;
      radius = r;
      isBuilt = false;
+     isCity = false;
      adjHexs = new Hexagon[3]; 
      ellipse(x, y, r, r ); 
   }

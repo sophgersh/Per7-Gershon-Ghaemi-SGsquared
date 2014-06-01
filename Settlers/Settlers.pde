@@ -24,8 +24,8 @@ Hexagon pressed;
 void mousePressed(){
   //println(mouseX+","+mouseY);
   if (g.stage == 0){
-    g.selectColor(mouseX, mouseY);
-    g.hexs();
+    if (g.selectColor(mouseX, mouseY))
+      g.hexs();
   }else{
     if (pressed != null){
       pressed.checkSettlement(mouseX,mouseY);
@@ -33,8 +33,8 @@ void mousePressed(){
     }
     for (Hexagon h : g.hg.getGrid()){
       if(h != null && h.inHex(mouseX,mouseY)){
-        print(h+": ");
-        println(h.adjHexs);
+        /*print(h+": ");
+        println(h.adjHexs);*/
         pressed = h;
         h.setColor(h.col+50);      
       }

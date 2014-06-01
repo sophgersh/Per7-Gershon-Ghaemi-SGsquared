@@ -61,6 +61,27 @@ class Game{
     hg = new HexGrid();  
     stage++;  
     hg.background();
+    for (Player p : players)
+      p.addHG(hg);
+  }
+  
+  void firstSets(){
+    for (Player p : players){
+       if (p.isUser){
+         mpressed(mouseX,mouseY);
+       } else {
+         p.placeSet(true);
+       }
+    }
+  }
+  void secondSets(){
+    for (int i = 3; i >= 0; i--){
+       if (players[i].isUser){
+         mpressed(mouseX,mouseY);
+       } else {
+         players[i].placeSet(true);
+       }
+    }
   }
   
   void mpressed(int x, int y){

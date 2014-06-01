@@ -113,10 +113,23 @@ class Hexagon {
           } else 
              settlements[i].setColor(#FF15F0);  //not valid   
         }else if (c == settlements[i].col)  //already built     
-          settlements[i].buildCity();
-        
+          settlements[i].buildCity();        
       }
     }
+  }
+  
+  boolean checkSettlement(int j, int c){
+    for (int i = 0; i < settlements.length; i++){
+        if (!settlements[(i+j)%6].isBuilt){
+          if (checkAdjSets((i+j)%6)){
+             buildSettlement((i+j)%6); 
+             settlements[(i+j)%6].setColor(c);
+            return true;    
+        }else if (c == settlements[i].col)  //already built     
+          settlements[i].buildCity();        
+      }
+    }
+    return false;
   }
   
   Hexagon hexInDir(float angleFromCenter){

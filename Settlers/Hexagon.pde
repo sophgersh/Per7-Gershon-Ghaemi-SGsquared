@@ -103,19 +103,17 @@ class Hexagon {
   /*boolean onRoad(int x, int y){
   
   }*/
-  void checkSettlement(int x, int y){
+  void checkSettlement(int x, int y, int c){
     for (int i = 0; i < settlements.length; i++){
       if (settlements[i].inRadius(x,y)){
         if (!settlements[i].isBuilt){
           if (checkAdjSets(i)){
              buildSettlement(i); 
-             settlements[i].setColor(#FA0A0A); 
-          }
-         else 
-            settlements[i].setColor(#F525BA);
-      
-        }else 
-          settlements[i].setColor(#9A07DB);
+             settlements[i].setColor(c); 
+          } else 
+             settlements[i].setColor(#FF15F0);  //not valid   
+        }else if (c == settlements[i].col)  //already built     
+          settlements[i].buildCity();
         
       }
     }

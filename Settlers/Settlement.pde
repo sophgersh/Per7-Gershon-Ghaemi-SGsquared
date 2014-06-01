@@ -2,6 +2,7 @@ class Settlement{
   float radius;
   float centerx;
   float centery;
+  int col;
   boolean isBuilt;
   boolean isCity;
   Hexagon[] adjHexs;
@@ -57,7 +58,13 @@ class Settlement{
    }*/
 
   void setColor(int r){
+    col = r;
     fill(r);
     ellipse(centerx,centery,radius,radius);
+  }
+  
+  void buildCity(){
+    isCity = true;
+    setColor(col+100); 
   }
 }

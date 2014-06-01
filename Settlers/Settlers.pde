@@ -23,26 +23,11 @@ void draw(){
 Hexagon pressed;
 void mousePressed(){
   //println(mouseX+","+mouseY);
-  if (g.stage == 0){
-    if (g.selectColor(mouseX, mouseY))
-      g.hexs();
-  }else{
-    if (pressed != null){
-      pressed.checkSettlement(mouseX,mouseY);
-      pressed = null;
-    }
-    for (Hexagon h : g.hg.getGrid()){
-      if(h != null && h.inHex(mouseX,mouseY)){
-        /*print(h+": ");
-        println(h.adjHexs);*/
-        pressed = h;
-        h.setColor(h.col+50);      
-      }
-    }
-  }
-  
-  
+  g.mpressed(mouseX,mouseY);
 }
+  
+  
+
   
 
 

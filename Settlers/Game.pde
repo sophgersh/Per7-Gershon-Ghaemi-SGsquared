@@ -1,5 +1,6 @@
 class Game{
   Player[] players; //length 4
+  int u;
   int stage;
   HexGrid hg;
   
@@ -33,18 +34,22 @@ class Game{
     players[3] = new Player(#9808C1);
     if (330<x && x<400 && 300<y && y<325){
       players[0].isUser();
+      u = 0;
       println("red");
       return true;
     } else if (330<x && x<426 && 350<y && y<375){
       players[1].isUser();
+      u = 1;
       println("blue");
       return true;
     } else if (330<x && x<447 && 400<y && y<425){
       players[2].isUser();
+      u = 2;
       println("green");
       return true;
     } else if (330<x && x<475 && 450<y && y<475){
       players[3].isUser();
+      u = 3;
       println("purple");
       return true;
     } else 
@@ -58,5 +63,24 @@ class Game{
     hg.background();
   }
   
+  void mpressed(int x, int y){
+    if (stage == 0){
+      if (selectColor(mouseX, mouseY))
+        hexs();
+    }else{
+      if (pressed != null){
+        pressed.checkSettlement(mouseX,mouseY,players[u].col);
+        pressed = null;
+      }
+      for (Hexagon h : hg.getGrid()){
+        if(h != null && h.inHex(mouseX,mouseY)){
+          /*print(h+": ");
+          println(h.adjHexs);*/
+          pressed = h;
+          h.setColor(h.col+50);      
+        }
+      }
+    }
+  }
   
 }

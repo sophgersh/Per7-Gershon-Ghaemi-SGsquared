@@ -150,7 +150,7 @@ class Hexagon {
           if (checkAdjSets((i+j)%6)){
              buildSettlement((i+j)%6, c); 
              settlements[(i+j)%6].setColor(c);
-            return true;    
+             return true;    
         }else if (c == settlements[i].col)  //already built     
           settlements[i].buildCity();        
       }

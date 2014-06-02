@@ -75,7 +75,7 @@ class Game{
     } else if (stage == 1) {
         stageOne(x,y); 
     } else if (stage == 2){ 
-        stageTwo(x, y);
+        stageTwo(x,y);
     } else if (stage == 3){     
       if (pressed != null){
         pressed.checkSettlement(x,y,players[user].col);
@@ -131,27 +131,34 @@ class Game{
   void stageOne(int x, int y){
     if (players[pturn].isUser){
       if (userClick(x,y)){
-        if (pturn+1 < 3)
+        if (pturn+1 < 4)
           pturn++;
         else 
           stage++;
       }      
     } else {
       players[pturn].placeSet(true);   
-      if ((pturn+1)%4 < 4)
+      if (pturn+1 < 4)
         pturn++;
       else 
         stage++;
     }    
   }
   void stageTwo(int x, int y){
-    for (int i = 3; i >= 0; i--){
-       if (players[i].isUser){
-         mpressed(x,y);
-       } else {
-         players[i].placeSet(true);
-       }
-    }
+    if (players[pturn].isUser){
+      if (userClick(x,y)){
+        if (pturn-1 >= 0)
+          pturn--;
+        else 
+          stage++;
+      }      
+    } else {
+      players[pturn].placeSet(true);   
+      if (pturn-1 >= 0)
+        pturn--;
+      else 
+        stage++;
+    } 
   }
   
   

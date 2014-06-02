@@ -84,7 +84,9 @@ class Hexagon {
     float x1 = centerx + rad*cos(angle);
     float y1 = centery + rad*sin(angle);
     Hexagon nextHex = hexInDir(angle);
-    roads[j] = new Road(x1,y1);
+    float x2 = nextHex.centerx + rad*cos(angle + (PI) );
+    float y2 = nextHex.centery + rad*sin(angle + (PI) );
+    roads[j] = new Road((x1+x2)/2.0,(y1+y2)/2.0);
     j++;
    } 
   }
@@ -139,14 +141,14 @@ class Hexagon {
     float j = (float)(i) + 0.5;
     int nextX =(int)(3/2 * (centerx + radius*cos( (PI/3)*j ) ) );
     int nextY =(int)(3/2 * (centery + radius*sin( (PI/3)*j ) ) );
-    printAdjHexs();
+    //printAdjHexs();
     if( adjHexs[i].inHex(nextX, nextY) ){return adjHexs[i];}
    } 
    return null;
   }
   
   void printAdjHexs(){
-   String s = "";
+   String s = "adj to "+this+": ";
    for(int i = 0; i<adjHexs.length; i++){s+=adjHexs[i]+", ";}
    println(s); 
   }

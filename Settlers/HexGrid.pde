@@ -2,7 +2,7 @@ class HexGrid{
    Hexagon[] hexs;   
    final int[] VALUES = {2,3,3,4,4,5,5,6,6,8,8,9,9,10,10,
                           11,11,12};
-    final String[] RESOURCES = {"forest", "wheat", "sheep", 
+   final String[] RESOURCES = {"forest", "wheat", "sheep", 
                                 "stone", "brick", "desert"};
     //4 forest tiles, 4 wheat, 4 sheep, 
     //3 stone tiles, 3 brick, 1 desert
@@ -39,6 +39,9 @@ class HexGrid{
             mutualAdd((i+4)%6, i+j+6,  (i+1)%6, pos2);           
           }          
         }
+     }
+     for(int i = 0; i<19; i++){
+      hexs[i].printAdjHexs(); 
      }
    }
    

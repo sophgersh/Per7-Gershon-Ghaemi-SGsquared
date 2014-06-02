@@ -9,7 +9,7 @@ class HexGrid{
    HexGrid(){
      hexs = new Hexagon[19]; 
      makethemhexs();
-     new Road( 40, 500);
+     //new Road( 40, 500);
    }
 
   //creates the HexGrid with 19 hexagons, and the web of connection between them   

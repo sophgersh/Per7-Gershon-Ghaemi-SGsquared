@@ -57,7 +57,7 @@ class Hexagon {
     //stroke(0); 
     //ellipse(centerx,centery,sqrt(3)*radius,sqrt(3)*radius); 
     surroundingS();
-    surroundingRoads();
+    //surroundingRoads();
   }
 
   String toString(){
@@ -80,9 +80,11 @@ class Hexagon {
    float rad = 2/sqrt(3)*radius;
    int j = 0;
    for(float i = 0.5; i<6; i+=1){
-    float x = centerx + rad*cos( (PI/3) * i);
-    float y = centery + rad*sin( (PI/3) * i);
-    roads[j] = new Road(x,y);
+    float angle = (PI/3) * i;
+    float x1 = centerx + rad*cos(angle);
+    float y1 = centery + rad*sin(angle);
+    Hexagon nextHex = hexInDir(angle);
+    roads[j] = new Road(x1,y1);
     j++;
    } 
   }
@@ -137,9 +139,16 @@ class Hexagon {
     float j = (float)(i) + 0.5;
     int nextX =(int)(3/2 * (centerx + radius*cos( (PI/3)*j ) ) );
     int nextY =(int)(3/2 * (centery + radius*sin( (PI/3)*j ) ) );
+    printAdjHexs();
     if( adjHexs[i].inHex(nextX, nextY) ){return adjHexs[i];}
    } 
    return null;
+  }
+  
+  void printAdjHexs(){
+   String s = "";
+   for(int i = 0; i<adjHexs.length; i++){s+=adjHexs[i]+", ";}
+   println(s); 
   }
 
   boolean checkAdjSets(int i){
@@ -195,6 +204,7 @@ class Hexagon {
   }*/
   
   void add(int pos, Hexagon h){
+     println("SUCCESS ADDED" + h+"TO "+this);
      adjHexs[pos] = h; 
   }
   void addSet(int pos, Settlement s){

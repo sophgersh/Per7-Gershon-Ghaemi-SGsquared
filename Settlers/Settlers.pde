@@ -2,7 +2,7 @@ HexGrid grid;
 Game g;
 
 void setup(){
- size(700,700); //x=1200 so that we can have space to put stats and stuff
+ size(700,700); //x=1200 
  background(255);
  smooth();    
  g = new Game();
@@ -20,7 +20,7 @@ void draw(){
   }*/
 }
 
-Hexagon pressed;
+
 void mousePressed(){
   //println(mouseX+","+mouseY);
   g.mpressed(mouseX,mouseY);

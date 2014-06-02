@@ -1,18 +1,24 @@
 class Game{
   Player[] players; //length 4
-  int u;
+  int user;
   int stage;
   //STAGE 0  = choose color
-  //STAGE 1  = initial 2 settlements (before tile reveal)
+  //STAGE 1  = initial settlement (before tile reveal)
+  //STAGE 2  = second settlement
   //          show AI turns
-  //STAGE 2+ = play (check for mousePressed based on player's turn)
+  //STAGE 3+ = play (check for mousePressed based on player's turn)
   //          text box to recap AI turns
   HexGrid hg;
+  Hexagon pressed;
+  int pturn;
+  boolean noWinner;
   
   Game(){
     players = new Player[4]; 
     stage = 0;
     firstscreen();
+    noWinner = true;
+    pturn = 0;
   }
   
   void firstscreen(){
@@ -31,7 +37,7 @@ class Game{
     fill(#9808C1); 
     text("PURPLE", 330, 475);      
   }
-
+  
   boolean selectColor(int x, int y){
     players[0] = new Player(#F50C0C);
     players[1] = new Player(#1411F2);
@@ -39,25 +45,69 @@ class Game{
     players[3] = new Player(#9808C1);
     if (330<x && x<400 && 300<y && y<325){
       players[0].isUser();
-      u = 0;
+      user = 0;
       println("red");
       return true;
     } else if (330<x && x<426 && 350<y && y<375){
       players[1].isUser();
-      u = 1;
+      user = 1;
       println("blue");
       return true;
     } else if (330<x && x<447 && 400<y && y<425){
       players[2].isUser();
-      u = 2;
+      user = 2;
       println("green");
       return true;
     } else if (330<x && x<475 && 450<y && y<475){
       players[3].isUser();
-      u = 3;
+      user = 3;
       println("purple");
       return true;
     } else 
+      return false;
+  }
+  
+  
+  void mpressed(int x, int y){
+    if (stage == 0){
+      if (selectColor(x, y))
+        hexs();
+    } else if (stage == 1) {
+        stageOne(x,y); 
+    } else if (stage == 2){ 
+        stageTwo(x,y);
+    } else if (stage == 3){     
+      if (pressed != null){
+        pressed.checkSettlement(x,y,players[user].col);
+        pressed = null;
+      }
+      for (Hexagon h : hg.getGrid()){
+        if(h != null && h.inHex(x,y)){
+          /*print(h+": ");
+          println(h.adjHexs);*/
+          pressed = h;
+          h.setColor(h.col+50);      
+        }
+      }
+    }
+  }
+  
+  boolean userClick(int x, int y){
+      if (pressed != null){
+        int setPos = pressed.checkSettlement(x,y,players[user].col);
+        if (setPos == 0) {
+          pressed.buildSettlement(x, y, players[user].col); 
+          pressed = null;
+          return true;
+        }
+      }
+      for (Hexagon h : hg.getGrid()){
+        if (h.inHex(x,y)){
+          pressed = h;
+          h.setColor(h.col+50);
+          return false;      
+        }
+      }
       return false;
   }
   
@@ -71,52 +121,46 @@ class Game{
   }
   
   void playGame(){
-    firstSets();
-    secondSets();
+    
+    while (noWinner){
+      //turns();
+    }
     //turns(); 
   }
   
-  void firstSets(){
-    for (Player p : players){
-       if (p.isUser){
-         mousePressed();
-       } else {
-         p.placeSet(true);
-       }
-    }
+  void stageOne(int x, int y){
+    if (players[pturn].isUser){
+      if (userClick(x,y)){
+        if (pturn+1 < 4)
+          pturn++;
+        else 
+          stage++;
+      }      
+    } else {
+      players[pturn].placeSet(true);   
+      if (pturn+1 < 4)
+        pturn++;
+      else 
+        stage++;
+    }    
   }
-  void secondSets(){
-    for (int i = 3; i >= 0; i--){
-       if (players[i].isUser){
-         mpressed(mouseX,mouseY);
-       } else {
-         players[i].placeSet(true);
-       }
-    }
+  void stageTwo(int x, int y){
+    if (players[pturn].isUser){
+      if (userClick(x,y)){
+        if (pturn-1 >= 0)
+          pturn--;
+        else 
+          stage++;
+      }      
+    } else {
+      players[pturn].placeSet(true);   
+      if (pturn-1 >= 0)
+        pturn--;
+      else 
+        stage++;
+    } 
   }
   
-  void mpressed(int x, int y){
-    if (stage == 0){
-      if (selectColor(mouseX, mouseY))
-        hexs();
-    /*} else if (stage == 1) {
-       playGame();
-    */
-    }else{
-      
-      if (pressed != null){
-        pressed.checkSettlement(mouseX,mouseY,players[u].col);
-        pressed = null;
-      }
-      for (Hexagon h : hg.getGrid()){
-        if(h != null && h.inHex(mouseX,mouseY)){
-          /*print(h+": ");
-          println(h.adjHexs);*/
-          pressed = h;
-          h.setColor(h.col+50);      
-        }
-      }
-    }
-  }
+  
   
 }

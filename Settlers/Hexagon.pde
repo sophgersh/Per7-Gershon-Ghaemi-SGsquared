@@ -61,7 +61,7 @@ class Hexagon {
     noFill();
     //stroke(0); 
     //ellipse(centerx,centery,sqrt(3)*radius,sqrt(3)*radius); 
-    surroundingS();
+    surroundingSets();
     //surroundingRoads();
   }
 
@@ -69,7 +69,7 @@ class Hexagon {
     return "Hex#"+this.num; 
   }
 
-  void surroundingS(){    
+  void surroundingSets(){    
     float angle = TWO_PI / 6;
     float r = (2/sqrt(3)*radius - sqrt(3)/2*radius)*2; //diameter
     float rad = 2/sqrt(3)*radius; //displacement
@@ -119,28 +119,38 @@ class Hexagon {
   /*boolean onRoad(int x, int y){
   
   }*/
-  void checkSettlement(int x, int y, int c){
+  
+  //used during the USER's turn to determine whether they can build a settlement in a given location
+  int checkSettlement(int x, int y, int c){
     for (int i = 0; i < settlements.length; i++){
       if (settlements[i].inRadius(x,y)){
         if (!settlements[i].isBuilt){
-          if (checkAdjSets(i)){
-             buildSettlement(i); 
-             settlements[i].setColor(c); 
-          } else 
+          if (checkAdjSets(i)){           
+             //buildSettlement(i);    
+             return 0;  //0 means that the settlement can be built
+             //return true;
+          } else {
              settlements[i].setColor(#FF15F0);  //not valid   
-        }else if (c == settlements[i].col)  //already built     
-          settlements[i].buildCity();        
+             return 2; // 2 means that the settlement cannot be built
+          }
+        }else if (c == settlements[i].col){  //already built     
+          //settlements[i].buildCity(); 
+          return 1; //means that a settlement of the players color has already been built here
+        }       
       }
     }
+    return 3; //did not click on a settlement
   }
   
+  //function used by COM player to determine whether a selected settlement can be built
+  //randomly inputed j is a displacement, c is the color 
   boolean checkSettlement(int j, int c){
     for (int i = 0; i < settlements.length; i++){
         if (!settlements[(i+j)%6].isBuilt){
           if (checkAdjSets((i+j)%6)){
-             buildSettlement((i+j)%6); 
+             buildSettlement((i+j)%6, c); 
              settlements[(i+j)%6].setColor(c);
-            return true;    
+             return true;    
         }else if (c == settlements[i].col)  //already built     
           settlements[i].buildCity();        
       }
@@ -178,8 +188,8 @@ class Hexagon {
      return true;     
   }
   
-  void buildSettlement(int i){
-    settlements[i].build();
+  void buildSettlement(int i, int col){
+    settlements[i].build(col);
     settlements[i].add(this);
     if (adjHexs[(i+5)%6] != null){
        adjHexs[(i+5)%6].addSet((i+2)%6, settlements[i]);
@@ -187,8 +197,21 @@ class Hexagon {
     } if (adjHexs[i%6] != null){
        adjHexs[i].addSet((i+4)%6, settlements[i]);
        settlements[i].add(adjHexs[i%6]);
-    }
-    
+    }   
+  }
+  void buildSettlement(int x, int y, int col){
+    int i = 0;
+    for (int j = 0; j < settlements.length; j++)
+      if (settlements[j].inRadius(x,y)){ i = j; }
+    settlements[i].build(col);
+    settlements[i].add(this);
+    if (adjHexs[(i+5)%6] != null){
+       adjHexs[(i+5)%6].addSet((i+2)%6, settlements[i]);
+       settlements[i].add(adjHexs[(i+5)%6]);
+    } if (adjHexs[i%6] != null){
+       adjHexs[i].addSet((i+4)%6, settlements[i]);
+       settlements[i].add(adjHexs[i%6]);
+    }   
   }
 
   void setColor(int c){

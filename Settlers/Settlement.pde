@@ -18,8 +18,9 @@ class Settlement{
      ellipse(x, y, r, r ); 
   }
 
-  void build(){
+  void build(int c){
     isBuilt = true; 
+    setColor(c);
   }
 
   

@@ -18,8 +18,9 @@ class HexGrid{
         hexs[i] = new Hexagon(i); 
      }   
      //DO THE THING HERE 
-     setValuesAll();
+     //setValuesAll();
      setResourcesAll();
+     setValuesAll();
      hexs[0].drawHex(350,350);
      center();
      float angle = TWO_PI/6;
@@ -41,7 +42,8 @@ class HexGrid{
         }
      }
      for(int i = 0; i<19; i++){
-      hexs[i].printAdjHexs(); 
+      //hexs[i].printAdjHexs(); 
+      hexs[i].surroundingRoads();
      }
    }
    
@@ -111,7 +113,8 @@ class HexGrid{
       //int l = tiles[total];
       //Hexagon m = hexs[l];
       //String resource = RESOURCES[j];
-      hexs[ tiles[total] ].setResource( RESOURCES[j] );
+      //hexs[ tiles[total] ].setResource( RESOURCES[j] );
+      hexs[total].setResource(RESOURCES[j]);
       total++;
      }
      if(j<RESOURCES.length){j++;} 

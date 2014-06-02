@@ -18,10 +18,11 @@ class Player{
    
   void placeSet(boolean b){
     Hexagon h = hg.hexs[(int)random(19)];
-    boolean cs = false;
+    h.setColor(col);
+    /*boolean cs = false;
     while (!cs){
       cs = h.checkSettlement((int)random(6),col);
-    }
+    }*/
    if (b){
       //also build road adjacent 
    }

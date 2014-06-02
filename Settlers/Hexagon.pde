@@ -54,6 +54,11 @@ class Hexagon {
     }
     endShape(CLOSE);  
     noFill(); 
+    PFont font = loadFont("AppleMyungjo-48.vlw");
+    textFont(font, 35);
+    fill(0);
+    text(""+dieValue,cx,cy);
+    noFill();
     //stroke(0); 
     //ellipse(centerx,centery,sqrt(3)*radius,sqrt(3)*radius); 
     surroundingS();
@@ -83,10 +88,17 @@ class Hexagon {
     float angle = (PI/3) * i;
     float x1 = centerx + rad*cos(angle);
     float y1 = centery + rad*sin(angle);
-    Hexagon nextHex = hexInDir(angle);
-    float x2 = nextHex.centerx + rad*cos(angle + (PI) );
-    float y2 = nextHex.centery + rad*sin(angle + (PI) );
-    roads[j] = new Road((x1+x2)/2.0,(y1+y2)/2.0);
+    //Hexagon nextHex = hexInDir(angle);
+    try{
+      Hexagon nextHex = adjHexs[(int)(i-0.5)];
+      float x2 = nextHex.centerx + rad*cos(angle + (PI) );
+      float y2 = nextHex.centery + rad*sin(angle + (PI) );
+      roads[j] = new Road((x1+x2)/2.0,(y1+y2)/2.0);}
+    catch(NullPointerException e){
+      roads[j] = new Road(x1, y1);
+      println("SEASIDE ROAD BUILT WITH "+this);
+     //build road on seaside 
+    }
     j++;
    } 
   }

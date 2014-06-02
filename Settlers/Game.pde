@@ -2,6 +2,11 @@ class Game{
   Player[] players; //length 4
   int u;
   int stage;
+  //STAGE 0  = choose color
+  //STAGE 1  = initial 2 settlements (before tile reveal)
+  //          show AI turns
+  //STAGE 2+ = play (check for mousePressed based on player's turn)
+  //          text box to recap AI turns
   HexGrid hg;
   
   Game(){
@@ -65,10 +70,16 @@ class Game{
       p.addHG(hg);
   }
   
+  void playGame(){
+    firstSets();
+    secondSets();
+    //turns(); 
+  }
+  
   void firstSets(){
     for (Player p : players){
        if (p.isUser){
-         mpressed(mouseX,mouseY);
+         mousePressed();
        } else {
          p.placeSet(true);
        }
@@ -88,7 +99,11 @@ class Game{
     if (stage == 0){
       if (selectColor(mouseX, mouseY))
         hexs();
+    /*} else if (stage == 1) {
+       playGame();
+    */
     }else{
+      
       if (pressed != null){
         pressed.checkSettlement(mouseX,mouseY,players[u].col);
         pressed = null;

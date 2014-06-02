@@ -71,9 +71,21 @@ class HexGrid{
   //sets the dieValues of the Hexagons
   void setValuesAll(){
     int[] chosenValues = scramble(VALUES);
+    int temp = 0;
     for(int i = 0; i<18; i++){
-      hexs[i].setValue(chosenValues[i]);
+      if(hexs[i].resource.equals("desert")){
+        println("desert tile");
+        hexs[i].setValue(-1); 
+        /*Hexagon temp = hexs[i];
+        hexs[i] = hexs[18];
+        hexs[18] = temp;
+        i--;*/
+        temp = chosenValues[i];
+      }
+      else{
+        hexs[i].setValue( chosenValues[i]);}
     }
+    hexs[18].setValue(temp);
   }
   
   //randomly scrambles the values in an array
@@ -114,7 +126,7 @@ class HexGrid{
       //Hexagon m = hexs[l];
       //String resource = RESOURCES[j];
       //hexs[ tiles[total] ].setResource( RESOURCES[j] );
-      hexs[total].setResource(RESOURCES[j]);
+      hexs[ tiles[total] ].setResource(RESOURCES[j]);
       total++;
      }
      if(j<RESOURCES.length){j++;} 

@@ -55,7 +55,7 @@ class Hexagon {
     endShape(CLOSE);  
     noFill(); 
     PFont font = loadFont("AppleMyungjo-48.vlw");
-    textFont(font, 35);
+    textFont(font, 15);
     fill(0);
     text(""+dieValue,cx,cy);
     noFill();
@@ -231,6 +231,7 @@ class Hexagon {
   
   boolean setValue(int val){
     dieValue = val;
+    if(resource.equals("desert")){dieValue=-1;}
     return true;
   }
   boolean setResource(String r){

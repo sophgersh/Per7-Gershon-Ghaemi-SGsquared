@@ -93,11 +93,12 @@ class Hexagon {
       Hexagon nextHex = adjHexs[(int)(i-0.5)];
       float x2 = nextHex.centerx + rad*cos(angle + (PI) );
       float y2 = nextHex.centery + rad*sin(angle + (PI) );
-      roads[j] = new Road((x1+x2)/2.0,(y1+y2)/2.0);}
-    catch(NullPointerException e){
-      roads[j] = new Road(x1, y1);
+      roads[j] = new Road((x1+x2)/2.0,(y1+y2)/2.0,this,nextHex);}
+    catch(NullPointerException e){//build road on seaside
+      float xSeaside = centerx + radius*cos(angle);
+      float ySeaside = centery + radius*sin(angle);
+      roads[j] = new Road(xSeaside, ySeaside,this,null);
       println("SEASIDE ROAD BUILT WITH "+this);
-     //build road on seaside 
     }
     j++;
    } 

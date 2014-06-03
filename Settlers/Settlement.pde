@@ -28,7 +28,7 @@ class Settlement{
      for (int i = 0; i < adjHexs.length; i++){
         if (adjHexs[i] == null){
           adjHexs[i] = h1;
-          h1.setColor(#59D84F);
+          //h1.setColor(#59D84F);
           return;
         }
      } 
@@ -66,6 +66,6 @@ class Settlement{
   
   void buildCity(){
     isCity = true;
-    setColor(col+100); 
+    //setColor(col+100); 
   }
 }

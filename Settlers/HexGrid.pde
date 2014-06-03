@@ -63,10 +63,7 @@ class HexGrid{
      hexs[h2].add(pos1, hexs[h1]);
    }
 
-  void background(){
-   PImage photo = loadImage("catan5.jpg");
-   image(photo,700,0);
-  } 
+  
 
   //sets the dieValues of the Hexagons
   void setValuesAll(){

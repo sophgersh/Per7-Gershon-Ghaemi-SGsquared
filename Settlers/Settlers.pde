@@ -2,7 +2,7 @@ HexGrid grid;
 Game g;
 
 void setup(){
- size(700,700); //x=1200 
+ size(1200,700); //x=1200 
  background(255);
  smooth();    
  g = new Game();

@@ -77,18 +77,7 @@ class Game{
     } else if (stage == 2){ 
         stageTwo(x,y);
     } else if (stage == 3){     
-      if (pressed != null){
-        pressed.checkSettlement(x,y,players[user].col);
-        pressed = null;
-      }
-      for (Hexagon h : hg.getGrid()){
-        if(h != null && h.inHex(x,y)){
-          /*print(h+": ");
-          println(h.adjHexs);*/
-          pressed = h;
-          h.setColor(h.col+50);      
-        }
-      }
+        stageThree(x,y);
     }
   }
   
@@ -96,15 +85,18 @@ class Game{
       if (pressed != null){
         int setPos = pressed.checkSettlement(x,y,players[user].col);
         if (setPos == 0) {
-          pressed.buildSettlement(x, y, players[user].col); 
+          pressed.buildSettlement(x, y, players[user].col);
+          players[u].addVP(); 
           pressed = null;
           return true;
+        } else if (setPos == 1){
+          //pressed build city 
         }
       }
       for (Hexagon h : hg.getGrid()){
         if (h.inHex(x,y)){
           pressed = h;
-          h.setColor(h.col+50);
+          //h.setColor(h.col+50);
           return false;      
         }
       }
@@ -112,13 +104,17 @@ class Game{
   }
   
   void hexs(){
-    background(#05E7FA);
+    background(#05E7FA);   
     hg = new HexGrid();  
     stage++;  
-    hg.background();
+    rightSide();
     for (Player p : players)
       p.addHG(hg);
   }
+  void rightSide(){
+   PImage photo = loadImage("catan5.jpg");
+   image(photo,700,0);
+  } 
   
   void playGame(){
     
@@ -160,7 +156,13 @@ class Game{
         stage++;
     } 
   }
-  
+  void stageThree(int x, int y){
+      if (players[pturn].isUser){
+         /* roll die, build settlements,roads,etc. 
+            userClick(x,y);
+         */ 
+      }
+  }
   
   
 }

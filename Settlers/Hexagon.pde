@@ -255,7 +255,7 @@ class Hexagon {
   
   boolean setValue(int val){
     dieValue = val;
-    if(resource.equals("desert")){dieValue=-1;}
+    if (resource.equals("desert")){ dieValue=-1; }
     return true;
   }
   boolean setResource(String r){

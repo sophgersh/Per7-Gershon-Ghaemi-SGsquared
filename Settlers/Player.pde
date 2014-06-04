@@ -3,6 +3,8 @@ class Player{
   boolean isUser;
   HexGrid hg;
   int VP;
+  ArrayList<Road> roads;
+  ArrayList<Settlement> settlements;
 
   Player(int c){
       col = c;

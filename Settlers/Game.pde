@@ -12,6 +12,9 @@ class Game{
   Hexagon pressed;
   int pturn;
   boolean noWinner;
+  ArrayList<Road> roads;
+  ArrayList<Settlement> settlements;
+  
   
   Game(){
     players = new Player[4]; 
@@ -24,7 +27,7 @@ class Game{
   void firstscreen(){
     PImage photo = loadImage("catan-logo.jpg");
     image(photo,200,50);
-    PFont font = loadFont("AppleMyungjo-48.vlw");
+    PFont font = loadFont("TrebuchetMS-Bold-48.vlw");
     textFont(font, 35);
     fill(0);
     text("Choose your color:",325,275);
@@ -86,7 +89,7 @@ class Game{
         int setPos = pressed.checkSettlement(x,y,players[user].col);
         if (setPos == 0) {
           pressed.buildSettlement(x, y, players[user].col);
-          players[u].addVP(); 
+          players[user].addVP(); 
           pressed = null;
           return true;
         } else if (setPos == 1){
@@ -111,9 +114,17 @@ class Game{
     for (Player p : players)
       p.addHG(hg);
   }
+  
   void rightSide(){
-   PImage photo = loadImage("catan5.jpg");
-   image(photo,700,0);
+   //PImage photo = loadImage("catan5.jpg");
+   //image(photo,700,0);
+   PFont font = loadFont("TrebuchetMS-Bold-48.vlw");
+   textFont(font, 48);
+   fill(0);
+   text("Player stats:",800,50);
+   textFont(font,25);
+   text("VP: "+players[user].VP,820,100); //needs to be updated
+   
   } 
   
   void playGame(){

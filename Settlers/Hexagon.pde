@@ -62,7 +62,7 @@ class Hexagon {
     //stroke(0); 
     //ellipse(centerx,centery,sqrt(3)*radius,sqrt(3)*radius); 
     surroundingSets();
-    //surroundingRoads();
+    surroundingRoads();
   }
 
   String toString(){
@@ -98,10 +98,15 @@ class Hexagon {
       float xSeaside = centerx + radius*cos(angle);
       float ySeaside = centery + radius*sin(angle);
       roads[j] = new Road(xSeaside, ySeaside,this,null);
-      println("SEASIDE ROAD BUILT WITH "+this);
+      //println("SEASIDE ROAD BUILT WITH "+this);
     }
     j++;
+   }
+   String s = "Roads around "+this+": ";
+   for(int i = 0; i<roads.length; i++){
+    s+=roads[i];
    } 
+   println(s);
   }
     
   
@@ -242,7 +247,7 @@ class Hexagon {
   }*/
   
   void add(int pos, Hexagon h){
-     println("SUCCESS ADDED" + h+"TO "+this);
+     println("successfully added " + h+" to "+this);
      adjHexs[pos] = h; 
   }
   void addSet(int pos, Settlement s){

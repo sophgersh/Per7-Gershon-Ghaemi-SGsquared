@@ -22,7 +22,7 @@ void draw(){
 
 
 void mousePressed(){
-  //println(mouseX+","+mouseY);
+  println("mouse at: "+mouseX+","+mouseY);
   g.mpressed(mouseX,mouseY);
 }
   

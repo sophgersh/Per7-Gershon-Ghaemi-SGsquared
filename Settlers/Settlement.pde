@@ -68,4 +68,8 @@ class Settlement{
     isCity = true;
     //setColor(col+100); 
   }
+  
+  String toString(){
+   return "settlement @ ("+(int)centerx+","+(int)centery+")"; 
+  }
 }

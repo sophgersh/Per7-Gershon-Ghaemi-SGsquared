@@ -91,7 +91,7 @@ class Game{
   
   void bpressed(){
     if (stage == 1) {
-       hg.settlements.get(b).setColor(#F5810C);
+       hg.roads.get(b).drawRoad(#F5810C);
        b++;
     }
   }

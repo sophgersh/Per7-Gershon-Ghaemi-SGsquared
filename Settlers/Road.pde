@@ -3,23 +3,29 @@ class Road{
   float cx, cy;
   Hexagon[] adjHexs;
   Settlement[] adjSettlements;
+  int col;
   //Player owner;
   
-  Road(float x, float y,Hexagon h1, Hexagon h2){
+  Road(float x, float y){
    cx = x;
    cy = y;
    adjHexs = new Hexagon[2];
-   adjHexs[0] = h1;
-   adjHexs[1] = h2; //will be null for seaside road 
    adjSettlements = new Settlement[2];
-   findAdjSettlements();  
+   //findAdjSettlements();  
    //ellipse(x,y,15,15); 
+  }
+  
+  void add(Hexagon h){
+    if (adjHexs[0] == null) 
+      adjHexs[0] = h;
+    else
+      adjHexs[1] = h;
   }
   
   void findAdjSettlements(){
     Hexagon h = adjHexs[0];
     int thisIsNthRoad = 0;
-    for(int i = 0; i<h.roads.length; i++){
+    for(int i = 0; i<6; i++){
      if(h.roads[i] == null){
        //println("YO ROAD NOT LEGIT ON "+ h);
      }
@@ -31,14 +37,32 @@ class Road{
     adjSettlements[1] = h.settlements[secondAdjSet];
     //println("findAdjSettlements success for "+this+" road between "+h+" and "+adjHexs[1]);
     println("AdjSettlements to "+this+": "+adjSettlements[0] + " and "+adjSettlements[1]);
-    float distToSet = h.radius*sin(30);
-    
+    float distToSet = h.radius*sin(30);   
+  }
+  
+  void setColor(int c){
+    col = c;
+    fill(c);
+    ellipse(cx,cy,15,15);
   }
   
   void drawRoad(){
    //width 30, length from one settlement to other 
-   ellipse(cx,cy,15,15); 
-   
+   //if (isBuilt){
+     noFill();
+     stroke(0);
+     ellipse(cx,cy,15,15); 
+   //}
+  }
+  
+  void drawRoad(int c){
+   //width 30, length from one settlement to other 
+   //if (isBuilt){
+     col = c;
+     fill(col);
+     stroke(0);
+     ellipse(cx,cy,15,15); 
+   //}
   }
   
   String toString(){

@@ -14,6 +14,7 @@ class Game{
   boolean noWinner;
   ArrayList<Road> roads;
   ArrayList<Settlement> settlements;
+  int se;
   
   
   Game(){
@@ -22,11 +23,12 @@ class Game{
     firstscreen();
     noWinner = true;
     pturn = 0;
+    se = 0;
   }
   
   void firstscreen(){
     PImage photo = loadImage("catan-logo.jpg");
-    image(photo,200,50);
+    image(photo,225,50);
     PFont font = loadFont("TrebuchetMS-Bold-48.vlw");
     textFont(font, 35);
     fill(0);
@@ -71,7 +73,9 @@ class Game{
   }
   
   
-  void mpressed(int x, int y){
+  void mpressed(/*int x, int y*/){
+    int x = mouseX;
+    int y = mouseY;
     if (stage == 0){
       if (selectColor(x, y))
         hexs();
@@ -81,6 +85,13 @@ class Game{
         stageTwo(x,y);
     } else if (stage == 3){     
         stageThree(x,y);
+    }
+  }
+  
+  void bpressed(){
+    if (stage == 1) {
+       hg.settlements.get(s).setColor(#F5810C);
+       se++;
     }
   }
   

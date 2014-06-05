@@ -67,12 +67,15 @@ class Road{
   
   String toString(){
     return "("+(int)cx+","+(int)cy+")"; 
-   }
+  }
    
-   boolean equals(Road other){
+  boolean equals(Road other){
     return (this.cx ==other.cx) && (this.cy==other.cy); 
-   }
-
+  }
+  
+  boolean inRadius(int x, int y){
+    return sqrt(sq(x-cx)+sq(y-cy)) < 15/2; 
+  }
   
   
 }

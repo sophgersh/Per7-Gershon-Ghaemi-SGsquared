@@ -14,8 +14,12 @@ class Settlement{
      radius = r;
      isBuilt = false;
      isCity = false;
-     adjHexs = new Hexagon[3]; 
-     ellipse(x, y, r, r ); 
+     adjHexs = new Hexagon[3];  
+  }
+  
+  void drawSet(){
+     noFill();
+     ellipse(centerx, centery, radius, radius );
   }
 
   void build(int c){
@@ -70,6 +74,6 @@ class Settlement{
   }
   
   String toString(){
-   return "settlement @ ("+(int)centerx+","+(int)centery+")"; 
+    return "settlement @ ("+(int)centerx+","+(int)centery+")"; 
   }
 }

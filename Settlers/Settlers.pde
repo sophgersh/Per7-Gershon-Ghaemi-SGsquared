@@ -23,9 +23,15 @@ void draw(){
 
 void mousePressed(){
   println("mouse at: "+mouseX+","+mouseY);
-  g.mpressed(mouseX,mouseY);
+  g.mpressed(/*mouseX,mouseY*/);
 }
   
+  
+void keyPressed() {
+  if (key == 'b' || key == 'B') {
+     g.bpressed();
+  }
+ }
   
 
   

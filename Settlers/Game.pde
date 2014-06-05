@@ -90,7 +90,7 @@ class Game{
   
   void bpressed(){
     if (stage == 1) {
-       hg.settlements.get(s).setColor(#F5810C);
+       hg.settlements.get(se).setColor(#F5810C);
        se++;
     }
   }

@@ -1,27 +1,43 @@
 class HexGrid{
-   Hexagon[] hexs;   
+   Hexagon[] hexs;  
+   ArrayList<Road> roads;
+   ArrayList<Settlement> settlements; 
    final int[] VALUES = {2,3,3,4,4,5,5,6,6,8,8,9,9,10,10,
                           11,11,12};
    final String[] RESOURCES = {"forest", "wheat", "sheep", 
                                 "stone", "brick", "desert"};
     //4 forest tiles, 4 wheat, 4 sheep, 
     //3 stone tiles, 3 brick, 1 desert
+    
    HexGrid(){
      hexs = new Hexagon[19]; 
-     makethemhexs();
+     roads = new ArrayList<Road>();
+     settlements = new ArrayList<Settlement>();   
      //new Road( 40, 500);
+     makeHexs();
+     makeSets();
+   }
+   
+   void drawBoard(){
+      for (int i = 0; i < hexs.length; i++){
+         hexs[i].drawHex();
+      } 
+      for (int i = 0; i < settlements.size(); i++){
+         settlements.get(i).drawSet(); 
+      }
+      for (int i = 0; i < roads.size(); i++){
+         roads.get(i).drawRoad(); 
+      }
    }
 
   //creates the HexGrid with 19 hexagons, and the web of connection between them   
-   void makethemhexs(){   
+   void makeHexs(){   
      for (int i = 0; i < hexs.length; i++){
         hexs[i] = new Hexagon(i); 
      }   
-     //DO THE THING HERE 
-     //setValuesAll();
      setResourcesAll();
      setValuesAll();
-     hexs[0].drawHex(350,350);
+     hexs[0].setXY(350,350);
      center();
      float angle = TWO_PI/6;
      for (int i = 1; i <= 6; i++){
@@ -31,7 +47,7 @@ class HexGrid{
         for (int j = i-1; j <= i; j++){          
           float x = hexs[i].centerx + 2*hexs[i].radius * cos(angle*(j%6)+PI/6);
           float y = hexs[i].centery + 2*hexs[i].radius * sin(angle*(j%6)+PI/6);
-          hexs[i+j+6].drawHex(x,y); 
+          hexs[i+j+6].setXY(x,y); 
           mutualAdd((j+3)%6, i,  j%6, i+j+6); //i and generated (both)
           if (j == i){
             mutualAdd((i+1)%6, i+j+6,  (i+4)%6, i+j+5); //two generated with each other
@@ -40,12 +56,30 @@ class HexGrid{
             mutualAdd((i+4)%6, i+j+6,  (i+1)%6, pos2);           
           }          
         }
-     }
-     for(int i = 0; i<19; i++){
-      //hexs[i].printAdjHexs(); 
-      hexs[i].surroundingRoads();
-     }
+     }     
    }
+   
+   void makeRoads(){
+    for(int i = 0; i < 19; i++){
+      Hexagon h = hexs[i];
+      Settlements[] sets = h.settlements;
+      for (int j = 0; j < sets.length; j++){
+        if (sets[j] == null)
+          roads.add(h.newRoad());
+     } 
+   }
+   
+   void makeSets(){
+      for (int i = 0; i < hexs.length; i++){
+         Hexagon h = hexs[i];
+         Settlement[] sets = h.settlements;
+         for (int j = 0; j < sets.length; j++){
+            if (sets[j] == null)
+               settlements.add(h.newSet(j));
+         }
+      }
+   }
+   
    
    void center(){
      Hexagon h = hexs[0];
@@ -53,7 +87,7 @@ class HexGrid{
      for (int i = 1; i <= 6; i++){
         float x = h.centerx + 2*h.radius*cos(angle*(i-1)+PI/6);
         float y = h.centery + 2*h.radius*sin(angle*(i-1)+PI/6);
-        hexs[i].drawHex(x,y);
+        hexs[i].setXY(x,y);
         hexs[0].add(i-1, hexs[i]);        
      }  
   }
@@ -63,10 +97,7 @@ class HexGrid{
      hexs[h2].add(pos1, hexs[h1]);
    }
 
-  void background(){
-   PImage photo = loadImage("catan5.jpg");
-   image(photo,700,0);
-  } 
+  
 
   //sets the dieValues of the Hexagons
   void setValuesAll(){

@@ -12,6 +12,10 @@ class Game{
   Hexagon pressed;
   int pturn;
   boolean noWinner;
+  ArrayList<Road> roads;
+  ArrayList<Settlement> settlements;
+  int b;
+  
   
   Game(){
     players = new Player[4]; 
@@ -19,12 +23,14 @@ class Game{
     firstscreen();
     noWinner = true;
     pturn = 0;
+    b = 0;
+    hg = new HexGrid();
   }
   
   void firstscreen(){
     PImage photo = loadImage("catan-logo.jpg");
-    image(photo,200,50);
-    PFont font = loadFont("AppleMyungjo-48.vlw");
+    image(photo,225,50);
+    PFont font = loadFont("TrebuchetMS-Bold-48.vlw");
     textFont(font, 35);
     fill(0);
     text("Choose your color:",325,275);
@@ -68,7 +74,9 @@ class Game{
   }
   
   
-  void mpressed(int x, int y){
+  void mpressed(/*int x, int y*/){
+    int x = mouseX;
+    int y = mouseY;
     if (stage == 0){
       if (selectColor(x, y))
         hexs();
@@ -77,18 +85,14 @@ class Game{
     } else if (stage == 2){ 
         stageTwo(x,y);
     } else if (stage == 3){     
-      if (pressed != null){
-        pressed.checkSettlement(x,y,players[user].col);
-        pressed = null;
-      }
-      for (Hexagon h : hg.getGrid()){
-        if(h != null && h.inHex(x,y)){
-          /*print(h+": ");
-          println(h.adjHexs);*/
-          pressed = h;
-          h.setColor(h.col+50);      
-        }
-      }
+        stageThree(x,y);
+    }
+  }
+  
+  void bpressed(){
+    if (stage == 1) {
+       hg.settlements.get(b).setColor(#F5810C);
+       b++;
     }
   }
   
@@ -96,15 +100,18 @@ class Game{
       if (pressed != null){
         int setPos = pressed.checkSettlement(x,y,players[user].col);
         if (setPos == 0) {
-          pressed.buildSettlement(x, y, players[user].col); 
+          pressed.buildSettlement(x, y, players[user].col);
+          players[user].addVP(); 
           pressed = null;
           return true;
+        } else if (setPos == 1){
+          //pressed build city 
         }
       }
       for (Hexagon h : hg.getGrid()){
         if (h.inHex(x,y)){
           pressed = h;
-          h.setColor(h.col+50);
+          //h.setColor(h.col+50);
           return false;      
         }
       }
@@ -112,13 +119,25 @@ class Game{
   }
   
   void hexs(){
-    background(#05E7FA);
-    hg = new HexGrid();  
+    background(#05E7FA);   
+    hg.drawBoard();
     stage++;  
-    hg.background();
+    rightSide();
     for (Player p : players)
       p.addHG(hg);
   }
+  
+  void rightSide(){
+   //PImage photo = loadImage("catan5.jpg");
+   //image(photo,700,0);
+   PFont font = loadFont("TrebuchetMS-Bold-48.vlw");
+   textFont(font, 48);
+   fill(0);
+   text("Player stats:",800,50);
+   textFont(font,25);
+   text("VP: "+players[user].VP,820,100); //needs to be updated
+   
+  } 
   
   void playGame(){
     
@@ -160,7 +179,13 @@ class Game{
         stage++;
     } 
   }
-  
+  void stageThree(int x, int y){
+      if (players[pturn].isUser){
+         /* roll die, build settlements,roads,etc. 
+            userClick(x,y);
+         */ 
+      }
+  }
   
   
 }

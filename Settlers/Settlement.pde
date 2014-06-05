@@ -14,8 +14,12 @@ class Settlement{
      radius = r;
      isBuilt = false;
      isCity = false;
-     adjHexs = new Hexagon[3]; 
-     ellipse(x, y, r, r ); 
+     adjHexs = new Hexagon[3];  
+  }
+  
+  void drawSet(){
+     noFill();
+     ellipse(centerx, centery, radius, radius );
   }
 
   void build(int c){
@@ -28,7 +32,7 @@ class Settlement{
      for (int i = 0; i < adjHexs.length; i++){
         if (adjHexs[i] == null){
           adjHexs[i] = h1;
-          h1.setColor(#59D84F);
+          //h1.setColor(#59D84F);
           return;
         }
      } 
@@ -66,6 +70,10 @@ class Settlement{
   
   void buildCity(){
     isCity = true;
-    setColor(col+100); 
+    //setColor(col+100); 
+  }
+  
+  String toString(){
+    return "settlement @ ("+(int)centerx+","+(int)centery+")"; 
   }
 }

@@ -2,15 +2,17 @@ class Road{
   boolean isBuilt;
   float cx, cy;
   Hexagon[] adjHexs;
-  Settlement[] adjSettlements;
+  Settlement[] adjSets;
+  Road[] adjRoads;
   int col;
   //Player owner;
   
   Road(float x, float y){
    cx = x;
    cy = y;
-   adjHexs = new Hexagon[2];
-   adjSettlements = new Settlement[2];
+   adjHexs = new Hexagon[2]; 
+   adjSets = new Settlement[2];
+   adjRoads = new Road[4];
    //findAdjSettlements();  
    //ellipse(x,y,15,15); 
   }
@@ -33,10 +35,10 @@ class Road{
     }
     int firstAdjSet = thisIsNthRoad;
     int secondAdjSet = (firstAdjSet+1)%6;
-    adjSettlements[0] = h.settlements[firstAdjSet];
-    adjSettlements[1] = h.settlements[secondAdjSet];
+    adjSets[0] = h.settlements[firstAdjSet];
+    adjSets[1] = h.settlements[secondAdjSet];
     //println("findAdjSettlements success for "+this+" road between "+h+" and "+adjHexs[1]);
-    println("AdjSettlements to "+this+": "+adjSettlements[0] + " and "+adjSettlements[1]);
+    println("AdjSettlements to "+this+": "+adjSets[0] + " and "+adjSets[1]);
     float distToSet = h.radius*sin(30);   
   }
   
@@ -47,12 +49,13 @@ class Road{
   }
   
   void drawRoad(){
-   //width 30, length from one settlement to other 
-   //if (isBuilt){
-     noFill();
-     stroke(0);
-     ellipse(cx,cy,15,15); 
-   //}
+     if (isBuilt){
+       fill(col);
+       ellipse(cx, cy, 15, 15);
+     } else {
+       noFill();
+       ellipse(cx, cy, 15, 15);
+     }
   }
   
   void drawRoad(int c){

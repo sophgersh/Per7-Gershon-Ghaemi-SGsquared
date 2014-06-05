@@ -52,22 +52,18 @@ class Game{
     if (330<x && x<400 && 300<y && y<325){
       players[0].isUser();
       user = 0;
-      println("red");
       return true;
     } else if (330<x && x<426 && 350<y && y<375){
       players[1].isUser();
       user = 1;
-      println("blue");
       return true;
     } else if (330<x && x<447 && 400<y && y<425){
       players[2].isUser();
       user = 2;
-      println("green");
       return true;
     } else if (330<x && x<475 && 450<y && y<475){
       players[3].isUser();
       user = 3;
-      println("purple");
       return true;
     } else 
       return false;

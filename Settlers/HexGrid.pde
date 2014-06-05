@@ -28,7 +28,6 @@ class HexGrid{
       }
       for (int i = 0; i < roads.size(); i++){
          roads.get(i).drawRoad();
-         println(i); 
       }
    }
 
@@ -68,7 +67,6 @@ class HexGrid{
        for (int j = 0; j < r.length; j++){
          if (r[j] == null)
            roads.add(h.newRoad(j));
-           println("Added road "+j+" to "+h);
        } 
     }
    }
@@ -109,15 +107,14 @@ class HexGrid{
     int temp = 0;
     for(int i = 0; i<18; i++){
       if(hexs[i].resource.equals("desert")){
-        println("desert tile");
+        //println("desert tile");
         hexs[i].setValue(-1); 
         /*Hexagon temp = hexs[i];
         hexs[i] = hexs[18];
         hexs[18] = temp;
         i--;*/
         temp = chosenValues[i];
-      }
-      else{
+      } else {
         hexs[i].setValue( chosenValues[i]);}
     }
     hexs[18].setValue(temp);

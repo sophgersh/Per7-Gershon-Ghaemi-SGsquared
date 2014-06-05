@@ -14,8 +14,8 @@ class Hexagon {
                 4 = rock, 5 = wheat, 6 = desert */    
    int dieValue; //dice roll number, 2-12 
    boolean hasRobber;
-  // ---pieces on board--- (settlements/cities/roads)
-  int col;
+   // ---pieces on board--- (settlements/cities/roads)
+   int col;
   
   Hexagon(int n){
      num = n;

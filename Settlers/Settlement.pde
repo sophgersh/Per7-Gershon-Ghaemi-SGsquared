@@ -6,6 +6,8 @@ class Settlement{
   boolean isBuilt;
   boolean isCity;
   Hexagon[] adjHexs;
+  Settlement[] adjSets;
+  Road[] adjRoads;
   //Player owner;
   
   Settlement(float x, float y, float r){    
@@ -14,19 +16,31 @@ class Settlement{
      radius = r;
      isBuilt = false;
      isCity = false;
-     adjHexs = new Hexagon[3];  
+     adjHexs = new Hexagon[3]; 
+     adjSets = new Settlement[3];
+     adjRoads = new Road[3];
+  }
+  
+  void setColor(int r){
+    col = r;
+    fill(r);
+    ellipse(centerx,centery,radius,radius);
   }
   
   void drawSet(){
-     noFill();
-     ellipse(centerx, centery, radius, radius );
+     if (isBuilt){
+       fill(col);
+       ellipse(centerx, centery, radius, radius );
+     } else {
+       noFill();
+       ellipse(centerx, centery, radius, radius );
+     }
   }
 
   void build(int c){
     isBuilt = true; 
     setColor(c);
   }
-
   
   void add(Hexagon h1){
      for (int i = 0; i < adjHexs.length; i++){
@@ -62,11 +76,7 @@ class Settlement{
       return true;
    }*/
 
-  void setColor(int r){
-    col = r;
-    fill(r);
-    ellipse(centerx,centery,radius,radius);
-  }
+  
   
   void buildCity(){
     isCity = true;

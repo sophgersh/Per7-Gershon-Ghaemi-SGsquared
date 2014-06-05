@@ -13,7 +13,7 @@ class Road{
    adjHexs[1] = h2; //will be null for seaside road 
    adjSettlements = new Settlement[2];
    findAdjSettlements();  
-   ellipse(x,y,15,15); 
+   //ellipse(x,y,15,15); 
   }
   
   void findAdjSettlements(){

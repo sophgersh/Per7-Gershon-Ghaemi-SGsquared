@@ -89,6 +89,28 @@ class Hexagon {
     }
     return settlements[i];
   }
+  
+  Road newRoad(int i){
+   noFill();
+   float rad = 2/sqrt(3)*radius;
+   int j = 0;
+   for(float i = 0.5; i<6; i++){
+    float angle = (PI/3) * i;
+    float x1 = centerx + rad*cos(angle);
+    float y1 = centery + rad*sin(angle);
+    //Hexagon nextHex = hexInDir(angle);
+    try{
+      Hexagon nextHex = adjHexs[(int)(i-0.5)];
+      float x2 = nextHex.centerx + rad*cos(angle + (PI) );
+      float y2 = nextHex.centery + rad*sin(angle + (PI) );
+      roads[j] = new Road((x1+x2)/2.0,(y1+y2)/2.0,this,nextHex);}
+    catch(NullPointerException e){//build road on seaside
+      float xSeaside = centerx + radius*cos(angle);
+      float ySeaside = centery + radius*sin(angle);
+      roads[j] = new Road(xSeaside, ySeaside,this,null);
+      //println("SEASIDE ROAD BUILT WITH "+this);
+    }
+  }
 
   void surroundingSets(){    
     float angle = TWO_PI / 6;

@@ -14,7 +14,7 @@ class Game{
   boolean noWinner;
   ArrayList<Road> roads;
   ArrayList<Settlement> settlements;
-  int se;
+  int b;
   
   
   Game(){
@@ -23,7 +23,8 @@ class Game{
     firstscreen();
     noWinner = true;
     pturn = 0;
-    se = 0;
+    b = 0;
+    hg = new HexGrid();
   }
   
   void firstscreen(){
@@ -90,8 +91,8 @@ class Game{
   
   void bpressed(){
     if (stage == 1) {
-       hg.settlements.get(se).setColor(#F5810C);
-       se++;
+       hg.settlements.get(b).setColor(#F5810C);
+       b++;
     }
   }
   
@@ -119,7 +120,7 @@ class Game{
   
   void hexs(){
     background(#05E7FA);   
-    hg = new HexGrid();  
+    hg.drawBoard();
     stage++;  
     rightSide();
     for (Player p : players)

@@ -39,7 +39,7 @@ class Road{
     adjSets[1] = h.settlements[secondAdjSet];
     //println("findAdjSettlements success for "+this+" road between "+h+" and "+adjHexs[1]);
     println("AdjSettlements to "+this+": "+adjSets[0] + " and "+adjSets[1]);
-    float distToSet = h.radius*sin(30);   
+    float distToSet = 60*sin(30);   
   }
   
   void setColor(int c){

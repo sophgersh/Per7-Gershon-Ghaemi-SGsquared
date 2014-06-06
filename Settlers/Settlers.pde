@@ -28,6 +28,8 @@ void mousePressed(){
        r.setColor(#0BA074);
        for (Settlement s : r.adjSets)
           if (s != null) s.setColor(#7DA00B);
+       //for (Road adjR : r.adjRoads)
+         // if (adjR != null) adjR.setColor(#706DEA); 
      }
   }
 }

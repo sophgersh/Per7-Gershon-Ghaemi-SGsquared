@@ -37,10 +37,10 @@ class Road{
     Hexagon h = adjHexs[0];
     int thisIsNthRoad = 0;
     for(int i = 0; i<6; i++){
-     if(h.roads[i] == null){
+     //if(h.roads[i] == null){
        //println("YO ROAD NOT LEGIT ON "+ h);
-     }
-     else if(this.equals(h.roads[i])){ thisIsNthRoad = i;} 
+     //}
+     if(h.roads[i] != null && this.equals(h.roads[i])){ thisIsNthRoad = i;} 
     }
     int firstAdjSet = thisIsNthRoad;
     int secondAdjSet = (firstAdjSet+1)%6;
@@ -50,7 +50,19 @@ class Road{
     adjSets[1].addRoad(this);
     //println("findAdjSettlements success for "+this+" road between "+h+" and "+adjHexs[1]);
     //println("AdjSettlements to "+this+": "+adjSets[0] + " and "+adjSets[1]);
-    float distToSet = 60*sin(30);   
+    //float distToSet = 60*sin(30);   
+  }
+  
+  void findAdjRoads(){
+   int i =0;
+   for(Settlement s: adjSets){
+      s.printAdjRoads();
+    for(Road r: s.adjRoads){
+      if(! this.equals(adjRoads[i]))
+        adjRoads[i] = r;
+      i++;
+    }
+   }  
   }
   
   void setColor(int c){
@@ -58,6 +70,7 @@ class Road{
     fill(c);
     ellipse(cx,cy,15,15);
   }
+  
   
   void drawRoad(){
      if (isBuilt){
@@ -80,10 +93,12 @@ class Road{
   }
   
   String toString(){
-    return "("+(int)cx+","+(int)cy+")"; 
+    return "road @ ("+(int)cx+","+(int)cy+")"; 
   }
    
   boolean equals(Road other){
+    println(this);
+    println(other);
     return (this.cx ==other.cx) && (this.cy==other.cy); 
   }
   

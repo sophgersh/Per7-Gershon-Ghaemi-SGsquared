@@ -95,4 +95,19 @@ class Settlement{
   String toString(){
     return "settlement @ ("+(int)centerx+","+(int)centery+")"; 
   }
+  
+  void printAdjSettlements(){
+    String str = "sets adj to " + this;
+    for(Settlement s: adjSets)
+      str+=s+",";
+    println(str);
+  }
+  
+  void printAdjRoads(){
+    String str = "roads adj to " + this;
+    for(Road r: adjRoads){
+     str+=r+" ";
+    println(str);
+    } 
+  }
 }

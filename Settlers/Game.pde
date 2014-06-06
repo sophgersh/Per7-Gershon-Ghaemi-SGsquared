@@ -26,6 +26,7 @@ class Game{
     pturn = 0;
     b = 0;
     hg = new HexGrid();
+    //rightSide = new rightSide(
   }
   
   void firstscreen(){
@@ -74,7 +75,7 @@ class Game{
     background(#05E7FA);   
     hg.drawBoard();
     stage++;  
-    rightSide();
+    //rightSide();
     for (Player p : players)
       p.addHG(hg);
   }
@@ -83,6 +84,7 @@ class Game{
   void mpressed(/*int x, int y*/){
     int x = mouseX;
     int y = mouseY;
+    
     if (stage == 0){
       if (selectColor(x, y))
         hexs();

@@ -100,7 +100,8 @@ class Hexagon {
   
   }*/
   
-  //used during the USER's turn to determine whether they can build a settlement in a given location
+  /*used during the USER's turn to determine whether they can 
+  build a settlement in a given location*/
   int checkSettlement(int x, int y, int c){
     for (int i = 0; i < settlements.length; i++){
       if (settlements[i].inRadius(x,y)){

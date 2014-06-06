@@ -72,14 +72,26 @@ class HexGrid{
   }
    
   void makeRoads(){
-    for(int i = 0; i < 19; i++){
+     for(int i = 0; i < 19; i++){
        Hexagon h = hexs[i];
        Road[] r = h.roads;
        for (int j = 0; j < r.length; j++){
-         if (r[j] == null)
+         if (r[j] == null){
            roads.add(h.newRoad(j));
+           r[j].findAdjSettlements();
+         }
        } 
-    }
+     }
+   }
+   
+   void connectRoadsSetts(){
+      for (Settlement s : settlements){
+         for (int i = 0; i < s.adjRoads.length; i++){
+            if (r != null){
+               r.addRoad(
+            }
+         } 
+       }
    }
    
    void makeSets(){

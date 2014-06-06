@@ -69,6 +69,15 @@ class Game{
       return false;
   }
   
+  void hexs(){
+    background(#05E7FA);   
+    hg.drawBoard();
+    stage++;  
+    rightSide();
+    for (Player p : players)
+      p.addHG(hg);
+  }
+  
   
   void mpressed(/*int x, int y*/){
     int x = mouseX;
@@ -93,20 +102,30 @@ class Game{
   }
   
   boolean userClick(int x, int y){
-      if (pressed != null){
-        int setPos = pressed.checkSettlement(x,y,players[user].col);
-        if (setPos == 0) {
-          pressed.buildSettlement(x, y, players[user].col);
-          players[user].addVP(); 
-          pressed = null;
-          return true;
-        } else if (setPos == 1){
-          //pressed build city 
-        }
-      }
-      for (Hexagon h : hg.getGrid()){
-        if (h.inHex(x,y)){
-          pressed = h;
+     Road r = onRoad(x,y); //returns road
+     if (r != null) { /* check road*/ }
+     Settlement s = onSettlement(x,y); //returns settlement
+     if (s != null) { /* check set*/ }
+     Hexagon h = onHex(x,y); //returns hexagon
+     if (h != null) { /* check hex*/ }
+     if (diceClick(x,y)) //boolean
+        //roll dice 
+     if (nextMoveButton(x,y)) //on button
+        //next move
+     if (pressed != null){
+       int setPos = pressed.checkSettlement(x,y,players[user].col);
+       if (setPos == 0) {
+         pressed.buildSettlement(x, y, players[user].col);
+         players[user].addVP(); 
+         pressed = null;
+         return true;
+       } else if (setPos == 1){
+         //pressed build city 
+       }
+     }
+      for (Hexagon he : hg.getGrid()){
+        if (he.inRadius(x,y)){
+          pressed = he;
           //h.setColor(h.col+50);
           return false;      
         }
@@ -114,14 +133,39 @@ class Game{
       return false;
   }
   
-  void hexs(){
-    background(#05E7FA);   
-    hg.drawBoard();
-    stage++;  
-    rightSide();
-    for (Player p : players)
-      p.addHG(hg);
+  Road onRoad(int x, int y){
+     for (Road r : hg.roads){
+        if (r.inRadius(x,y))
+           return r; 
+     }
+     return null;
   }
+  Settlement onSettlement(int x, int y){
+    for (Settlement s : hg.settlements){
+        if (s.inRadius(x,y))
+           return s; 
+     }
+     return null;   
+  }
+  Hexagon onHex(int x, int y){
+    for (Hexagon h : hg.hexs){
+        if (h.inRadius(x,y))
+           return h; 
+     }
+     return null;
+  }
+  boolean diceClick(int x, int y){
+    //in bounds of x/y
+    return true;
+  }
+  boolean nextMoveButton(int x, int y){
+     //return x/y between edges of button
+     return true; 
+  }
+  
+     
+  
+  
   
   void rightSide(){
    //PImage photo = loadImage("catan5.jpg");

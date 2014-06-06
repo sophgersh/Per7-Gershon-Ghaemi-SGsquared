@@ -16,8 +16,7 @@ class Hexagon {
    int col;
   
   Hexagon(int n){
-     num = n;
-      
+     num = n;    
      adjHexs = new Hexagon[6];  
      roads = new Road[6];
      settlements = new Settlement[6];        
@@ -43,8 +42,7 @@ class Hexagon {
   }
 
   void drawHex(){
-    float angle = TWO_PI / 6;
-    
+    float angle = TWO_PI / 6;   
     fill(col);
     beginShape();
     for (int i = 0; i < 6; i++) {
@@ -93,12 +91,9 @@ class Hexagon {
   }
 
 
-  boolean inHex(int x, int y){
+  boolean inRadius(int x, int y){
       return sqrt(sq(x-centerx)+sq(y-centery)) < sqrt(3)/2*60;  
   }  
-  /*boolean onRoad(int x, int y){
-  
-  }*/
   
   /*used during the USER's turn to determine whether they can 
   build a settlement in a given location*/
@@ -140,7 +135,7 @@ class Hexagon {
     return false;
   }
   
-  Hexagon hexInDir(float angleFromCenter){
+  /*Hexagon hexInDir(float angleFromCenter){
    for(int i = 0; i<6; i++){
     float j = (float)(i) + 0.5;
     int nextX =(int)(3/2 * (centerx + 60*cos( (PI/3)*j ) ) );
@@ -149,7 +144,7 @@ class Hexagon {
     if( adjHexs[i].inHex(nextX, nextY) ){return adjHexs[i];}
    } 
    return null;
-  }
+  }*/
   
   void printAdjHexs(){
    String s = "adj to "+this+": ";

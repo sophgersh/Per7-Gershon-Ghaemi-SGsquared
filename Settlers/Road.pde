@@ -24,6 +24,15 @@ class Road{
       adjHexs[1] = h;
   }
   
+  void addRoad(Road r){
+     for (int i = 0; i < adjRoads.length; i++){
+        if (adjRoads[i] == null){
+           adjRoads[i] = r;
+           return; 
+        }
+     } 
+  }
+  
   void findAdjSettlements(){
     Hexagon h = adjHexs[0];
     int thisIsNthRoad = 0;
@@ -37,8 +46,10 @@ class Road{
     int secondAdjSet = (firstAdjSet+1)%6;
     adjSets[0] = h.settlements[firstAdjSet];
     adjSets[1] = h.settlements[secondAdjSet];
+    adjSets[0].addRoad(this);
+    adjSets[1].addRoad(this);
     //println("findAdjSettlements success for "+this+" road between "+h+" and "+adjHexs[1]);
-    println("AdjSettlements to "+this+": "+adjSets[0] + " and "+adjSets[1]);
+    //println("AdjSettlements to "+this+": "+adjSets[0] + " and "+adjSets[1]);
     float distToSet = 60*sin(30);   
   }
   

@@ -52,6 +52,15 @@ class Settlement{
      } 
   }
   
+  void addRoad(Road r){
+     for (int i = 0; i < adjRoads.length; i++){
+        if (adjRoads[i] == null){
+          adjRoads[i] = r;
+          return;
+        }
+     } 
+  }
+  
   boolean inRadius(int x, int y){
      return sqrt(sq(x-centerx)+sq(y-centery)) < radius/2; 
   }

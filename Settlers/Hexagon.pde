@@ -111,6 +111,7 @@ class Hexagon {
       //println("SEASIDE ROAD BUILT WITH "+this);
     }
   }
+  }
 
   void surroundingSets(){    
     float angle = TWO_PI / 6;

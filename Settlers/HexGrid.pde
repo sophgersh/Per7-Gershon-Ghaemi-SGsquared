@@ -62,11 +62,12 @@ class HexGrid{
    void makeRoads(){
     for(int i = 0; i < 19; i++){
       Hexagon h = hexs[i];
-      Settlements[] sets = h.settlements;
+      Settlement[] sets = h.settlements;
       for (int j = 0; j < sets.length; j++){
         if (sets[j] == null)
           roads.add(h.newRoad());
      } 
+   }
    }
    
    void makeSets(){

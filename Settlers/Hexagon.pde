@@ -8,82 +8,71 @@ class Hexagon {
    Road[] roads;
    Settlement[] settlements;
    Hexagon[] adjHexs;
-   float radius; //60
-   //---game mechanics--- 
-   int type; /* 1 = forest, 2 = brick, 3 = sheep 
-                4 = rock, 5 = wheat, 6 = desert */    
+
+   //---game mechanics---      
    int dieValue; //dice roll number, 2-12 
    boolean hasRobber;
-  // ---pieces on board--- (settlements/cities/roads)
-  int col;
+   // ---pieces on board--- (settlements/cities/roads)
+   int col;
   
   Hexagon(int n){
      num = n;
-     radius = 60; 
+      
      adjHexs = new Hexagon[6];  
      roads = new Road[6];
      settlements = new Settlement[6];        
-  }
-    
-  Hexagon(float cx, float cy, float r, int n) {
-    num = n;   
-    //if (n == 0) { center(); }
-    radius = r; 
-    //drawHex(cx, cy);   
-    adjHexs = new Hexagon[6];  
-    roads = new Road[6];
-    settlements = new Settlement[6];   
-  }
+  } 
+  
+  String toString(){ return "Hex#"+this.num; }
   
   void setXY(float x, float y){
      centerx = x;
      centery = y;  
   }
   
+  void setNum(int n){ num = n; }
 
-  void drawHex(){
-    float angle = TWO_PI / 6;
+  //set the tile backgrounds here, for now color fillers
+  void setBackground(){  
     if (resource.equals("forest")) {col = #177E0A; }
     else if (resource.equals("wheat")) {col = #DBA307; }
     else if (resource.equals("desert")) {col = #F7F700; }
     else if (resource.equals("stone")) {col = #7E7E7A; }
     else if (resource.equals("brick")) {col = #BC4E09; }
-    else /*(resource.equals("sheep"))*/ {col = #4EFF15; }
+    else if (resource.equals("sheep")) {col = #4EFF15; }
+  }
+
+  void drawHex(){
+    float angle = TWO_PI / 6;
+    
     fill(col);
     beginShape();
     for (int i = 0; i < 6; i++) {
-      vertex(centerx + radius * cos(angle * i),
-             centery + radius * sin(angle * i) );      
+      vertex(centerx + 60 * cos(angle * i),
+             centery + 60 * sin(angle * i) );      
     }
     endShape(CLOSE);  
     //noFill(); 
     PFont font = loadFont("AppleMyungjo-48.vlw");
-    textFont(font, 15);
+    textFont(font, 20);
     fill(0);
-    text(""+dieValue,centerx,centery);
-    //noFill();
-    //stroke(0); 
-    //ellipse(centerx,centery,sqrt(3)*radius,sqrt(3)*radius); 
-    surroundingSets();
+    text(""+dieValue,centerx,centery+5);
+    //surroundingSets();
     //surroundingRoads();
   }
-
-  String toString(){
-    return "Hex#"+this.num; 
-  }
-
+  
   Settlement newSet(int i){
-    float angle = TWO_PI / 6;
-    float r = (2/sqrt(3)*radius - sqrt(3)/2*radius)*2; //diameter
-    float rad = 2/sqrt(3)*radius; //displacement
-    settlements[i] = new Settlement(centerx+rad*cos(angle * i), 
-                                    centery+rad*sin(angle * i), r);
+    float r = (2/sqrt(3)*60 - sqrt(3)/2*60)*2; //diameter
+    float rad = 2/sqrt(3)*60; //displacement
+    float x = centerx + rad*cos(TWO_PI/6 * i);
+    float y = centery + rad*sin(TWO_PI/6 * i);
+    settlements[i] = new Settlement(x,y,r);
     settlements[i].add(this);                                
     //add this to the surrounding hexs
     if (adjHexs[(i+5)%6] != null){
        adjHexs[(i+5)%6].addSet((i+2)%6, settlements[i]);
        settlements[i].add(adjHexs[(i+5)%6]);
-    } if (adjHexs[i%6] != null){
+    } if (adjHexs[i] != null){
        adjHexs[i].addSet((i+4)%6, settlements[i]);
        settlements[i].add(adjHexs[i%6]);
     }
@@ -91,85 +80,29 @@ class Hexagon {
   }
   
   Road newRoad(int i){
-   noFill();
-   float rad = 2/sqrt(3)*radius;
-   int j = 0;
-   for(float i = 0.5; i<6; i++){
-    float angle = (PI/3) * i;
-    float x1 = centerx + rad*cos(angle);
-    float y1 = centery + rad*sin(angle);
-    //Hexagon nextHex = hexInDir(angle);
-    try{
-      Hexagon nextHex = adjHexs[(int)(i-0.5)];
-      float x2 = nextHex.centerx + rad*cos(angle + (PI) );
-      float y2 = nextHex.centery + rad*sin(angle + (PI) );
-      roads[j] = new Road((x1+x2)/2.0,(y1+y2)/2.0,this,nextHex);}
-    catch(NullPointerException e){//build road on seaside
-      float xSeaside = centerx + radius*cos(angle);
-      float ySeaside = centery + radius*sin(angle);
-      roads[j] = new Road(xSeaside, ySeaside,this,null);
-      //println("SEASIDE ROAD BUILT WITH "+this);
+    //float rad = 2/sqrt(3)*60;
+    float x1 = centerx + 60*cos(TWO_PI/6 * i + PI/6);
+    float y1 = centery + 60*sin(TWO_PI/6 * i + PI/6);
+    roads[i] = new Road(x1, y1);
+    roads[i].add(this);
+    if (adjHexs[i] != null){
+       adjHexs[i].addRoad((i+3)%6,roads[i]);
+       roads[i].add(adjHexs[i]);
     }
+    return roads[i];
   }
   }
 
-  void surroundingSets(){    
-    float angle = TWO_PI / 6;
-    float r = (2/sqrt(3)*radius - sqrt(3)/2*radius)*2; //diameter
-    float rad = 2/sqrt(3)*radius; //displacement
-    for (int i = 0; i < 6; i++) {
-      settlements[i] = new Settlement(centerx+rad*cos(angle * i), 
-                                      centery+rad*sin(angle * i), r);                
-    }
-  }
-
-  void surroundingRoads(){
-   noFill();
-   float rad = 2/sqrt(3)*radius;
-   int j = 0;
-   for(float i = 0.5; i<6; i+=1){
-    float angle = (PI/3) * i;
-    float x1 = centerx + rad*cos(angle);
-    float y1 = centery + rad*sin(angle);
-    //Hexagon nextHex = hexInDir(angle);
-    try{
-      Hexagon nextHex = adjHexs[(int)(i-0.5)];
-      float x2 = nextHex.centerx + rad*cos(angle + (PI) );
-      float y2 = nextHex.centery + rad*sin(angle + (PI) );
-      roads[j] = new Road((x1+x2)/2.0,(y1+y2)/2.0,this,nextHex);}
-    catch(NullPointerException e){//build road on seaside
-      float xSeaside = centerx + radius*cos(angle);
-      float ySeaside = centery + radius*sin(angle);
-      roads[j] = new Road(xSeaside, ySeaside,this,null);
-      //println("SEASIDE ROAD BUILT WITH "+this);
-    }
-    j++;
-   } 
-   String s = "Roads around "+this+": ";
-   for(int i = 0; i<roads.length; i++){
-     s+=roads[i];
-   } 
-   println(s);
-  }
-    
-  
-  void setNum(int n){
-     num = n; 
-  }
-  
-  void background(){
-   PImage photo = loadImage("catan5.jpg");
-   image(photo,700,0);
-  } 
 
   boolean inHex(int x, int y){
-      return sqrt(sq(x-centerx)+sq(y-centery)) < sqrt(3)/2*radius;  
+      return sqrt(sq(x-centerx)+sq(y-centery)) < sqrt(3)/2*60;  
   }  
   /*boolean onRoad(int x, int y){
   
   }*/
   
-  //used during the USER's turn to determine whether they can build a settlement in a given location
+  /*used during the USER's turn to determine whether they can 
+  build a settlement in a given location*/
   int checkSettlement(int x, int y, int c){
     for (int i = 0; i < settlements.length; i++){
       if (settlements[i].inRadius(x,y)){
@@ -191,8 +124,9 @@ class Hexagon {
     return 3; //did not click on a settlement
   }
   
-  //function used by COM player to determine whether a selected settlement can be built
-  //randomly inputed j is a displacement, c is the color 
+  /*function used by COM player to determine whether a selected 
+  settlement can be built
+  randomly inputed j is a displacement, c is the color */
   boolean checkSettlement(int j, int c){
     for (int i = 0; i < settlements.length; i++){
         if (!settlements[(i+j)%6].isBuilt){
@@ -210,8 +144,8 @@ class Hexagon {
   Hexagon hexInDir(float angleFromCenter){
    for(int i = 0; i<6; i++){
     float j = (float)(i) + 0.5;
-    int nextX =(int)(3/2 * (centerx + radius*cos( (PI/3)*j ) ) );
-    int nextY =(int)(3/2 * (centery + radius*sin( (PI/3)*j ) ) );
+    int nextX =(int)(3/2 * (centerx + 60*cos( (PI/3)*j ) ) );
+    int nextY =(int)(3/2 * (centery + 60*sin( (PI/3)*j ) ) );
     //printAdjHexs();
     if( adjHexs[i].inHex(nextX, nextY) ){return adjHexs[i];}
    } 
@@ -257,7 +191,7 @@ class Hexagon {
 
   void setColor(int c){
     fill(c);
-    ellipse(centerx,centery,radius,radius);
+    ellipse(centerx,centery,60,60);
     if (col != 255)
       col = c;
     else 
@@ -275,19 +209,17 @@ class Hexagon {
       beginShape();
       fill(255,col);
       for (int i = 0; i < 6; i++) {
-        vertex(centerx + radius * cos(angle * i),
-          centery + radius * sin(angle * i) );        
+        vertex(centerx + 60 * cos(angle * i),
+          centery + 60 * sin(angle * i) );        
       }    
       endShape(CLOSE); 
   }*/
   
-  void add(int pos, Hexagon h){
-     println("successfully added " + h+" to "+this);
-     adjHexs[pos] = h; 
-  }
-  void addSet(int pos, Settlement s){
-     settlements[pos] = s; 
-  }
+  void addHex(int pos, Hexagon h){ adjHexs[pos] = h; }
+
+  void addSet(int pos, Settlement s){ settlements[pos] = s; }
+
+  void addRoad(int pos, Road r){ roads[pos] = r; }
   
   Hexagon get(int pos){
      return adjHexs[pos]; 

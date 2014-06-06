@@ -20,7 +20,6 @@ void draw(){
   }*/
 }
 
-
 void mousePressed(){
   //println("mouse at: "+mouseX+","+mouseY);
   g.mpressed();
@@ -32,7 +31,6 @@ void mousePressed(){
      }
   }
 }
-  
   
 void keyPressed() {
   if (key == 'b' || key == 'B') {

@@ -15,6 +15,7 @@ class Game{
   ArrayList<Road> roads;
   ArrayList<Settlement> settlements;
   int b;
+  RightSide rightSide;
   
   
   Game(){

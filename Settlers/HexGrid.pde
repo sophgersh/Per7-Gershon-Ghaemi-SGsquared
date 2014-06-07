@@ -82,9 +82,10 @@ class HexGrid{
          }
        } 
      }
-     for (Road r : roads){
+     for (Road r : roads)
         r.findAdjRoads();
-     }
+     for (Settlement s: settlements)
+        s.findAdjSets();
    }
    
    
@@ -113,7 +114,7 @@ class HexGrid{
             if (sets[j] == null)
                settlements.add(h.newSet(j));
          }
-      }
+      }     
    }
   
    void mutualAdd(int pos1, int h1, int pos2, int h2){

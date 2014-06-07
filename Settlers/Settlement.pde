@@ -21,6 +21,18 @@ class Settlement{
      adjRoads = new Road[3];
   }
   
+  void findAdjSets(){
+    for(Road r: this.adjRoads){ 
+      if (r != null){
+        for(Settlement s: r.adjSets){ 
+          if (s != null && s != this)
+            addSet(s);
+        }        
+      }
+    } 
+  }
+  
+  
   void setColor(int r){
     col = r;
     fill(r);
@@ -57,6 +69,15 @@ class Settlement{
         if (adjRoads[i] == null){
           adjRoads[i] = r;
           return;
+        }
+     } 
+  }
+  
+  void addSet(Settlement s){
+     for (int i = 0; i < adjSets.length; i++){
+        if (adjSets[i] == null){
+           adjSets[i] = s;
+           return; 
         }
      } 
   }

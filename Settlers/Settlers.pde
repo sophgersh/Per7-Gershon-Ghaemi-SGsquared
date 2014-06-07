@@ -23,11 +23,11 @@ void draw(){
 void mousePressed(){
   //println("mouse at: "+mouseX+","+mouseY);
   g.mpressed();
-  for (Road r : g.hg.roads){
-     if (r.inRadius(mouseX, mouseY)){
-       r.setColor(#0BA074);
-       for (Road r2 : r.adjRoads)
-          if (r2 != null) r2.setColor(#7DA00B);
+  for (Settlement s1 : g.hg.settlements){
+     if (s1.inRadius(mouseX, mouseY)){
+       s1.setColor(#0BA074);
+       for (Settlement s2 : s1.adjSets)
+          if (s2 != null) s2.setColor(#7DA00B);
        //for (Road adjR : r.adjRoads)
          // if (adjR != null) adjR.setColor(#706DEA); 
      }

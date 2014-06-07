@@ -89,22 +89,6 @@ class HexGrid{
    }
    
    
-   /*
-   void connectRoadsSetts(){
-      for (Settlement s : settlements){
-         for (int i = 0; i < s.adjRoads.length; i++){
-            Road r = s.adjRoads[i];
-            if (r != null){
-               r.addRoad(???);
-            }
-         } 
-       }
-=======
-    }*/
-//>>>>>>> 6ded842f25804eb0831f6a5478e5e8a836036383
-//>>>>>>> FETCH_HEAD
-   //}
-   //}
    
    void makeSets(){
       for (int i = 0; i < hexs.length; i++){

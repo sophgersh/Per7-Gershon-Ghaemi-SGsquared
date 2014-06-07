@@ -67,8 +67,7 @@ class Game{
       players[3].isUser();
       user = 3;
       return true;
-    } else 
-      return false;
+    } return false;
   }
   
   void hexs(){
@@ -83,8 +82,7 @@ class Game{
   
   void mpressed(/*int x, int y*/){
     int x = mouseX;
-    int y = mouseY;
-    
+    int y = mouseY;   
     if (stage == 0){
       if (selectColor(x, y))
         hexs();
@@ -165,11 +163,7 @@ class Game{
      //return x/y between edges of button
      return true; 
   }
-  
-     
-  
-  
-  
+ 
   void rightSide(){
    //PImage photo = loadImage("catan5.jpg");
    //image(photo,700,0);

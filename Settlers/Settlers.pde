@@ -26,8 +26,8 @@ void mousePressed(){
   for (Road r : g.hg.roads){
      if (r.inRadius(mouseX, mouseY)){
        r.setColor(#0BA074);
-       for (Settlement s : r.adjSets)
-          if (s != null) s.setColor(#7DA00B);
+       for (Road r2 : r.adjRoads)
+          if (r2 != null) r2.setColor(#7DA00B);
        //for (Road adjR : r.adjRoads)
          // if (adjR != null) adjR.setColor(#706DEA); 
      }

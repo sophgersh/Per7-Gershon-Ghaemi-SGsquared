@@ -54,14 +54,13 @@ class Road{
   }
   
   void findAdjRoads(){
-   int i =0;
-   for(Settlement s: adjSets){
+   for(Settlement s: this.adjSets){ //loop through adj sets
       s.printAdjRoads();
-    for(Road r: s.adjRoads){
-      if(! this.equals(adjRoads[i]))
-        adjRoads[i] = r;
-      i++;
-    }
+      for(Road r: s.adjRoads){ //roads adjacent to Set from before
+        if (r != null && r != this){
+          addRoad(r);
+        }     
+      }
    }  
   }
   

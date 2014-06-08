@@ -25,10 +25,13 @@ void draw(){
   //Settlers.draw() -- HexGrid.drawBoard() + RightSide.drawInfo()
   
   
-  if(game.stage > 0 && grid!=null && game.nextMoveButton(mouseX,mouseY)){
+  /*if(game.stage > 0 && grid!=null && game.nextMoveButton(mouseX,mouseY)){
     println("drawing in Settlers mouse @" + mouseX+","+mouseY);
     grid.drawBoard();
-    game.rightSide.drawInfo();}
+    game.rightSide.drawInfo();}*/
+  if(game.stage > 0 && mousePressed){
+    display();
+  }
 }
 
 void mousePressed(){
@@ -44,14 +47,17 @@ void mousePressed(){
      }
   }*/
   
-    if (game.stage == 0){
+    if (game.stage == 0){//choose color and create board
        if (game.selectColor(mouseX, mouseY))
           game.hexs();    
-    } else if (game.stage == 1) {
+    } else if (game.stage == 1) {//first settlement
+//        display();
         game.stageOne(mouseX,mouseY); 
-    } else if (game.stage == 2){ 
+    } else if (game.stage == 2){ //second settlement
+//        display();
         game.stageTwo(mouseX,mouseY);
-    } else if (game.stage == 3){     
+    } else if (game.stage == 3){ //regular gameplay
+//        display();    
         game.stageThree(mouseX,mouseY);
     }
     
@@ -60,6 +66,15 @@ void mousePressed(){
       game.rightSide.displayDice();   
     }*/
   
+}
+
+void display(){
+   println("displayed");
+   clear();
+   background(#05E7FA);
+   smooth();   
+   game.hg.drawBoard();
+   game.rightSide.drawInfo();
 }
   
 void keyPressed() {

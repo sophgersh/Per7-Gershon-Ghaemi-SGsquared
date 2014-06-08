@@ -55,7 +55,7 @@ class Road{
   
   void findAdjRoads(){
    for(Settlement s: this.adjSets){ //loop through adj sets
-      s.printAdjRoads();
+      //s.printAdjRoads();
       for(Road r: s.adjRoads){ //roads adjacent to Set from before
         if (r != null && r != this){
           addRoad(r);
@@ -102,8 +102,8 @@ class Road{
   }
    
   boolean equals(Road other){
-    println(this);
-    println(other);
+    //println(this);
+    //println(other);
     return (this.cx ==other.cx) && (this.cy==other.cy); 
   }
   

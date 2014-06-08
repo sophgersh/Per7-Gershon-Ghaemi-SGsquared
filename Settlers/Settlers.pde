@@ -2,7 +2,7 @@ HexGrid grid;
 Game game;
 
 void setup(){
- size(1200,700); //x=1200 
+ size(1300,700); //x=1200 
  background(255);
  smooth();    
  game = new Game();
@@ -31,9 +31,10 @@ void draw(){
   //Settlers.draw() -- HexGrid.drawBoard() + RightSide.drawInfo()
   
   
-/*  if(game.stage > 0 && grid!=null && game.rightSide.nextMoveButton()){
+  if(game.stage > 0 && grid!=null && game.nextMoveButton(mouseX,mouseY)){
+    println("drawing in Settlers mouse @" + mouseX+","+mouseY);
     grid.drawBoard();
-    game.rightSide.drawInfo();}*/
+    game.rightSide.drawInfo();}
 }
 
 void mousePressed(){
@@ -67,9 +68,4 @@ void keyPressed() {
      game.bpressed();
   }
  }
-  
-
-  
-
-
 

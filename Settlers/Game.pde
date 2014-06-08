@@ -184,7 +184,7 @@ class Game{
     //return rightSide.inTextBox(x,y); 
     fill(random(255),random(255),random(255));
     ellipse(700,400,15,15);
-    return rightSide.inNextButton();
+    return mousePressed && rightSide.inNextButton();
   }
  
   

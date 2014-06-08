@@ -98,7 +98,7 @@ class Road{
        }
     }
     
-    void drawRoad(int c){
+   void drawRoad(int c){
      //width 30, length from one settlement to other 
      //if (isBuilt){
        col = c;
@@ -110,30 +110,11 @@ class Road{
          vertex( (int)(adjSets[i/2].centerx-15), (int)(adjSets[i/2].centery) );
        }
        endShape(CLOSE);
-      
+       
      //}
-    }
-     } else {
-       noFill();
-       ellipse(cx, cy, 15, 15);
-     }
   }
   
-  void drawRoad(int c){
-   //width 30, length from one settlement to other 
-   //if (isBuilt){
-     col = c;
-     fill(col);
-     stroke(0);
-     //ellipse(cx,cy,15,15); 
-     beginShape();
-     for(int i = 0; i<4; i++){
-       vertex( (int)(adjSets[i/2].centerx-15), (int)(adjSets[i/2].centery) );
-     }
-     endShape(CLOSE);
-     
-   //}
-  }
+  
   
   String toString(){
     return "road @ ("+(int)cx+","+(int)cy+")"; 
@@ -161,6 +142,20 @@ class Road{
      } 
     return false;
   }
+  
+  boolean isValidPlacement(int c){
+    return !isBuilt && isConnected(c);
+  }
+  
+  boolean isConnected(int c){
+     for (Road r : adjRoads){
+        if (r != null && r.col == c)
+          return true;
+     }
+     return false; 
+  }
+  
+  
   
   
 }

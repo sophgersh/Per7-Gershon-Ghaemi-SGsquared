@@ -107,6 +107,15 @@ class Settlement{
      return true; 
   }
   
+  boolean isConnected(int c){
+     for (Road r : adjRoads){
+        if (r != null && r.col == c)
+          return true;
+     } 
+     return false;
+  }
+  
+  
   boolean canBuildCity(int c){
      return isBuilt && c == col;
   }

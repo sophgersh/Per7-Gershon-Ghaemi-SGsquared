@@ -12,7 +12,7 @@ class Game{
   //          text box to recap AI turns
   HexGrid hg;
   RightSide rightSide; 
-  boolean noWinner;
+  Player winner;
   int b;
   Hexagon pressed;
   
@@ -21,7 +21,6 @@ class Game{
     players = new Player[4]; 
     stage = 0;
     firstscreen();
-    noWinner = true;
     pturn = 0;
     placeRoad = false;
     b = 0;
@@ -113,7 +112,7 @@ class Game{
           stage++;
       }      
     } else if (nextMoveButton(x,y)){
-      players[pturn].placeSet(true);   
+      players[pturn].placeSet(true);  
       if (pturn-1 >= 0)
         pturn--;
       else 
@@ -143,20 +142,36 @@ class Game{
   }*/
   
       
-  void bpressed(){
+  /*void bpressed(){
     if (stage == 1) {
        hg.roads.get(b).drawRoad(#F5810C);
        b++;
     }
-  }
+  }*/
   
-  void userClick(int x, int y){    
+  void userClick(int x, int y){   
+     int c = players[user].col; 
      if (diceClick() && !placeRoad){ 
         rollDice(); 
         placeRoad = true;
+     } else if (placeRoad){
+       Settlement s = onSettlement(x,y);
+       if (s != null && s.isValidPlacement() && s.isConnected(c) 
+           && players[user].canBuildSet()){
+      
+          s.build(c);
+          players[user].subSetRes();
+          if (players[user].addVP()){
+             winner = players[user];
+             stage++;
+          }            
+       }
+       Road r = onRoad(x,y);
+       if (r != null && r.isValidPlacement(c) && players[user].canBuildRoad()){
+          s.build(c);
+          players[user].subSetRes(); 
+       }         
      }
-     Hexagon h = onHex(x,y); 
-     if (h != null) { /* check hex*/ }
         
   }
   
@@ -220,17 +235,6 @@ class Game{
     //ellipse(700,400,15,15);
     return mousePressed && rightSide.inNextButton();
   }
- 
-  
-  
-  void playGame(){
-    
-    while (noWinner){
-      //turns();
-    }
-    //turns(); 
-  }
-  
  
   
   

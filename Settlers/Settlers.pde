@@ -34,11 +34,11 @@ void draw(){
 void mousePressed(){
   //println("mouse at: "+mouseX+","+mouseY);
   //game.mousePressed(mouseX, mouseY);
-  /*for (Settlement s1 : g.hg.settlements){
-     if (s1.inRadius(mouseX, mouseY)){
-       s1.setColor(#0BA074);
-       for (Settlement s2 : s1.adjSets)
-          if (s2 != null) s2.setColor(#7DA00B);
+  /*for (Road r1 : game.hg.roads){
+     if (r1.inRadius(mouseX, mouseY)){
+       r1.setColor(#0BA074);
+       for (Road r2 : r1.adjRoads)
+          if (r2 != null) r2.setColor(#7DA00B);
        //for (Road adjR : r.adjRoads)
          // if (adjR != null) adjR.setColor(#706DEA); 
      }
@@ -64,7 +64,7 @@ void mousePressed(){
   
 void keyPressed() {
   if (key == 'b' || key == 'B') {
-     game.bpressed();
+     //game.bpressed();
   }
  }
 

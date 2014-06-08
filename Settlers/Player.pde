@@ -5,6 +5,7 @@ class Player{
   int VP;
   ArrayList<Road> roads;
   ArrayList<Settlement> settlements;
+  int wood, brick, stone, wheat, sheep;
 
   Player(int c){
       col = c;
@@ -16,18 +17,50 @@ class Player{
   
   void isUser(){ isUser = true; }
   
-  void addVP(){ VP++; }
+  boolean addVP(){ 
+    VP++;
+    return VP >= 10; 
+  }
+  
+  boolean canBuildRoad(){
+     return wood>0 && brick>0; 
+  }
+  
+  boolean canBuildSet(){
+    return sheep>0 && wood>0 && wheat>0 && brick>0;
+  }
+  
+  boolean canBuildCity(){
+    return stone>=3 && wheat>=2; 
+  }
+  
+  void subRoadRes(){
+     wood--;
+     brick--; 
+  }
+  
+  void subSetRes(){
+     sheep--;
+     wood--;
+     wheat--;
+     brick--;
+  }
    
-  void placeSet(boolean placeRoad){
+  void subCityRes(){
+     stone -= 3;
+     wheat -= 2;
+  } 
+   
+  boolean placeSet(boolean placeRoad){
     Settlement s = hg.randSet();
     while (!s.isValidPlacement()){
       s = hg.randSet();
     }
     s.build(col);
-    addVP();
     if (placeRoad){
        s.buildRoad(col); 
-    }    
+    } 
+    return addVP();   
   }
   
   

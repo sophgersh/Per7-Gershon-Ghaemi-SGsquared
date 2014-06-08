@@ -87,6 +87,47 @@ class Game{
     
   }
   
+   void stageOne(int x, int y){
+    if (pturn == user){
+      if (userStage12(x,y)){
+        if (pturn+1 < 4)
+          pturn++;
+        else 
+          stage++;
+      }      
+    } else if (nextMoveButton(x,y)){
+      players[pturn].placeSet(true);   
+      if (pturn+1 < 4)
+        pturn++;
+      else 
+        stage++;
+    }    
+  }
+  
+  void stageTwo(int x, int y){
+    if (players[pturn].isUser){
+      if (userStage12(x,y)){
+        if (pturn-1 >= 0)
+          pturn--;
+        else 
+          stage++;
+      }      
+    } else if (nextMoveButton(x,y)){
+      players[pturn].placeSet(true);   
+      if (pturn-1 >= 0)
+        pturn--;
+      else 
+        stage++;
+    } 
+  }
+  void stageThree(int x, int y){
+      if (user == pturn){
+         userClick(x,y);
+         /* roll die, build settlements,roads,etc. 
+            userClick(x,y);
+         */ 
+      }
+  }
   /*
   void mousePressed(int x, int y){     
     if (stage == 0){
@@ -109,32 +150,14 @@ class Game{
     }
   }
   
-  boolean userClick(int x, int y){
-     
-     Hexagon h = onHex(x,y); //returns hexagon
-     if (h != null) { /* check hex*/ }
-     if (diceClick()) //boolean
-        //roll dice 
-        
-     if (pressed != null){
-       int setPos = pressed.checkSettlement(x,y,players[user].col);
-       if (setPos == 0) {
-         pressed.buildSettlement(x, y, players[user].col);
-         players[user].addVP(); 
-         pressed = null;
-         return true;
-       } else if (setPos == 1){
-         //pressed build city 
-       }
+  void userClick(int x, int y){    
+     if (diceClick() && !placeRoad){ 
+        rollDice(); 
+        placeRoad = true;
      }
-      for (Hexagon he : hg.getGrid()){
-        if (he.inRadius(x,y)){
-          pressed = he;
-          //h.setColor(h.col+50);
-          return false;      
-        }
-      }
-      return false;
+     Hexagon h = onHex(x,y); 
+     if (h != null) { /* check hex*/ }
+        
   }
   
   boolean userStage12(int x, int y){
@@ -188,6 +211,7 @@ class Game{
     int die1 = (int)random(1,7);
     int die2 = (int)random(1,7);
     rightSide.setDice(die1,die2);
+    rightSide.displayDice();
     return die1+die2; 
   }
   boolean nextMoveButton(int x, int y){
@@ -207,46 +231,7 @@ class Game{
     //turns(); 
   }
   
-  void stageOne(int x, int y){
-    if (pturn == user){
-      if (userStage12(x,y)){
-        if (pturn+1 < 4)
-          pturn++;
-        else 
-          stage++;
-      }      
-    } else if (nextMoveButton(x,y)){
-      players[pturn].placeSet(true);   
-      if (pturn+1 < 4)
-        pturn++;
-      else 
-        stage++;
-    }    
-  }
-  
-  void stageTwo(int x, int y){
-    if (players[pturn].isUser){
-      if (userStage12(x,y)){
-        if (pturn-1 >= 0)
-          pturn--;
-        else 
-          stage++;
-      }      
-    } else if (nextMoveButton(x,y)){
-      players[pturn].placeSet(true);   
-      if (pturn-1 >= 0)
-        pturn--;
-      else 
-        stage++;
-    } 
-  }
-  void stageThree(int x, int y){
-      if (players[pturn].isUser){
-         /* roll die, build settlements,roads,etc. 
-            userClick(x,y);
-         */ 
-      }
-  }
+ 
   
   
 }

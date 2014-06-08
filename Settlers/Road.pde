@@ -115,7 +115,7 @@ class Road{
     for (Settlement s: adjSets){
        if (s != null && s.col == c){
           for (Road r: s.adjRoads){
-             if (r.isBuilt && r.col == c)
+             if (r != null && r.isBuilt && r.col == c)
                 return false;
           }
           return true;

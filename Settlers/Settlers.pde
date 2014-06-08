@@ -12,12 +12,6 @@ void setup(){
 
 
 void draw(){
-  /* some way of highlighting the thing the mouse is over
-  for (Hexagon h : grid.getGrid()){
-    if (h != null){
-      h.mouseOver(h.inRadius(mouseX,mouseY));
-    }
-  }*/
   
   //every cycle of the draw function, redraw whole canvas
   //LAYER 1: Hexagon Tile Grid
@@ -61,10 +55,10 @@ void mousePressed(){
         game.stageThree(mouseX,mouseY);
     }
     
-    if (game.diceClick()){
+    /*if (game.diceClick()){
       game.rollDice();
       game.rightSide.displayDice();   
-    }
+    }*/
   
 }
   

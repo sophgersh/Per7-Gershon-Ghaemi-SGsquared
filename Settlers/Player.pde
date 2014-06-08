@@ -18,14 +18,14 @@ class Player{
   
   void addVP(){ VP++; }
    
-  void placeSet(boolean b){
+  void placeSet(boolean placeRoad){
     Settlement s = hg.randSet();
     while (!s.isValidPlacement()){
       s = hg.randSet();
     }
     s.build(col);
     addVP();
-    if (b){
+    if (placeRoad){
        s.buildRoad(col); 
     }    
   }

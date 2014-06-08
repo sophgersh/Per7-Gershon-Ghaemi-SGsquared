@@ -80,12 +80,12 @@ class Game{
     background(#05E7FA);   
     hg.drawBoard();
     stage++;  
-    rightSide.displayStats();
+    rightSide.drawInfo();
     for (Player p : players)
       p.addHG(hg);
   }
   
-  
+  /*
   void mousePressed(int x, int y){     
     if (stage == 0){
        if (selectColor(x, y))
@@ -97,7 +97,7 @@ class Game{
     } else if (stage == 3){     
         stageThree(x,y);
     }
-  }
+  }*/
   
       
   void bpressed(){
@@ -181,7 +181,10 @@ class Game{
     return true;
   }
   boolean nextMoveButton(int x, int y){
-    return rightSide.inTextBox(x,y); 
+    //return rightSide.inTextBox(x,y); 
+    fill(random(255),random(255),random(255));
+    ellipse(700,400,15,15);
+    return rightSide.inNextButton();
   }
  
   

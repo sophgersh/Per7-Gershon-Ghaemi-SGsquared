@@ -23,9 +23,25 @@ class RightSide{
    fill(255);
    rect(700,550,450,100);   
   } 
-  
+  /*
   boolean inTextBox(int x, int y){
      return 700 < x &&  x < 1150 && 550 < y && y < 650;
+  }*/
+  boolean inNextButton(){
+     return 700 < mouseX && mouseX < 1150 && 550< mouseY && mouseY < 650; 
+  }
+  
+  void displayButtons(){
+   PFont font =loadFont("TrebuchetMS-Bold-48.vlw");
+   textFont(font,12);
+   fill(0);
+   text("Click here for Next",800,600); 
+  }
+ 
+  void drawInfo(){
+   displayRules();
+   displayStats();
+   displayButtons();
   }
   
 }

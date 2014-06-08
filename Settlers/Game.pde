@@ -216,7 +216,11 @@ class Game{
   }
   boolean nextMoveButton(int x, int y){
     //return rightSide.inTextBox(x,y); 
+<<<<<<< HEAD
     fill(random(255),random(255),random(255));
+=======
+    //fill(random(255),random(255),random(255));
+>>>>>>> FETCH_HEAD
     //ellipse(700,400,15,15);
     return mousePressed && rightSide.inNextButton();
   }

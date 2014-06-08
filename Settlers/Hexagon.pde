@@ -14,6 +14,7 @@ class Hexagon {
    boolean hasRobber;
    // ---pieces on board--- (settlements/cities/roads)
    int col;
+   PImage tileBackground;
   
   Hexagon(int n){
      num = n;    
@@ -33,28 +34,35 @@ class Hexagon {
 
   //set the tile backgrounds here, for now color fillers
   void setBackground(){  
-    if (resource.equals("forest")) {col = #177E0A; }
-    else if (resource.equals("wheat")) {col = #DBA307; }
-    else if (resource.equals("desert")) {col = #F7F700; }
-    else if (resource.equals("stone")) {col = #7E7E7A; }
-    else if (resource.equals("brick")) {col = #BC4E09; }
-    else if (resource.equals("sheep")) {col = #4EFF15; }
+    if (resource.equals("forest")) {col = #177E0A;  tileBackground = loadImage("tileForest.png"); tileBackground.resize(110,110);}
+    else if (resource.equals("wheat")) {col = #DBA307;  tileBackground = loadImage("tileWheat.png"); tileBackground.resize(110,110);}
+    else if (resource.equals("desert")) {col = #F7F700; } //need to get png file for desert
+    else if (resource.equals("stone")) {col = #7E7E7A;  tileBackground = loadImage("tileStone.png"); tileBackground.resize(110,110);}
+    else if (resource.equals("brick")) {col = #BC4E09;  tileBackground = loadImage("tileBrick.png"); tileBackground.resize(110,110);}
+    else if (resource.equals("sheep")) {col = #4EFF15;  tileBackground = loadImage("tileSheep.png"); tileBackground.resize(110,110);}
   }
 
   void drawHex(){
-    float angle = TWO_PI / 6;   
-    fill(col);
+    //println(this+" -- "+this.resource);
+    float angle = TWO_PI / 6; 
+    if(!resource.equals("desert")) image(tileBackground, centerx-2.8*(60*cos(240)), centery-60*sin(240));  
+    noFill();
+    //fill(col);
     beginShape();
     for (int i = 0; i < 6; i++) {
       vertex(centerx + 60 * cos(angle * i),
              centery + 60 * sin(angle * i) );      
     }
     endShape(CLOSE);  
+    
     //noFill(); 
+    fill(col);
+    ellipse(centerx, centery, 25, 25);
     PFont font = loadFont("AppleMyungjo-48.vlw");
     textFont(font, 20);
     fill(0);
-    text(""+dieValue,centerx,centery+5);
+    if(dieValue<10 && dieValue>0) text(""+dieValue,centerx-5,centery+5);
+    else{ text(""+dieValue, centerx-15,centery+5);}
     //surroundingSets();
     //surroundingRoads();
   }

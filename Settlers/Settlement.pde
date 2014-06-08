@@ -96,6 +96,8 @@ class Settlement{
   }
 
   boolean isValidPlacement(){
+     if (isBuilt)
+       return false;
      for (Settlement s : adjSets){
         if (s != null){
            if (s.isBuilt)

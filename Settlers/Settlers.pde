@@ -60,6 +60,11 @@ void mousePressed(){
     } else if (game.stage == 3){     
         game.stageThree(mouseX,mouseY);
     }
+    
+    if (game.diceClick()){
+      game.rollDice();
+      game.rightSide.displayDice();   
+    }
   
 }
   

@@ -111,5 +111,18 @@ class Road{
     return sqrt(sq(x-cx)+sq(y-cy)) < 15/2; 
   }
   
+  boolean adjToSet(int c){
+    for (Settlement s: adjSets){
+       if (s != null && s.col == c){
+          for (Road r: s.adjRoads){
+             if (r.isBuilt && r.col == c)
+                return false;
+          }
+          return true;
+        }
+     } 
+    return false;
+  }
+  
   
 }

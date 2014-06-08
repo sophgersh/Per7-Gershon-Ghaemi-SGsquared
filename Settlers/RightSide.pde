@@ -1,6 +1,9 @@
 class RightSide{
  Player player;
  int pColor;
+ int die1; 
+ int die2;
+ String[] dice = {"dice1.png", "dice2.png", "dice3.png", "dice4.png", "dice5.png", "dice6.png"};
  
  RightSide(Player p){
   player = p;
@@ -27,7 +30,7 @@ class RightSide{
    textFont(font, 12);
    text("each payer may place 2 initial Settlements by clicking " , 850,Y);
    text("on a Settlement space. You must also place a Road adjacent to each initial Settlement.", 675,Y+=12);
-   text("The intiial order is RED-BLUE-GREEN-PURPLE-PURPLE-GREEN-BLUE-RED. (Each player places 2 Settlements", 675,Y+=12); 
+   text("The initial order is RED-BLUE-GREEN-PURPLE-PURPLE-GREEN-BLUE-RED. (Each player places 2 Settlements", 675,Y+=12); 
    text("During regular gameplay, the order is RED-BLUE-GREEN-PURPLE",675,Y+=12);
  }
  
@@ -40,8 +43,7 @@ class RightSide{
    text("Player stats:",800,50);
    textFont(font,25);
    text("VP: "+player.VP,820,100); //needs to be updated
-   fill(255);
-   rect(700,550,450,100);   
+      
   } 
   /*
   boolean inTextBox(int x, int y){
@@ -52,16 +54,33 @@ class RightSide{
   }
   
   void displayButtons(){
+   fill(255);
+   rect(700,550,450,100);
    PFont font =loadFont("TrebuchetMS-Bold-48.vlw");
    textFont(font,36);
    fill(0);
    text("Click here for Next",750,620); 
+  }
+  
+  void displayDice(){
+     PImage d1;
+     d1 = loadImage(dice[die1-1]);
+     image(d1,640,50,50,50);
+     PImage d2;
+     d2 = loadImage(dice[die2-1]);
+     image(d2, 700, 50,50,50);
+  }
+  
+  void setDice(int d1, int d2){
+    die1 = d1;
+    die2 = d2;
   }
  
   void drawInfo(){
    displayRules();
    displayStats();
    displayButtons();
+   displayDice();
   }
   
 }

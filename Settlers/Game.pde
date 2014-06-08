@@ -79,10 +79,12 @@ class Game{
   void hexs(){
     background(#05E7FA);   
     hg.drawBoard();
-    stage++;  
+    stage++; 
+    rollDice(); 
     rightSide.drawInfo();
     for (Player p : players)
       p.addHG(hg);
+    
   }
   
   /*
@@ -108,10 +110,10 @@ class Game{
   }
   
   boolean userClick(int x, int y){
-   
+     
      Hexagon h = onHex(x,y); //returns hexagon
      if (h != null) { /* check hex*/ }
-     if (diceClick(x,y)) //boolean
+     if (diceClick()) //boolean
         //roll dice 
         
      if (pressed != null){
@@ -141,12 +143,13 @@ class Game{
        if (s != null){ 
          if (s.isValidPlacement()){
            s.build(players[user].col);
+           players[user].addVP();
            placeRoad = true;
          }
        }
     } else {
        Road r = onRoad(x,y); 
-       if (r != null){
+       if (r != null && r.adjToSet(players[user].col)){
          r.build(players[user].col);
          placeRoad = false;
          return true;
@@ -176,14 +179,21 @@ class Game{
      }
      return null;
   }
-  boolean diceClick(int x, int y){
-    //in bounds of x/y
-    return true;
+  boolean diceClick(){
+    int x = mouseX;
+    int y = mouseY;
+    return 640<x && x<750 && 50<y && y<100;
+  }
+  int rollDice(){
+    int die1 = (int)random(1,7);
+    int die2 = (int)random(1,7);
+    rightSide.setDice(die1,die2);
+    return die1+die2; 
   }
   boolean nextMoveButton(int x, int y){
     //return rightSide.inTextBox(x,y); 
     fill(random(255),random(255),random(255));
-    ellipse(700,400,15,15);
+    //ellipse(700,400,15,15);
     return mousePressed && rightSide.inNextButton();
   }
  

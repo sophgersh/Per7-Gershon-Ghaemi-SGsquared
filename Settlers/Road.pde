@@ -80,7 +80,18 @@ class Road{
   void drawRoad(){
      if (isBuilt){
        fill(col);
-       ellipse(cx, cy, 15, 15);
+       //ellipse(cx, cy, 15, 15);
+       /*
+       int v[] = new int[4];
+       v[0] = (int)(adjSets[0].cx-15);
+       v[1] = (int)(adjSets[0].cy+adjSets[1]radius);
+       v[2] = (int)(adjSets[1].cx-15);
+       v[3] = (int)(adjSets[1].cy+adjSets[1]radius);*/
+       beginShape();
+       for(int i = 0; i<4; i++){
+          vertex( (int)(adjSets[i/2].centerx-15), (int)(adjSets[i/2].centery) );
+       }
+       endShape(CLOSE);
      } else {
        noFill();
        ellipse(cx, cy, 15, 15);
@@ -93,7 +104,13 @@ class Road{
      col = c;
      fill(col);
      stroke(0);
-     ellipse(cx,cy,15,15); 
+     //ellipse(cx,cy,15,15); 
+     beginShape();
+     for(int i = 0; i<4; i++){
+       vertex( (int)(adjSets[i/2].centerx-15), (int)(adjSets[i/2].centery) );
+     }
+     endShape(CLOSE);
+     
    //}
   }
   

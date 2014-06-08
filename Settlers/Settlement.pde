@@ -8,7 +8,7 @@ class Settlement{
   Hexagon[] adjHexs;
   Settlement[] adjSets;
   Road[] adjRoads;
-  //Player owner;
+  Player owner;
   
   Settlement(float x, float y, float r){    
      centerx = x;
@@ -53,9 +53,11 @@ class Settlement{
      }
   }
 
-  void build(int c){
+  //void build(int c){
+  void build(Player p){
+    owner = p;
     isBuilt = true; 
-    setColor(c);
+    setColor(p.col);
   }
   
   void buildCity(){

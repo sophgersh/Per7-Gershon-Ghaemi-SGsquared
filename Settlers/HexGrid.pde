@@ -178,4 +178,23 @@ class HexGrid{
       h.setBackground();
     
    } 
+   
+   void distributeResourcesAll(int dieRoll){
+     ArrayList<Hexagon> hexsToDistr = new ArrayList<Hexagon>();
+     for(Hexagon h: hexs){ 
+        if (h.dieValue == dieRoll){
+          //hexsToDistr.add(h);
+          for(Settlement s: h.settlements){
+             if(s.isBuilt){
+               println(s+""+s.owner);
+               if(h.resource.equals("forest")){s.owner.wood++;}
+               else if(h.resource.equals("wheat")){s.owner.wheat++;}
+               else if(h.resource.equals("stone")){s.owner.stone++;}
+               else if(h.resource.equals("sheep")){s.owner.sheep++;}
+               else if(h.resource.equals("brick")){s.owner.brick++;}
+             }
+          }        
+        }
+     }
+   }
 }

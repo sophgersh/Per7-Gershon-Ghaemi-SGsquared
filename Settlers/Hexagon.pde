@@ -131,14 +131,15 @@ class Hexagon {
   /*function used by COM player to determine whether a selected 
   settlement can be built
   randomly inputed j is a displacement, c is the color */
-  boolean checkSettlement(int j, int c){
+  //boolean checkSettlement(int j, int c){
+  boolean checkSettlement(int j, Player player){
     for (int i = 0; i < settlements.length; i++){
         if (!settlements[(i+j)%6].isBuilt){
           if (checkAdjSets((i+j)%6)){
-             buildSettlement((i+j)%6, c); 
-             settlements[(i+j)%6].setColor(c);
+             buildSettlement((i+j)%6, player); 
+             settlements[(i+j)%6].setColor(player.col);
              return true;    
-        }else if (c == settlements[i].col)  //already built     
+        }else if (player.col == settlements[i].col)  //already built     
           settlements[i].buildCity();        
       }
     }
@@ -175,14 +176,16 @@ class Hexagon {
      return true;     
   }
   
-  void buildSettlement(int i, int col){
-    settlements[i].build(col);   
+  //void buildSettlement(int i, int col){
+  void buildSettlement(int i, Player p){
+    settlements[i].build(p);   
   }
-  void buildSettlement(int x, int y, int col){
+  //void buildSettlement(int x, int y, int col){
+  void buildSettlement(int x, int y, Player p){
     int i = 0;
     for (int j = 0; j < settlements.length; j++)
       if (settlements[j].inRadius(x,y)){ i = j; }
-    settlements[i].build(col);
+    settlements[i].build(p);
     settlements[i].add(this);
     if (adjHexs[(i+5)%6] != null){
        adjHexs[(i+5)%6].addSet((i+2)%6, settlements[i]);

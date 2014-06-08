@@ -1,5 +1,6 @@
 class Player{
   int col;
+  String pColor;
   boolean isUser;
   HexGrid hg;
   int VP;
@@ -9,6 +10,10 @@ class Player{
 
   Player(int c){
       col = c;
+      if(c == #F50C0C){pColor = "RED";}
+      else if(c == #1411F2){pColor = "BLUE";}
+      else if(c == #07B405){pColor = "GREEN";}
+      else{pColor = "PURPLE";}
       isUser = false;
       VP = 0;
   }
@@ -56,11 +61,16 @@ class Player{
     while (!s.isValidPlacement()){
       s = hg.randSet();
     }
-    s.build(col);
+    s.build(this);
     if (placeRoad){
        s.buildRoad(col); 
     } 
     return addVP();   
+  }
+  
+  String toString(){
+   if(isUser){return pColor+"--USER";}
+   else{return pColor;} 
   }
   
   

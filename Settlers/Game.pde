@@ -159,7 +159,7 @@ class Game{
        if (s != null && s.isValidPlacement() && s.isConnected(c) 
            && players[user].canBuildSet()){
       
-          s.build(c);
+          s.build(players[user]);
           players[user].subSetRes();
           if (players[user].addVP()){
              winner = players[user];
@@ -168,7 +168,7 @@ class Game{
        }
        Road r = onRoad(x,y);
        if (r != null && r.isValidPlacement(c) && players[user].canBuildRoad()){
-          s.build(c);
+          s.build(players[user]);
           players[user].subSetRes(); 
        }         
      }
@@ -180,7 +180,7 @@ class Game{
        Settlement s = onSettlement(x,y);
        if (s != null){ 
          if (s.isValidPlacement()){
-           s.build(players[user].col);
+           s.build(players[user]);
            players[user].addVP();
            placeRoad = true;
          }
@@ -226,7 +226,10 @@ class Game{
     int die1 = (int)random(1,7);
     int die2 = (int)random(1,7);
     rightSide.setDice(die1,die2);
-    rightSide.displayDice();
+    //rightSide.displayDice();
+    if(stage>1){
+      hg.distributeResourcesAll(die1+die2);
+    }
     return die1+die2; 
   }
   boolean nextMoveButton(int x, int y){

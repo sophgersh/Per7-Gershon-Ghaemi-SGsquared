@@ -42,7 +42,10 @@ class RightSide{
    fill(0);
    text("Player stats:",800,50);
    textFont(font,25);
-   text("VP: "+player.VP,820,100); //needs to be updated
+   text("Victory Points: "+player.VP,800,100); //needs to be updated
+   textFont(font, 15);
+   text("Roads (0 VP)", 1100,80);
+   text("Settlements (1 VP) Cities (2 VP)",1050,100);
    PImage cards = loadImage("catan5.jpg");
    cards.resize(600,120);
    image(cards,675,120);

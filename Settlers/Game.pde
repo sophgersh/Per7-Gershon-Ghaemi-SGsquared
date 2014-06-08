@@ -182,8 +182,8 @@ class Game{
   }
   boolean nextMoveButton(int x, int y){
     //return rightSide.inTextBox(x,y); 
-    fill(random(255),random(255),random(255));
-    ellipse(700,400,15,15);
+    //fill(random(255),random(255),random(255));
+    //ellipse(700,400,15,15);
     return mousePressed && rightSide.inNextButton();
   }
  

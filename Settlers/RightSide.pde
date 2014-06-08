@@ -18,7 +18,7 @@ class RightSide{
    text("GENERAL RULES:",675,Y);
    textFont(font,12);
    text("All Settlements must be separated by no fewer than 2 Roads", 850,Y);
-   text("Resources (Wood,Brick,Stone,Sheep,Wheat) are distributed at the beginning of each player's turn", 675,Y+=12);
+   text("Resources (Brick,Wood,Stone,Sheep,Wheat) are distributed at the beginning of each player's turn", 675,Y+=12);
    text("The dice are rolled and every player who has a Settlement adjacent to a Hexagon",675,Y+=12);
    text("with the value on the dice recieves that Hex's resource", 675,Y+=12);
    text("On your turn, you may place Roads,Settlements, or upgrade a Settlement to a City (yeilds double resources)",675,Y+=12);
@@ -43,6 +43,15 @@ class RightSide{
    text("Player stats:",800,50);
    textFont(font,25);
    text("VP: "+player.VP,820,100); //needs to be updated
+   PImage cards = loadImage("catan5.jpg");
+   cards.resize(600,120);
+   image(cards,675,120);
+   textFont(font,15);
+   text("Wood: "+player.wood, 700,260);
+   text("Brick: "+player.brick, 820, 260);
+   text("Stone: "+player.stone, 940,260);
+   text("Sheep: "+player.sheep, 1060, 260);
+   text("Wheat: "+player.wheat, 1180, 260);
       
   } 
   /*

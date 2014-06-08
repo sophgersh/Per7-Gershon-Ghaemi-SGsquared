@@ -97,28 +97,7 @@ class Road{
          ellipse(cx, cy, 15, 15);
        }
     }
-    
-    void drawRoad(int c){
-     //width 30, length from one settlement to other 
-     //if (isBuilt){
-       col = c;
-       fill(col);
-       stroke(0);
-       //ellipse(cx,cy,15,15); 
-       beginShape();
-       for(int i = 0; i<4; i++){
-         vertex( (int)(adjSets[i/2].centerx-15), (int)(adjSets[i/2].centery) );
-       }
-       endShape(CLOSE);
-      
-     //}
-    }
-     } else {
-       noFill();
-       ellipse(cx, cy, 15, 15);
-     }
-  }
-  
+ 
   void drawRoad(int c){
    //width 30, length from one settlement to other 
    //if (isBuilt){

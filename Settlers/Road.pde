@@ -92,8 +92,7 @@ class Road{
           vertex( (int)(adjSets[i/2].centerx-15), (int)(adjSets[i/2].centery) );
        }
        endShape(CLOSE);
-<<<<<<< HEAD
-       } else {
+     } else {
          noFill();
          ellipse(cx, cy, 15, 15);
        }
@@ -136,7 +135,6 @@ class Road{
      
    //}
   }
->>>>>>> FETCH_HEAD
   
   String toString(){
     return "road @ ("+(int)cx+","+(int)cy+")"; 

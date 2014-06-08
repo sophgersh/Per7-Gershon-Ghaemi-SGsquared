@@ -145,6 +145,10 @@ class HexGrid{
     return hexs[i];
   }
   
+  Settlement randSet(){
+    return settlements.get((int)(random(settlements.size())));
+  }
+  
   Hexagon[] getGrid(){
     return hexs;
   }

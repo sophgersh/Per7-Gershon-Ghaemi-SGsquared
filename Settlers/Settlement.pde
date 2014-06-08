@@ -21,6 +21,10 @@ class Settlement{
      adjRoads = new Road[3];
   }
   
+  String toString(){
+    return "settlement @ ("+(int)centerx+","+(int)centery+")"; 
+  }
+  
   void findAdjSets(){
     for(Road r: this.adjRoads){ 
       if (r != null){
@@ -52,6 +56,11 @@ class Settlement{
   void build(int c){
     isBuilt = true; 
     setColor(c);
+  }
+  
+  void buildCity(){
+    isCity = true;
+    //setColor(col+100); 
   }
   
   void add(Hexagon h1){
@@ -86,6 +95,29 @@ class Settlement{
      return sqrt(sq(x-centerx)+sq(y-centery)) < radius/2; 
   }
 
+  boolean isValidPlacement(){
+     for (Settlement s : adjSets){
+        if (s != null){
+           if (s.isBuilt)
+             return false;  
+        }          
+     }
+     return true; 
+  }
+  
+  boolean canBuildCity(int c){
+     return isBuilt && c == col;
+  }
+  
+  void buildRoad(int c){
+     Road r;
+     do {
+       r = adjRoads[(int)(random(adjRoads.length))];
+     } while (r == null || r.isBuilt);
+     r.build(c);
+     
+  }
+
   //checks to see if it settlement is in a legal placing
    //each Hexagon can have no more than 3 Settlments around it
    //each Settlement must be >=two sides away from each other
@@ -107,16 +139,6 @@ class Settlement{
    }*/
 
   
-  
-  void buildCity(){
-    isCity = true;
-    //setColor(col+100); 
-  }
-  
-  String toString(){
-    return "settlement @ ("+(int)centerx+","+(int)centery+")"; 
-  }
-  
   void printAdjSettlements(){
     String str = "sets adj to " + this;
     for(Settlement s: adjSets)
@@ -131,4 +153,5 @@ class Settlement{
     println(str);
     } 
   }
+  
 }

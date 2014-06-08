@@ -22,7 +22,7 @@ void draw(){
 
 void mousePressed(){
   //println("mouse at: "+mouseX+","+mouseY);
-  g.mpressed();
+  g.mousePressed(mouseX, mouseY);
   /*for (Settlement s1 : g.hg.settlements){
      if (s1.inRadius(mouseX, mouseY)){
        s1.setColor(#0BA074);
@@ -32,6 +32,7 @@ void mousePressed(){
          // if (adjR != null) adjR.setColor(#706DEA); 
      }
   }*/
+  
 }
   
 void keyPressed() {

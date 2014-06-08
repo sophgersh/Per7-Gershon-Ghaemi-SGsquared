@@ -69,6 +69,12 @@ class Road{
     fill(c);
     ellipse(cx,cy,15,15);
   }
+  void build(int c){
+    isBuilt = true;
+    col = c;
+    fill(c);
+    ellipse(cx,cy,15,15);
+  }
   
   
   void drawRoad(){

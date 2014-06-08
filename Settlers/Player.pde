@@ -9,6 +9,7 @@ class Player{
   Player(int c){
       col = c;
       isUser = false;
+      VP = 0;
   }
   
   void addHG(HexGrid h){ hg = h; }
@@ -18,19 +19,15 @@ class Player{
   void addVP(){ VP++; }
    
   void placeSet(boolean b){
-    Hexagon h = hg.hexs[(int)random(19)];
-    //h.setColor(col);
-    boolean cs = false;
-    while (!cs){
-      cs = h.checkSettlement((int)random(6),col);
+    Settlement s = hg.randSet();
+    while (!s.isValidPlacement()){
+      s = hg.randSet();
     }
+    s.build(col);
     addVP();
-   if (b){
-      /*if (canBuildRoad( ))
-        buildRoad();
-        */
-   }
-    
+    if (b){
+       s.buildRoad(col); 
+    }    
   }
   
   

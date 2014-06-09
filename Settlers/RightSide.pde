@@ -12,26 +12,35 @@ class RightSide{
  
  void displayRules(){
    PFont font = loadFont("TrebuchetMS-Bold-48.vlw");
-   int Y = 370;
+   int Y = 350;
    textFont(font, 20);
    fill(0);
    text("GENERAL RULES:",675,Y);
-   textFont(font,12);
-   text("All Settlements must be separated by no fewer than 2 Roads", 850,Y);
-   text("Resources (Brick,Wood,Stone,Sheep,Wheat) are distributed at the beginning of each player's turn", 675,Y+=12);
-   text("The dice are rolled and every player who has a Settlement adjacent to a Hexagon",675,Y+=12);
-   text("with the value on the dice recieves that Hex's resource", 675,Y+=12);
-   text("On your turn, you may place Roads,Settlements, or upgrade a Settlement to a City (yeilds double resources)",675,Y+=12);
-   text("The resource costs for Roads, Settlements, and Cities are above",675,Y+=12);
-   text("Click the button below to move from one turn to the next (press even on the AI's turn)",675,Y+=12);
+   textFont(font,15);
+   text("1. All Settlements must be separated by at least 2 Roads", 850,Y);
+   text("2. Resources (Brick,Wood,Stone,Sheep,Wheat) are distributed at the beginning of", 675,Y+=15);
+   text("each player's turn. The Desert does not yield a resource.",675, Y+=15);
+   text("3. The dice are rolled and every Hex with that value yields its resource to all players ",675,Y+=15);
+   text("who own a Settlement adjacent to that Hex.", 675,Y+=15);
+   //text("4. The Desert does not yield a resource", 675, Y+=15);
+   //text("5. On your turn, you may place Roads,Settlements, or upgrade a Settlement to a City (yields double resources)",675,Y+=15);
+   //text("6. The resource costs for Roads, Settlements, and Cities are above",675,Y+=15);
+   text("4. Click Next move from one turn to the next (press even on the AI's turn)",675,Y+=15);
    textFont(font,20);
-   Y+=30;
-   text("START OF GAME:",675,Y);
-   textFont(font, 12);
-   text("each payer may place 2 initial Settlements by clicking " , 850,Y);
-   text("on a Settlement space. You must also place a Road adjacent to each initial Settlement.", 675,Y+=12);
-   text("The initial order is RED-BLUE-GREEN-PURPLE-PURPLE-GREEN-BLUE-RED. (Each player places 2 Settlements", 675,Y+=12); 
-   text("During regular gameplay, the order is RED-BLUE-GREEN-PURPLE",675,Y+=12);
+   text("ON YOUR TURN: ",675,Y+=30);
+   textFont(font,15);
+   text("1. Click on the dice to roll and get resources",850,Y);
+   text("2. You may build a Road/Settlement or upgrade a Settlement to a City (doubles yield)",675,Y+=15);
+   text("3. Resource costs are listed above",675,Y+=15);
+   text("4. Click Next to end turn. Order is RED-BLUE-GREEN-PURPLE",675,Y+=15);
+   textFont(font,20);
+   text("START OF GAME:",675,Y+=30);
+   textFont(font, 15);
+   text("1. Each payer may place 2 initial Settlements. " , 850,Y);
+   text("You must also place a Road adjacent to each initial Settlement.", 675,Y+=15);
+   text("2. The initial order is RED-BLUE-GREEN-PURPLE-PURPLE-GREEN-BLUE-RED", 675,Y+=15); 
+   text("(Each player gets to place 2 Settlements, one at a time)",675,Y+=15);
+   //text("3. During regular gameplay, the order is RED-BLUE-GREEN-PURPLE",675,Y+=15);
  }
  
  void displayStats(){
@@ -62,16 +71,16 @@ class RightSide{
      return 700 < x &&  x < 1150 && 550 < y && y < 650;
   }*/
   boolean inNextButton(){
-     return 700 < mouseX && mouseX < 1150 && 550< mouseY && mouseY < 650; 
+     return 800 < mouseX && mouseX < 1050 && 600< mouseY && mouseY < 675; 
   }
   
   void displayButtons(){
    fill(255);
-   rect(700,550,450,100);
+   rect(800,600,250,75);
    PFont font =loadFont("TrebuchetMS-Bold-48.vlw");
    textFont(font,36);
    fill(0);
-   text("Click here for Next",750,620); 
+   text("Next",875,660); 
   }
   
   void displayDice(){

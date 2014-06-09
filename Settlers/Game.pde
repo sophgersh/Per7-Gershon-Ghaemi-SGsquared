@@ -119,13 +119,19 @@ class Game{
         stage++;
     } 
   }
+  
   void stageThree(int x, int y){
+      println(pturn);
       if (user == pturn){
-         userClick(x,y);
-         /* roll die, build settlements,roads,etc. 
-            userClick(x,y);
-         */ 
-      }
+           userClick(x,y);        
+      } else if (nextMoveButton(x,y)){
+        rollDice();
+        if (players[pturn].makeMove()){
+          winner = players[pturn];
+          stage++;
+        } else 
+          pturn = (pturn+1)%4;        
+    }
   }
   /*
   void mousePressed(int x, int y){     
@@ -155,6 +161,11 @@ class Game{
         rollDice(); 
         placeRoad = true;
      } else if (placeRoad){
+       placeRoad = false;
+       if (nextMoveButton(x,y)){
+           pturn = (pturn+1)%4;
+           return;   
+       }
        Settlement s = onSettlement(x,y);
        if (s != null && s.isValidPlacement() && s.isConnected(c) 
            && players[user].canBuildSet()){
@@ -168,8 +179,8 @@ class Game{
        }
        Road r = onRoad(x,y);
        if (r != null && r.isValidPlacement(c) && players[user].canBuildRoad()){
-          s.build(players[user]);
-          players[user].subSetRes(); 
+          r.build(c);
+          players[user].subRoadRes(); 
        }         
      }
         

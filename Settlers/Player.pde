@@ -73,6 +73,48 @@ class Player{
    else{return pColor;} 
   }
   
+  boolean equals(Player other){
+   return col==other.col && isUser == other.isUser; 
+  }
+  
+  boolean makeMove(){
+     Settlement set = null;
+     if (canBuildSet()){      
+       int i;
+       for (Settlement s : hg.settlements){
+          if (s.isValidPlacement() && s.isConnected(col)){
+             //if (s.
+             set = s;
+          }                        
+       }
+       if (set != null){
+         set.build(this);
+         subSetRes();
+         if (addVP())
+           return true;
+       }
+     } if (canBuildCity()){
+        for (Settlement s: hg.settlements){
+           if (s.canBuildCity(col)){
+              s.buildCity();
+              subCityRes();
+              if (addVP())
+                return true; 
+           }
+        } 
+     } else if (canBuildRoad()){
+        Road ro = null;
+        for (Road r : hg.roads){
+           if (r.isValidPlacement(col)){
+             ro = r;
+           }
+           ro.build(col);
+           subRoadRes();            
+        } 
+     }    
+     return false;
+  }
+  
   
   
   

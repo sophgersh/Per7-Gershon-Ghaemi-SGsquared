@@ -13,11 +13,11 @@ class RightSide{
  void displayRules(){
    PFont font = loadFont("TrebuchetMS-Bold-48.vlw");
    int Y = 370;
-   textFont(font, 20);
-   text("ROAD = 1 Brick + 1 Wood",675,290);
-   text("SETTLEMENT = 1 Brick + 1 Wood + 1 Wheat + 1 Sheep",675,310);
-   text("CITY = 1 Pre-existing Settlement + 2 Wheat + 3 Stone",675,330);
+   textFont(font, 20);   
    fill(0);
+   text("ROAD (0 VP) = 1 Brick + 1 Wood",675,290);
+   text("SETTLEMENT (1 VP) = 1 Brick + 1 Wood + 1 Wheat + 1 Sheep",675,310);
+   text("CITY (2 VP) = 1 Pre-existing Settlement + 2 Wheat + 3 Stone",675,330);
    text("GENERAL RULES:",675,Y);
    textFont(font,15);
    text("1. All Settlements must be separated by at least 2 Roads", 850,Y);
@@ -39,7 +39,7 @@ class RightSide{
    textFont(font,20);
    text("START OF GAME:",675,Y+=30);
    textFont(font, 15);
-   text("1. Each payer may place 2 initial Settlements. " , 850,Y);
+   text("1. Each player may place 2 initial Settlements. " , 850,Y);
    text("You must also place a Road adjacent to each initial Settlement.", 675,Y+=15);
    text("2. The initial order is RED-BLUE-GREEN-PURPLE-PURPLE-GREEN-BLUE-RED", 675,Y+=15); 
    text("(Each player gets to place 2 Settlements, one at a time)",675,Y+=15);
@@ -50,20 +50,20 @@ class RightSide{
    //PImage photo = loadImage("catan5.jpg");
    //image(photo,700,0);
    PFont font = loadFont("TrebuchetMS-Bold-48.vlw");
-   textFont(font, 48);
+   //textFont(font, 48);
    fill(0);
-   text("Player stats:",800,50);
+   //text("Player stats:",800,50);
    textFont(font,25);
    text("Victory Points: "+player.VP,800,100); //needs to be updated
    textFont(font, 15);
-   text("Roads (0 VP)", 1100,80);
-   text("Settlements (1 VP) Cities (2 VP)",1050,100);
+   //text("Roads (0 VP)", 1100,80);
+   //text("Settlements (1 VP) Cities (2 VP)",1050,100);
    PImage cards = loadImage("catan5.jpg");
    cards.resize(600,120);
    image(cards,675,120);
    textFont(font,15);
-   text("Wood: "+player.wood, 700,260);
-   text("Brick: "+player.brick, 820, 260);
+   text("Brick: "+player.brick, 700,260);
+   text("Wood: "+player.wood, 820, 260);
    text("Stone: "+player.stone, 940,260);
    text("Sheep: "+player.sheep, 1060, 260);
    text("Wheat: "+player.wheat, 1180, 260);
@@ -83,6 +83,7 @@ class RightSide{
    PFont font =loadFont("TrebuchetMS-Bold-48.vlw");
    textFont(font,36);
    fill(0);
+   //String turn = 
    text("Next",875,660); 
   }
   
@@ -100,7 +101,40 @@ class RightSide{
     die2 = d2;
   }
  
+  void winningScreen(Player victor){
+     victor.VP+=10000;
+ 
+     //???
+     if(victor.equals(player)){ 
+       stroke(0);
+       fill(#FFF529);
+       rect(675,290,600,400);
+       PFont font = loadFont("ChaparralPro-Bold-48.vlw");
+       fill(0);
+       textFont(font, 50);
+       text("YOU WIN",870,380);
+       textFont(font,20);
+       text("Your nation is the envy of Catan. You are #basedGod",730,430);
+       PImage winBackground = loadImage("city-on-a-hill.jpg");
+       winBackground.resize(440,180);
+       image(winBackground,775,460,440,180);
+     }
+     displayPlayersTurn();
+     displayStats();
+     displayDice();
+   }
+     
+   void displayPlayersTurn(){
+      //????
+    /* fill(player.col);
+     if(c == #F50C0C){text("Red Player";}
+     else if(c == #1411F2){pColor = "BLUE";}
+     else if(c == #07B405){pColor = "GREEN";}
+     else{pColor = "PURPLE";} */
+   }
+  
   void drawInfo(){
+   displayPlayersTurn();
    displayRules();
    displayStats();
    displayButtons();

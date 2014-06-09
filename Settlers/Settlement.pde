@@ -5,9 +5,11 @@ class Settlement{
   int col;
   boolean isBuilt;
   boolean isCity;
-  Hexagon[] adjHexs;
-  Settlement[] adjSets;
-  Road[] adjRoads;
+  //Hexagon[] adjHexs;
+  ArrayList<Hexagon> adjHexs;
+  ArrayList<Settlement> adjSets;
+  ArrayList<Road> adjRoads;
+  //Road[] adjRoads;
   Player owner;
   
   Settlement(float x, float y, float r){    
@@ -16,9 +18,9 @@ class Settlement{
      radius = r;
      isBuilt = false;
      isCity = false;
-     adjHexs = new Hexagon[3]; 
-     adjSets = new Settlement[3];
-     adjRoads = new Road[3];
+     adjHexs = new ArrayList<Hexagon>(); 
+     adjSets = new ArrayList<Settlement>();
+     adjRoads = new ArrayList<Road>();
   }
   
   String toString(){
@@ -66,31 +68,15 @@ class Settlement{
   }
   
   void add(Hexagon h1){
-     for (int i = 0; i < adjHexs.length; i++){
-        if (adjHexs[i] == null){
-          adjHexs[i] = h1;
-          //h1.setColor(#59D84F);
-          return;
-        }
-     } 
+     adjHexs.add(h1);    
   }
   
   void addRoad(Road r){
-     for (int i = 0; i < adjRoads.length; i++){
-        if (adjRoads[i] == null){
-          adjRoads[i] = r;
-          return;
-        }
-     } 
+     adjRoads.add(r); 
   }
   
   void addSet(Settlement s){
-     for (int i = 0; i < adjSets.length; i++){
-        if (adjSets[i] == null){
-           adjSets[i] = s;
-           return; 
-        }
-     } 
+    adjSets.add(s); 
   }
   
   boolean inRadius(int x, int y){
@@ -101,17 +87,15 @@ class Settlement{
      if (isBuilt)
        return false;
      for (Settlement s : adjSets){
-        if (s != null){
-           if (s.isBuilt)
-             return false;  
-        }          
+        if (s.isBuilt)
+             return false;            
      }
      return true; 
   }
   
   boolean isConnected(int c){
      for (Road r : adjRoads){
-        if (r != null && r.col == c)
+        if (r.col == c)
           return true;
      } 
      return false;
@@ -119,13 +103,15 @@ class Settlement{
   
   
   boolean canBuildCity(int c){
-     return isBuilt && c == col;
+     return isBuilt && c == col && !isCity;
   }
+  
+ 
   
   void buildRoad(int c){
      Road r;
      do {
-       r = adjRoads[(int)(random(adjRoads.length))];
+       r = adjRoads.get((int)(random(adjRoads.size())));
      } while (r == null || r.isBuilt);
      r.build(c);
      

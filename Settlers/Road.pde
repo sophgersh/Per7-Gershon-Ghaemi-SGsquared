@@ -1,40 +1,32 @@
 class Road{
   boolean isBuilt;
   float cx, cy;
-  Hexagon[] adjHexs;
-  Settlement[] adjSets;
-  Road[] adjRoads;
+  ArrayList<Hexagon> adjHexs;
+  ArrayList<Settlement> adjSets;
+  ArrayList<Road> adjRoads;
   int col;
   //Player owner;
   
   Road(float x, float y){
    cx = x;
    cy = y;
-   adjHexs = new Hexagon[2]; 
-   adjSets = new Settlement[2];
-   adjRoads = new Road[4];
+   adjHexs = new ArrayList<Hexagon>(); 
+   adjSets = new ArrayList<Settlement>();
+   adjRoads = new ArrayList<Road>();
    //findAdjSettlements();  
    //ellipse(x,y,15,15); 
   }
   
   void add(Hexagon h){
-    if (adjHexs[0] == null) 
-      adjHexs[0] = h;
-    else
-      adjHexs[1] = h;
+    adjHexs.add(h);
   }
   
   void addRoad(Road r){
-     for (int i = 0; i < adjRoads.length; i++){
-        if (adjRoads[i] == null){
-           adjRoads[i] = r;
-           return; 
-        }
-     } 
+     adjRoads.add(r); 
   }
   
   void findAdjSettlements(){
-    Hexagon h = adjHexs[0];
+    Hexagon h = adjHexs.get(0);
     int thisIsNthRoad = 0;
     for(int i = 0; i<6; i++){
      //if(h.roads[i] == null){
@@ -44,20 +36,20 @@ class Road{
     }
     int firstAdjSet = thisIsNthRoad;
     int secondAdjSet = (firstAdjSet+1)%6;
-    adjSets[0] = h.settlements[firstAdjSet];
-    adjSets[1] = h.settlements[secondAdjSet];
-    adjSets[0].addRoad(this);
-    adjSets[1].addRoad(this);
+    adjSets.add(h.settlements[firstAdjSet]);
+    adjSets.add(h.settlements[secondAdjSet]);
+    adjSets.get(0).addRoad(this);
+    adjSets.get(1).addRoad(this);
     //println("findAdjSettlements success for "+this+" road between "+h+" and "+adjHexs[1]);
     //println("AdjSettlements to "+this+": "+adjSets[0] + " and "+adjSets[1]);
     //float distToSet = 60*sin(30);   
   }
   
   void findAdjRoads(){
-   for(Settlement s: this.adjSets){ //loop through adj sets
+   for(Settlement s: adjSets){ //loop through adj sets
       //s.printAdjRoads();
       for(Road r: s.adjRoads){ //roads adjacent to Set from before
-        if (r != null && r != this){
+        if (r != this){
           addRoad(r);
         }     
       }
@@ -108,7 +100,7 @@ class Road{
        //ellipse(cx,cy,15,15); 
        beginShape();
        for(int i = 0; i<4; i++){
-         vertex( (int)(adjSets[i/2].centerx-15), (int)(adjSets[i/2].centery) );
+         vertex( (int)(adjSets.get(i/2).centerx-15), (int)(adjSets.get(i/2).centery) );
        }
        endShape(CLOSE);
        
@@ -133,9 +125,9 @@ class Road{
   
   boolean adjToSet(int c){
     for (Settlement s: adjSets){
-       if (s != null && s.col == c){
+       if (s.col == c){
           for (Road r: s.adjRoads){
-             if (r != null && r.isBuilt && r.col == c)
+             if (r.isBuilt && r.col == c)
                 return false;
           }
           return true;
@@ -150,7 +142,7 @@ class Road{
   
   boolean isConnected(int c){
      for (Road r : adjRoads){
-        if (r != null && r.col == c)
+        if (r.col == c)
           return true;
      }
      return false; 

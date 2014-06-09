@@ -74,7 +74,16 @@ void display(){
    background(#05E7FA);
    smooth();   
    game.hg.drawBoard();
-   game.rightSide.drawInfo();
+   if(cheat()){//skip to winning screen
+    game.rightSide.winningScreen(game.players[game.user]); 
+   }
+   else if(game.winner!=null){
+     game.rightSide.winningScreen(game.winner);
+   }
+   else{
+     game.rightSide.drawInfo();
+   }  
+   
 }
   
 void keyPressed() {
@@ -82,4 +91,8 @@ void keyPressed() {
      //game.bpressed();
   }
  }
+ 
+boolean cheat(){
+  return mousePressed && mouseX<50 && mouseX>0 && mouseY<50 && mouseY>0;
+}
 

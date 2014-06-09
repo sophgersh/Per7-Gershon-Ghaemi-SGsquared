@@ -73,7 +73,9 @@ class Player{
    else{return pColor;} 
   }
   
-  
+  boolean equals(Player other){
+   return col==other.col && isUser == other.isUser; 
+  }
   
   
   

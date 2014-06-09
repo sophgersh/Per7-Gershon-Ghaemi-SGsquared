@@ -76,6 +76,7 @@ class Player{
   boolean equals(Player other){
    return col==other.col && isUser == other.isUser; 
   }
+<<<<<<< HEAD
   
   boolean makeMove(){
      Settlement set = null;
@@ -116,6 +117,8 @@ class Player{
   }
   
   
+=======
+>>>>>>> FETCH_HEAD
   
   
   

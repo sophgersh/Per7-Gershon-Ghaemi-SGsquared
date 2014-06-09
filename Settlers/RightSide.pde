@@ -13,7 +13,11 @@ class RightSide{
  void displayRules(){
    PFont font = loadFont("TrebuchetMS-Bold-48.vlw");
    int Y = 370;
+<<<<<<< HEAD
    textFont(font, 20);   
+=======
+   textFont(font, 20);
+>>>>>>> FETCH_HEAD
    fill(0);
    text("ROAD (0 VP) = 1 Brick + 1 Wood",675,290);
    text("SETTLEMENT (1 VP) = 1 Brick + 1 Wood + 1 Wheat + 1 Sheep",675,310);
@@ -56,7 +60,11 @@ class RightSide{
    textFont(font,25);
    text("Victory Points: "+player.VP,800,100); //needs to be updated
    textFont(font, 15);
+<<<<<<< HEAD
    //text("Roads (0 VP)", 1100,80);
+=======
+  // text("Roads (0 VP)", 1100,80);
+>>>>>>> FETCH_HEAD
    //text("Settlements (1 VP) Cities (2 VP)",1050,100);
    PImage cards = loadImage("catan5.jpg");
    cards.resize(600,120);
@@ -102,6 +110,7 @@ class RightSide{
   }
  
   void winningScreen(Player victor){
+<<<<<<< HEAD
      victor.VP+=10000;
  
      //???
@@ -133,6 +142,39 @@ class RightSide{
      else{pColor = "PURPLE";} */
    }
   
+=======
+    victor.VP+=10000;
+
+    //???
+    if(victor.equals(player)){ 
+      stroke(0);
+      fill(#FFF529);
+      rect(675,290,600,400);
+      PFont font = loadFont("ChaparralPro-Bold-48.vlw");
+      fill(0);
+      textFont(font, 50);
+      text("YOU WIN",870,380);
+      textFont(font,20);
+      text("Your nation is the envy of Catan. You are #basedGod",730,430);
+      PImage winBackground = loadImage("city-on-a-hill.jpg");
+      winBackground.resize(440,180);
+      image(winBackground,775,460,440,180);
+    }
+    displayPlayersTurn();
+    displayStats();
+    displayDice();
+  }
+    
+  void displayPlayersTurn(){
+     //????
+   /* fill(player.col);
+    if(c == #F50C0C){text("Red Player";}
+    else if(c == #1411F2){pColor = "BLUE";}
+    else if(c == #07B405){pColor = "GREEN";}
+    else{pColor = "PURPLE";} */
+  }
+ 
+>>>>>>> FETCH_HEAD
   void drawInfo(){
    displayPlayersTurn();
    displayRules();

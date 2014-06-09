@@ -160,9 +160,9 @@ class Game{
      if (diceClick() && !placeRoad){ 
         rollDice(); 
         placeRoad = true;
-     } else if (placeRoad){
-       placeRoad = false;
+     } else if (placeRoad){       
        if (nextMoveButton(x,y)){
+           placeRoad = false;
            pturn = (pturn+1)%4;
            return;   
        }
@@ -176,6 +176,13 @@ class Game{
              winner = players[user];
              stage++;
           }            
+       } else if (s != null && s.canBuildCity(players[user].col)){
+          s.buildCity();
+          if (players[user].addVP()){
+            winner = players[user];
+            stage++;
+          }            
+          players[user].subCityRes();
        }
        Road r = onRoad(x,y);
        if (r != null && r.isValidPlacement(c) && players[user].canBuildRoad()){

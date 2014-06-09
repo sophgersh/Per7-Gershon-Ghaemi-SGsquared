@@ -7,6 +7,8 @@ class Player{
   ArrayList<Road> roads;
   ArrayList<Settlement> settlements;
   int wood, brick, stone, wheat, sheep;
+  int extraroads;
+  boolean saveforcity;
 
   Player(int c){
       col = c;
@@ -16,6 +18,7 @@ class Player{
       else{pColor = "PURPLE";}
       isUser = false;
       VP = 0;
+      saveforcity = false;
   }
   
   void addHG(HexGrid h){ hg = h; }
@@ -76,45 +79,68 @@ class Player{
   boolean equals(Player other){
    return col==other.col && isUser == other.isUser; 
   }
+<<<<<<< HEAD
 //<<<<<<< HEAD
+=======
+
+>>>>>>> 8cad3607a7598f40a07a20fd0560ed1ba4fdeda3
   
   boolean makeMove(){
-     Settlement set = null;
-     if (canBuildSet()){      
-       int i;
+     Settlement set = null;    
        for (Settlement s : hg.settlements){
           if (s.isValidPlacement() && s.isConnected(col)){
              //if (s.
              set = s;
           }                        
        }
-       if (set != null){
-         set.build(this);
-         subSetRes();
-         if (addVP())
-           return true;
-       }
-     } if (canBuildCity()){
+       if (set != null){ 
+         if (canBuildSet()){
+           set.build(this);
+           subSetRes();
+           if (addVP())
+             return true;
+         } else {
+           saveforcity = true;
+         }
+       } if (canBuildCity()){
         for (Settlement s: hg.settlements){
            if (s.canBuildCity(col)){
               s.buildCity();
               subCityRes();
               if (addVP())
                 return true; 
+              extraroads = 0;
            }
         } 
-     } else if (canBuildRoad()){
+        saveforcity = false;
+     } else if (canBuildRoad() &&  !saveforcity){
         Road ro = null;
         for (Road r : hg.roads){
            if (r.isValidPlacement(col)){
              ro = r;
+<<<<<<< HEAD
              ro.build(col);
              subRoadRes();
            }          
         } 
+=======
+           }
+                      
+        }
+        ro.build(col);
+        extraroads++;
+        subRoadRes();  
+>>>>>>> 8cad3607a7598f40a07a20fd0560ed1ba4fdeda3
      }    
      return false;
   }
   
   
+<<<<<<< HEAD
+=======
+
+  
+  
+  
+>>>>>>> 8cad3607a7598f40a07a20fd0560ed1ba4fdeda3
 }

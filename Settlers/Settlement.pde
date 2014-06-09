@@ -49,6 +49,9 @@ class Settlement{
      if (isBuilt){
        fill(col);
        ellipse(centerx, centery, radius, radius );
+     } if (isCity){
+        fill(col+50);
+        ellipse(centerx, centery, radius-15, radius-15);
      } else {
        noFill();
        ellipse(centerx, centery, radius, radius );

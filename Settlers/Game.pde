@@ -178,6 +178,10 @@ class Game{
           }            
        } else if (s != null && s.canBuildCity(players[user].col)){
           s.buildCity();
+          if (players[user].addVP()){
+            winner = players[user];
+            stage++;
+          }            
           players[user].subCityRes();
        }
        Road r = onRoad(x,y);

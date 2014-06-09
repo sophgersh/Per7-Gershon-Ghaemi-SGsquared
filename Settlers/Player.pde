@@ -90,6 +90,7 @@ class Player{
           if (s.isValidPlacement() && s.isConnected(col)){
              //if (s.
              set = s;
+             break;
           }                        
        }
        if (set != null){ 
@@ -119,10 +120,9 @@ class Player{
              ro = r;
 
              ro.build(col);
-             subRoadRes();
-             ro.build(col);
              extraroads++;
-             subRoadRes();  
+             subRoadRes(); 
+             break; 
            }
         }
      

@@ -6,6 +6,8 @@ class RightSide{
  PImage r1Img;
  String r2Str;
  PImage r2Img;
+ boolean completedTrade;
+ 
  int die1; 
  int die2;
  String[] dice = {"dice1.png", "dice2.png", "dice3.png", "dice4.png", "dice5.png", "dice6.png"};
@@ -160,23 +162,65 @@ class RightSide{
      displayDice();
    }
    boolean inTradeMode(){
-     return !inNextButton() && (inTradeWindow() || inTradeButton() || inResources());
+     return !inNextButton() && !completedTrade && (inTradeWindow() || inTradeButton() || inResources());
+   }
+   boolean inHaggleButton(){
+     return mousePressed && mouseX>1120 && mouseX<1240 &&mouseY>500 && mouseY<560;
+   }
+   boolean inCompleteTradeButton(){
+     return mousePressed && mouseX>850 && mouseX<985 && mouseY>580 && mouseY<620; 
    }
    void tradeScreen(){
+     completedTrade=false;
+     /*if(inHaggleButton()){
+        //r1Str = "";
+        r2Str = "";
+        //r1Img = new PImage();
+        r2Img = new PImage();
+        pick2;}*/
      stroke(0);
      fill(#7AB0D3);
      rect(675,350,600,300);
+     rect(1120,500,120,60);
+     rect(850,580,135,40);
      textFont(loadFont("TrebuchetMS-Bold-48.vlw"),16);
      fill(0);
+     text("C'mon bro...",1120,530);
+     text("Complete Deal",860,615);
      int Y = 375;
      text("Welcome to the Iron Bank of Catan",780,Y);
      text("You will give us 3 of one resource for 1 of your desired resource. ",685,Y+=20); 
-     //text("Click on the left box, then the resource. Click right, then resource.",685,Y+=20);
+     text("Here is what we feel like giving you. DO NOT click the rightmost box, though.",685,Y+=20);
      text("...for...",880,Y+100);
      noFill();
-     if(r1Str.equals(""))pick1();
-     if(r2Str.equals(""))pick2();
+     
+     //pick2();
+     //if(r1Str.equals("")) pick1();
+     pick1();
+     pick2();
+     if(inHaggleButton()){
+        //r1Str = "";
+        r2Str = "";
+        //r1Img = new PImage();
+        r2Img = new PImage();
+        pick2();}
+     //if(r2Str.equals("")&&!r1Str.equals(""))pick2();
      displayTradeDeal();
+     if(inCompleteTradeButton()){
+       //ellipse(100,100,50,50);
+       if(r1Str.equals("Wood")) player.wood-=3;
+       else if(r1Str.equals("Brick")) player.brick-=3;
+       else if(r1Str.equals("Stone")) player.stone-=3;
+       else if(r1Str.equals("Sheep")) player.sheep-=3;
+       else if(r1Str.equals("Wheat")) player.wheat-=3;
+       
+       if(r2Str.equals("Wood")) player.wood++;
+       else if(r2Str.equals("Brick")) player.brick++;
+       else if(r2Str.equals("Stone")) player.stone++;
+       else if(r2Str.equals("Sheep")) player.sheep++;
+       else if(r2Str.equals("Wheat")) player.wheat++;
+       completedTrade=true;
+     }
      fill(0);
      //if(inLeftBox()){
      //pick1();
@@ -202,9 +246,9 @@ class RightSide{
      rect(720,445,120,160);
      rect(990,445,120,160);
      image(r1Img,720,445,120,160);
-     text(r1Str,740,625);
+     text("3 "+r1Str,740,625);
      image(r2Img,990,445,120,160);
-     text(r2Str,1010,625);
+     text("1 "+r2Str,1010,625);
    }
    boolean pick1(){
      r1Str = pickResource();
@@ -212,7 +256,9 @@ class RightSide{
      return true;
    }
    boolean pick2(){
-     r2Str = pickResource();
+     String[] randomResources = {"Wood","Brick","Stone","Sheep","Wheat"};
+     //r2Str = pickResource();
+     r2Str = randomResources[(int)random(5)];
      r2Img = getImage(r2Str);
      return true;
    }

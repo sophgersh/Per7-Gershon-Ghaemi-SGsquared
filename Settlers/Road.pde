@@ -74,14 +74,46 @@ class Road{
        fill(col);
        ellipse(cx, cy, 15, 15);
        
-       /*int[] v = new int[4];
-       v[0] = (int)(adjSets[0].cx-15);
-       v[1] = (int)(adjSets[0].cy);
-       v[2] = (int)(adjSets[1].cx-15);
-       v[3] = (int)(adjSets[1].cy);
+       /*int[] coords = new int[8];
+       int j = 0;
+       for(int i =0;i<6;i++){
+         int x = (int)(adjHexs[0].centerx + 60 * cos(i * PI/3));
+         int y = (int)(adjHexs[0].centery + 60 * sin(i*PI/3));
+         if(adjSets[0].inRadius(x,y)){
+           coords[j]=x;
+           coords[j+1]=y;
+           j+=2;
+         }
+         else if(adjSets[1].inRadius(x,y)){
+           coords[j]=x;
+           coords[j+1]=y;
+           j+=2;
+         }
+       }
+       if(adjHexs[1] !=null){
+         for(int i =0;i<6;i++){
+           int x = (int)(adjHexs[1].centerx + 60 * cos(i * PI/3));
+           int y = (int)(adjHexs[1].centery + 60 * sin(i*PI/3));
+           if(adjSets[0].inRadius(x,y)){
+             coords[j]=x;
+             coords[j+1]=y;
+             j+=2;
+           }
+           else if(adjSets[1].inRadius(x,y)){
+             coords[j]=x;
+             coords[j+1]=y;
+             j+=2;
+           }
+         }
+       }
+       else{
+        //????
+       //for seaside roads 
+       }
+       noStroke();//causes all strokes to disappear -- needs to be fixed
        beginShape();
-       for(int i = 0; i<4; i++){
-          vertex( (int)(adjSets[i/2].centerx-15), (int)(adjSets[i/2].centery) );
+       for(int i = 0; i<8; i+=2){
+          vertex( coords[i], coords[i+1] );
        }
        endShape(CLOSE);*/
      } else {

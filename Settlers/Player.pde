@@ -117,8 +117,7 @@ class Player{
   }
   
   
-=======
->>>>>>> FETCH_HEAD
+
   
   
   

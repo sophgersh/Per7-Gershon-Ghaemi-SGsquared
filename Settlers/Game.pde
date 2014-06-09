@@ -160,9 +160,9 @@ class Game{
      if (diceClick() && !placeRoad){ 
         rollDice(); 
         placeRoad = true;
-     } else if (placeRoad){
-       placeRoad = false;
+     } else if (placeRoad){       
        if (nextMoveButton(x,y)){
+           placeRoad = false;
            pturn = (pturn+1)%4;
            return;   
        }

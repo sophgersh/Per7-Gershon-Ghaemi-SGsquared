@@ -76,7 +76,7 @@ class Player{
   boolean equals(Player other){
    return col==other.col && isUser == other.isUser; 
   }
-<<<<<<< HEAD
+
   
   boolean makeMove(){
      Settlement set = null;
@@ -109,9 +109,10 @@ class Player{
            if (r.isValidPlacement(col)){
              ro = r;
            }
-           ro.build(col);
-           subRoadRes();            
-        } 
+                      
+        }
+        ro.build(col);
+        subRoadRes();  
      }    
      return false;
   }

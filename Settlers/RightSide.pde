@@ -103,6 +103,12 @@ class RightSide{
   boolean inResources(){
      return mouseX>675 && mouseX<1275 && mouseY>120 && mouseY<240; 
   }
+  boolean inLeftBox(){
+    return mousePressed && mouseX>720 && mouseX <840 && mouseY>445 && mouseY<605; 
+   }
+  boolean inRightBox(){
+    return mousePressed && mouseX>990 && mouseX <1110 && mouseY>445 && mouseY<605;    
+   }
   
   void displayButtons(){
    fill(255);
@@ -160,17 +166,29 @@ class RightSide{
      stroke(0);
      fill(#7AB0D3);
      rect(675,350,600,300);
-     textFont(loadFont("TrebuchetMS-Bold-48.vlw"),20);
+     textFont(loadFont("TrebuchetMS-Bold-48.vlw"),16);
      fill(0);
      int Y = 375;
      text("Welcome to the Iron Bank of Catan",780,Y);
-     text("Click on the resource you will give 3 of to us.",685,Y+=20); 
-     text("We will give you 1 of your desired resource. Click it.",685,Y+=20);
+     text("You will give us 3 of one resource for 1 of your desired resource. ",685,Y+=20); 
+     //text("Click on the left box, then the resource. Click right, then resource.",685,Y+=20);
      text("...for...",880,Y+100);
-     if(pick1()) pick2();
-
+     noFill();
+     if(r1Str.equals(""))pick1();
+     if(r2Str.equals(""))pick2();
+     displayTradeDeal();
+     fill(0);
+     //if(inLeftBox()){
+     //pick1();
+     //}
+     //if(inRightBox()){
+     //pick2();
+     //}
+     /*image(r1Img,720,445,120,160);
+     text(r1Str,740,625);
+     image(r2Img,720,445,120,160);
+     text(r2Str,740,625);*/
      //if r1 not enough supply
-     
      PFont font = loadFont("TrebuchetMS-Bold-48.vlw");
      textFont(font, 20);   
      fill(0);
@@ -179,21 +197,23 @@ class RightSide{
      text("CITY (2 VP) = 1 Pre-existing Settlement + 2 Wheat + 3 Stone",675,330);
      displayStats();
      displayDice();
-     //noStroke();
-     //noFill();
+   }
+   void displayTradeDeal(){
+     rect(720,445,120,160);
+     rect(990,445,120,160);
+     image(r1Img,720,445,120,160);
+     text(r1Str,740,625);
+     image(r2Img,990,445,120,160);
+     text(r2Str,1010,625);
    }
    boolean pick1(){
      r1Str = pickResource();
      r1Img = getImage(r1Str);
-     image(r1Img,720,445,120,160);
-     text(r1Str,740,625);
      return true;
    }
    boolean pick2(){
      r2Str = pickResource();
      r2Img = getImage(r2Str);
-     image(r2Img,990,445,120,160);
-     text(r2Str,1010,625);
      return true;
    }
    String pickResource(/*String importExport*/){

@@ -176,6 +176,9 @@ class Game{
              winner = players[user];
              stage++;
           }            
+       } else if (s != null && s.canBuildCity(players[user].col)){
+          s.buildCity();
+          players[user].subCityRes();
        }
        Road r = onRoad(x,y);
        if (r != null && r.isValidPlacement(c) && players[user].canBuildRoad()){

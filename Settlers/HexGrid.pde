@@ -185,8 +185,14 @@ class HexGrid{
         if (h.dieValue == dieRoll){
           //hexsToDistr.add(h);
           for(Settlement s: h.settlements){
-             if(s.isBuilt){
+             if(s.isBuilt && s.isCity){
                println(s+""+s.owner);
+               if(h.resource.equals("forest")){s.owner.wood++;}
+               else if(h.resource.equals("wheat")){s.owner.wheat+=2;}
+               else if(h.resource.equals("stone")){s.owner.stone+=2;}
+               else if(h.resource.equals("sheep")){s.owner.sheep+=2;}
+               else if(h.resource.equals("brick")){s.owner.brick+=2;}
+             } else if (s.isBuilt){
                if(h.resource.equals("forest")){s.owner.wood++;}
                else if(h.resource.equals("wheat")){s.owner.wheat++;}
                else if(h.resource.equals("stone")){s.owner.stone++;}

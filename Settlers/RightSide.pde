@@ -12,8 +12,11 @@ class RightSide{
  
  void displayRules(){
    PFont font = loadFont("TrebuchetMS-Bold-48.vlw");
-   int Y = 350;
+   int Y = 370;
    textFont(font, 20);
+   text("ROAD = 1 Brick + 1 Wood",675,290);
+   text("SETTLEMENT = 1 Brick + 1 Wood + 1 Wheat + 1 Sheep",675,310);
+   text("CITY = 1 Pre-existing Settlement + 2 Wheat + 3 Stone",675,330);
    fill(0);
    text("GENERAL RULES:",675,Y);
    textFont(font,15);
@@ -71,12 +74,12 @@ class RightSide{
      return 700 < x &&  x < 1150 && 550 < y && y < 650;
   }*/
   boolean inNextButton(){
-     return 800 < mouseX && mouseX < 1050 && 600< mouseY && mouseY < 675; 
+     return 800 < mouseX && mouseX < 1050 && 600< mouseY && mouseY < 695; 
   }
   
   void displayButtons(){
    fill(255);
-   rect(800,600,250,75);
+   rect(800,620,250,75);
    PFont font =loadFont("TrebuchetMS-Bold-48.vlw");
    textFont(font,36);
    fill(0);

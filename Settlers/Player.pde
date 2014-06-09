@@ -79,11 +79,10 @@ class Player{
   boolean equals(Player other){
    return col==other.col && isUser == other.isUser; 
   }
-<<<<<<< HEAD
-//<<<<<<< HEAD
-=======
 
->>>>>>> 8cad3607a7598f40a07a20fd0560ed1ba4fdeda3
+
+
+
   
   boolean makeMove(){
      Settlement set = null;    
@@ -118,29 +117,17 @@ class Player{
         for (Road r : hg.roads){
            if (r.isValidPlacement(col)){
              ro = r;
-<<<<<<< HEAD
+
              ro.build(col);
              subRoadRes();
-           }          
-        } 
-=======
+             ro.build(col);
+             extraroads++;
+             subRoadRes();  
            }
-                      
         }
-        ro.build(col);
-        extraroads++;
-        subRoadRes();  
->>>>>>> 8cad3607a7598f40a07a20fd0560ed1ba4fdeda3
+     
      }    
      return false;
   }
   
-  
-<<<<<<< HEAD
-=======
-
-  
-  
-  
->>>>>>> 8cad3607a7598f40a07a20fd0560ed1ba4fdeda3
 }

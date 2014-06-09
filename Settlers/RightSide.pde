@@ -64,15 +64,7 @@ class RightSide{
    textFont(font,25);
    text("Victory Points: "+player.VP,800,100); //needs to be updated
    textFont(font, 15);
-<<<<<<< HEAD
-//<<<<<<< HEAD
-   //text("Roads (0 VP)", 1100,80);
-//=======
   // text("Roads (0 VP)", 1100,80);
-//>>>>>>> FETCH_HEAD
-=======
-  // text("Roads (0 VP)", 1100,80);
->>>>>>> 8cad3607a7598f40a07a20fd0560ed1ba4fdeda3
    //text("Settlements (1 VP) Cities (2 VP)",1050,100);
    PImage cards = loadImage("catan5.jpg");
    cards.resize(600,120);
@@ -141,12 +133,7 @@ class RightSide{
   }
  
   void winningScreen(Player victor){
-<<<<<<< HEAD
-//<<<<<<< HEAD
-=======
->>>>>>> 8cad3607a7598f40a07a20fd0560ed1ba4fdeda3
      victor.VP+=10000;
- 
      //???
      if(victor.equals(player)){ 
        stroke(0);
@@ -241,11 +228,6 @@ class RightSide{
      else if(c == #07B405){pColor = "GREEN";}
      else{pColor = "PURPLE";} */
    }
-  
-<<<<<<< HEAD
-=======
- 
->>>>>>> 8cad3607a7598f40a07a20fd0560ed1ba4fdeda3
   void drawInfo(){
      displayPlayersTurn();
      displayRules();

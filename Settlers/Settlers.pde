@@ -29,7 +29,7 @@ void draw(){
     println("drawing in Settlers mouse @" + mouseX+","+mouseY);
     grid.drawBoard();
     game.rightSide.drawInfo();}*/
-  if(game.stage > 0 && mousePressed){
+  if(game.stage > 0 && mousePressed /*&& !game.rightSide.inResources()*/){
     display();
   }
 }
@@ -80,8 +80,16 @@ void display(){
    else if(game.winner!=null){
      game.rightSide.winningScreen(game.winner);
    }
+   else if(game.rightSide.inTradeButton()){  
+       game.rightSide.tradeScreen();  
+   }
    else{
-     game.rightSide.drawInfo();
+     if(game.rightSide.inTradeMode()){
+       game.rightSide.tradeScreen();
+     }
+     else{  
+       game.rightSide.drawInfo();
+     }
    }  
    
 }
